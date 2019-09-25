@@ -1,13 +1,13 @@
--- MariaDB dump 10.17  Distrib 10.4.7-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: Thrift_Shop
 -- ------------------------------------------------------
--- Server version	10.4.7-MariaDB
+-- Server version	5.7.27-0ubuntu0.19.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -54,8 +54,8 @@ DROP TABLE IF EXISTS `Item`;
 CREATE TABLE `Item` (
   `i_id` int(11) NOT NULL AUTO_INCREMENT,
   `s_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1,
-  `price` float NOT NULL DEFAULT 0,
+  `quantity` int(11) NOT NULL DEFAULT '1',
+  `price` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`i_id`),
   KEY `fk_Item_1_idx` (`s_id`),
   CONSTRAINT `fk_Item_1` FOREIGN KEY (`s_id`) REFERENCES `User` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -121,6 +121,7 @@ CREATE TABLE `Login` (
 
 LOCK TABLES `Login` WRITE;
 /*!40000 ALTER TABLE `Login` DISABLE KEYS */;
+INSERT INTO `Login` VALUES (1,'anuj16','ayushi16'),(2,'komal24','kammo21'),(3,'kota500','delhiexpress'),(4,'kitkat45','breakuptobantahai');
 /*!40000 ALTER TABLE `Login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +186,7 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
-  `wallet` float NOT NULL DEFAULT 1000,
+  `wallet` float NOT NULL DEFAULT '1000',
   `pincode` int(11) NOT NULL,
   `city` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `neighbourhood` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -195,7 +196,7 @@ CREATE TABLE `User` (
   `email_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `email_id` (`email_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,6 +205,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (1,1000,422003,'Nashik','college road','Rachit heritage','Jain','Anuj','anuj16@gmail.com'),(2,1000,411037,'Pune','Vit ke samne','SBI nagar','Mekala','Komal','komal99@gmail.com'),(3,1000,422311,'Kota','Allen ke samne','SBI nagar','sharma','Kota','kota99@gmail.com'),(4,1000,412411,'Pune','PICT ke samne','Friends','Khandelwal','Ritika','ritika99@gmail.com');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -216,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-25 18:01:02
+-- Dump completed on 2019-09-25 20:17:14
