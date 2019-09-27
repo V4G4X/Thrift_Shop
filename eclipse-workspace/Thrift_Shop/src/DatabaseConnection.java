@@ -3,6 +3,7 @@ import java.sql.SQLException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 public class DatabaseConnection {
 	protected static Connection initializeDatabase() throws SQLException, ClassNotFoundException{
 		String dbDriver = "com.mysql.cj.jdbc.Driver";

@@ -1,4 +1,4 @@
-package com.Thrift_Shop;
+
 import java.sql.SQLException;
 
 import java.sql.Connection;
