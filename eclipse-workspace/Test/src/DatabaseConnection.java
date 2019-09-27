@@ -8,8 +8,8 @@ public class DatabaseConnection {
 		String dbDriver = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "test";
-		String user = "Varun";
-		String pass = "varun2003";
+		String user = "Admin";
+		String pass = "Admin@123";
 		try {
 			Class.forName(dbDriver);
 		} catch (Exception e) {
