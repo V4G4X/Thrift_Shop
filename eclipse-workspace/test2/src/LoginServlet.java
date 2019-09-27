@@ -53,17 +53,12 @@ public class LoginServlet extends HttpServlet {
 		if(!username.isEmpty() && !password1.isEmpty()) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
-				PreparedStatement st = con.prepareStatement("Select password from Login where username ='?'");
+				PreparedStatement st = con.prepareStatement("Select * from Login where username= ?");
 				st.setString(1, username);
 				ResultSet rs=st.executeQuery();
-				if(!rs.next())
+				if(rs.next())
 				{
-					out.println("Username not found");
-					System.out.println("Username not found");
-				}
-				else
-				{
-					rs.beforeFirst();
+					
 					password2=rs.getString("password");
 					out.println(password2);
 					if(password1.compareTo(password2)!=0)
@@ -75,6 +70,10 @@ public class LoginServlet extends HttpServlet {
 						out.println("Logged in successfully!!");
 						System.out.println("Logged in successfully!!");
 					}
+				}
+				else
+				{
+					out.println("Username does not exist!!");
 				}
 				st.close();
 				con.close();
