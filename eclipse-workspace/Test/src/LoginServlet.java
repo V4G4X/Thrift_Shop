@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.io.PrintWriter;
 import java.sql.Connection;
 
@@ -12,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class TestServlet
  */
-@WebServlet("/TestServlet")
-public class TestServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public TestServlet() {
+	public LoginServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -29,6 +30,7 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().println("WIll this run?");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -38,25 +40,43 @@ public class TestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String password1= request.getParameter("password");
+		String password2="";
 		PrintWriter out = response.getWriter();
 		if (username.isEmpty())
 			out.println("Empty Username Field");
-		if (password.isEmpty())
+		System.out.println("Empty Username Field");
+		if (password1.isEmpty())
 			out.println("Empty Password Field");
-		if(!username.isEmpty() && !password.isEmpty()) {
+			System.out.println("Empty Password Field");
+		if(!username.isEmpty() && !password1.isEmpty()) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
-				PreparedStatement st = con.prepareStatement("INSERT INTO User(name) VALUES(?)");
+				PreparedStatement st = con.prepareStatement("Select password from Login where username ='?'");
 				st.setString(1, username);
-				st.execute();
+				ResultSet rs=st.executeQuery();
+				if(!rs.next())
+				{
+					out.println("Username not found");
+					System.out.println("Username not found");
+				}
+				else
+				{
+					password2=rs.getString("password");
+					if(password1.compareTo(password2)!=0)
+					{
+						out.println("Passwords did not match");
+					}
+					else
+					{
+						out.println("Logged in successfully!!");
+						System.out.println("Logged in successfully!!");
+					}
+				}
 				st.close();
 				con.close();
-				out.println("Wrote into DB(FUCK YEAHHH!!!)");
-				request.setAttribute("name", username);
-				request.setAttribute("pass", password);
-				request.getRequestDispatcher("TheOther.jsp").forward(request, response);
 			} catch (Exception e) {
+				System.out.print("errors yaha par kidhar");
 				e.printStackTrace(); 
 			}
 		}
