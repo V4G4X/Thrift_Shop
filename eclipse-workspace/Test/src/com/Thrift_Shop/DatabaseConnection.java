@@ -1,3 +1,4 @@
+package com.Thrift_Shop;
 import java.sql.SQLException;
 
 import java.sql.Connection;
@@ -7,7 +8,7 @@ public class DatabaseConnection {
 	protected static Connection initializeDatabase() throws SQLException, ClassNotFoundException{
 		String dbDriver = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/";
-		String dbName = "test";
+		String dbName = "Thrift_Shop";
 		String user = "Admin";
 		String pass = "Admin@123";
 		try {
