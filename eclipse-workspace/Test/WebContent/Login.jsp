@@ -27,5 +27,10 @@
 			</section>
 		</fieldset>
 	</form>
+	<br>
+	<br>
+	<form action="SignUp.jsp" class="login">
+	<button type="submit">Sign Up</button>
+	</form>
 </body>
 </html>
