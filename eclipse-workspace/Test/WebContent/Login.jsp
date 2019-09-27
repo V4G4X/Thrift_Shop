@@ -8,7 +8,7 @@
 <link href="assets/CSS/style.css" rel="stylesheet">
 </head>
 <body>
-	<form name="login" method="GET" action="LoginServlet">
+	<form name="login" method="POST" action="LoginServlet">
 		<fieldset class="login">
 			<legend>Enter Details</legend>
 			<table class="login">

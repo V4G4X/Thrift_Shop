@@ -31,7 +31,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().println("WIll this run?");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -53,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 		if(!username.isEmpty() && !password1.isEmpty()) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
-				PreparedStatement st = con.prepareStatement("Select password from Login where username ='?'");
+				PreparedStatement st = con.prepareStatement("Select password from Login where username =?");
 				st.setString(1, username);
 				ResultSet rs=st.executeQuery();
 				if(!rs.next())
