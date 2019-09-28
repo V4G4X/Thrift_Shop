@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>My password is ${pass}</h3>
-	<h3>My Username is ${name}</h3>
+	<h3>My password is <%=session.getAttribute("password")%> </h3>
+	<h3>My User name is <%=session.getAttribute("username")%></h3>
 </body>
 </html>

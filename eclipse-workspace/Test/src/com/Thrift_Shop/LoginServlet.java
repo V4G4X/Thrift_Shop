@@ -5,11 +5,13 @@ import java.sql.ResultSet;
 import java.io.PrintWriter;
 import java.sql.Connection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class TestServlet
@@ -43,12 +45,12 @@ public class LoginServlet extends HttpServlet {
 		String password1= request.getParameter("password");
 		String password2="";
 		PrintWriter out = response.getWriter();
-		if (username.isEmpty())
+		if (username.isEmpty()) {
 			out.println("Empty Username Field");
-		System.out.println("Empty Username Field");
-		if (password1.isEmpty())
+		}
+		if (password1.isEmpty()) {
 			out.println("Empty Password Field");
-			System.out.println("Empty Password Field");
+		}
 		if(!username.isEmpty() && !password1.isEmpty()) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
@@ -69,7 +71,12 @@ public class LoginServlet extends HttpServlet {
 					}
 					else
 					{
-						out.println("Logged in successfully!!");
+						//session is used to transfer data from one jsp to other
+						HttpSession session = request.getSession();
+						session.setAttribute("username",username);
+						session.setAttribute("password", password1); 
+						//to redirect to profile page
+						response.sendRedirect("Profile.jsp");
 						System.out.println("Logged in successfully!!");
 					}
 				}
