@@ -43,23 +43,20 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password1= request.getParameter("password");
-		String password2="";
-		PrintWriter out = response.getWriter();
-		if (username.isEmpty()) {
-			out.println("Empty Username Field");
-		}
-		if (password1.isEmpty()) {
-			out.println("Empty Password Field");
-		}
+		String password2="";		
 		if(!username.isEmpty() && !password1.isEmpty()) {
 			try {
+				//to establish connection with database
 				Connection con = DatabaseConnection.initializeDatabase();
+				//PreparedStatement is used to run dynamic query
 				PreparedStatement st = con.prepareStatement("Select password from Login where username =?");
+				//? value in above sring will be replaced by username
 				st.setString(1, username);
+				//rs will point to the result of above query
 				ResultSet rs=st.executeQuery();
 				if(!rs.next())
 				{
-					response.sendRedirect("Error.jsp");
+					response.sendRedirect("errorLogin.jsp");
 					System.out.println("Username not found");
 				}
 				else
@@ -67,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 					password2=rs.getString("password");
 					if(password1.compareTo(password2)!=0)
 					{
-						response.sendRedirect("Error.jsp");
+						response.sendRedirect("errorLogin.jsp");
 						System.out.println("Passwords did not match");
 					}
 					else
@@ -84,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 				st.close();
 				con.close();
 			} catch (Exception e) {
-				System.out.print("errors yaha par kidhar");
+				System.out.print(e);
 				e.printStackTrace(); 
 			}
 		}
