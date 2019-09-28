@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 				ResultSet rs=st.executeQuery();
 				if(!rs.next())
 				{
-					out.println("Username not found");
+					response.sendRedirect("Error.jsp");
 					System.out.println("Username not found");
 				}
 				else
@@ -67,7 +67,8 @@ public class LoginServlet extends HttpServlet {
 					password2=rs.getString("password");
 					if(password1.compareTo(password2)!=0)
 					{
-						out.println("Passwords did not match");
+						response.sendRedirect("Error.jsp");
+						System.out.println("Passwords did not match");
 					}
 					else
 					{

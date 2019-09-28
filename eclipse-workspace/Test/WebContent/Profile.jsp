@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Profile</title>
 </head>
 <body>
 	<h3>My password is <%=session.getAttribute("password")%> </h3>

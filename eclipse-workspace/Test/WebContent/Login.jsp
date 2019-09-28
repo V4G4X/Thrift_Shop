@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Login Page</title>
 <link href="assets/CSS/style.css" rel="stylesheet">
+<script src="assets/JS/LoginValidate.js"></script>
 </head>
 <body>
 	<form name="login" method="POST" action="LoginServlet">
@@ -14,11 +15,11 @@
 			<table class="login">
 				<tr class="login">
 					<td>Username</td>
-					<td><input type="text" name="username"></td>
+					<td><input type="text" name="username" required aria-required="true"></td>
 				</tr>
 				<tr class="login">
 					<td>Password</td>
-					<td><input type="password" name="password"></td>
+					<td><input type="password" name="password" required aria-required="true"></td>
 				</tr>
 			</table>
 			<section class="center">
