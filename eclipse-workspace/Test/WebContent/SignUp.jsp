@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="assets/CSS/style.css" rel="stylesheet">
+<script src="assets/JS/signupValidation.js"></script>
 <title>Sign-up</title>
 </head>
 <body>
