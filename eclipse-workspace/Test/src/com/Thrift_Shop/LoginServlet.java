@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 				Connection con = DatabaseConnection.initializeDatabase();
 				//PreparedStatement is used to run dynamic query
 				PreparedStatement st = con.prepareStatement("Select password from Login where username =?");
-				//? value in above sring will be replaced by username
+				//? value in above string will be replaced by username
 				st.setString(1, username);
 				//rs will point to the result of above query
 				ResultSet rs=st.executeQuery();
