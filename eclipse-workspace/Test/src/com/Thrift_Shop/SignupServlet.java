@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SignupServer
  */
 @WebServlet("/SignupServer")
-public class SignupServer extends HttpServlet {
+public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignupServer() {
+    public SignupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class SignupServer extends HttpServlet {
 			response.sendRedirect("errorSignup.jsp");
 			System.out.println("Passwords did not match");
 		}
-		if(!fname.isEmpty() && !lname.isEmpty() && !phno1.isEmpty() && !emailid.isBlank() && !username.isEmpty() && !password1.isEmpty() && !building.isEmpty() && !city.isEmpty() && !neighbourhood.isEmpty() && !pincode.isEmpty()) {
+		if(!fname.isEmpty() && !lname.isEmpty() && !phno1.isEmpty() && !emailid.isEmpty() && !username.isEmpty() && !password1.isEmpty() && !building.isEmpty() && !city.isEmpty() && !neighbourhood.isEmpty() && !pincode.isEmpty()) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
 				
