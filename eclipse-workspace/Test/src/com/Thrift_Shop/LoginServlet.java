@@ -43,7 +43,8 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password1= request.getParameter("password");
-		String password2="";		
+		String password2="";	
+		int u_id = 0;
 		if(!username.isEmpty() && !password1.isEmpty()) {
 			try {
 				//to establish connection with database
@@ -73,6 +74,14 @@ public class LoginServlet extends HttpServlet {
 						HttpSession session = request.getSession();
 						session.setAttribute("username",username);
 						session.setAttribute("password", password1); 
+						PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
+						pst.setString(1, username);
+						ResultSet rs2 = st.executeQuery();
+						if(!rs2.next())
+						{
+							u_id = rs2.getInt("uid");
+						}
+						session.setAttribute("uid", u_id);
 						//to redirect to profile page
 						response.sendRedirect("Profile.jsp");
 						System.out.println("Logged in successfully!!");
