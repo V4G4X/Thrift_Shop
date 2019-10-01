@@ -58,7 +58,7 @@ public class SignupServer extends HttpServlet {
 			response.sendRedirect("errorSignup.jsp");
 			System.out.println("Passwords did not match");
 		}
-		if(!fname.isEmpty() && !lname.isEmpty() && !phno1.isEmpty() && !emailid.isBlank() && !username.isEmpty() && !password1.isEmpty() && !building.isEmpty() && !city.isEmpty() && !neighbourhood.isEmpty() && !pincode.isEmpty()) {
+		if(!fname.isEmpty() && !lname.isEmpty() && !phno1.isEmpty() && !emailid.isEmpty() && !username.isEmpty() && !password1.isEmpty() && !building.isEmpty() && !city.isEmpty() && !neighbourhood.isEmpty() && !pincode.isEmpty()) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
 				
