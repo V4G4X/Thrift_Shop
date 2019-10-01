@@ -31,7 +31,7 @@
 				</tr>
 			</table>
 			<section class="center">
-				<input type="submit" value="Submit" class="button"> <input
+				<input type="submit" value="Submit" class="button" id="btn"> <input
 					type="reset" value="Reset" class="button">
 			</section>
 		</fieldset>

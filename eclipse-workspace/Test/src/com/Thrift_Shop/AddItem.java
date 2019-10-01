@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -50,7 +51,8 @@ public class AddItem extends HttpServlet {
 		{
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
-				int u_id = session.getAttribute("uid");
+				HttpSession session = request.getSession();
+				//int u_id = session.getAttribute("uid");
 				PreparedStatement pst = con.prepareStatement("Insert into Item(s_id,stock,price) values (?,?,?)"); 
 				pst.setString(1, "u_id");
 			}catch(Exception exception)
