@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SignupServer
  */
 @WebServlet("/SignupServer")
-public class SignupServer extends HttpServlet {
+public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignupServer() {
+    public SignupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -52,7 +52,7 @@ public class AddItem extends HttpServlet {
 				Connection con = DatabaseConnection.initializeDatabase();
 				int u_id = session.getAttribute("uid");
 				PreparedStatement pst = con.prepareStatement("Insert into Item(s_id,stock,price) values (?,?,?)"); 
-				pst.setString(1, u_id);
+				pst.setString(1, "u_id");
 			}catch(Exception exception)
 			{
 				exception.printStackTrace();
