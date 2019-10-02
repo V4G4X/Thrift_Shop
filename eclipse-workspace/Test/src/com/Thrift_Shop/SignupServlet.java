@@ -35,6 +35,17 @@ public class SignupServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	protected void clearAttributes(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("fNameError", "");
+		request.setAttribute("lNameError", "");
+		request.setAttribute("phoneError", "");
+		request.setAttribute("emailError", "");
+		request.setAttribute("userNameError", "");
+		request.setAttribute("passwordError2", "");
+		request.setAttribute("passwordError1", "");
+		request.setAttribute("addressError", "");
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -42,22 +53,34 @@ public class SignupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		clearAttributes(request, response);
 		String fname = request.getParameter("fname");
+		request.setAttribute("fName", fname);
 		String lname = request.getParameter("lname");
+		request.setAttribute("lName", lname);
 		String phno1 = request.getParameter("phno1");
+		request.setAttribute("phone1", phno1);
 		String phno2 = request.getParameter("phno2");
+		request.setAttribute("phone2", phno2);
 		String emailid = request.getParameter("emailid");
+		request.setAttribute("email", emailid);
 		String username = request.getParameter("uname");
+		request.setAttribute("username", username);
 		String password1 = request.getParameter("pwd1");
 		String password2 = request.getParameter("pwd2");
 		String building = request.getParameter("bldg");
+		request.setAttribute("building", building);
 		String city = request.getParameter("city");
+		request.setAttribute("city", city);
 		String neighbourhood = request.getParameter("neighbour");
+		request.setAttribute("neighborhood", neighbourhood);
 		String pincode = request.getParameter("pincode");
+		request.setAttribute("pincode", pincode);
 		int uid = 0;
 
 		if (password1.compareTo(password2) != 0) {
-			response.sendRedirect("errorSignup.jsp");
+			request.setAttribute("passwordError2", "Passwords did not match.");
+			request.getRequestDispatcher("SignUp.jsp").forward(request, response);
 			System.out.println("Passwords did not match");
 		}
 		if (!fname.isEmpty() && !lname.isEmpty() && !phno1.isEmpty() && !emailid.isEmpty() && !username.isEmpty()
@@ -108,7 +131,50 @@ public class SignupServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		else {
+			try {
 
+				if (fname.isEmpty()) {
+					request.setAttribute("fNameError", "First Name Cannot be Empty");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+				if (lname.isEmpty()) {
+					request.setAttribute("lNameError", "Last Name Cannot be Empty");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+				if (phno1.isEmpty()) {
+					request.setAttribute("phoneError", "Primary Phone no. Cannot be Empty");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+				if (emailid.isEmpty()) {
+					request.setAttribute("emailError", "Email Cannot be Empty");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+				if (username.isEmpty()) {
+					request.setAttribute("usernameError", "Username Cannot be Empty");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+				if (password1.isEmpty()) {
+					request.setAttribute("passwordError1", "Password Cannot be Empty");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+				if (building.isEmpty() || city.isEmpty() || neighbourhood.isEmpty() || pincode.isEmpty()) {
+					request.setAttribute("addressError", "Please Fill all Address  fields");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
+
+			} catch (Exception e) {
+				System.out.println("Some Exception Happened");
+				 e.printStackTrace();
+			}
+		}
 		doGet(request, response);
 	}
 
