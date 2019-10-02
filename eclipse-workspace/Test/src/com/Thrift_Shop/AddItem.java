@@ -37,19 +37,78 @@ public class AddItem extends HttpServlet {
 		
 	}
 
+	
+	protected void clearAttributes(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("titleError", "");
+		request.setAttribute("conditionError", "");
+		request.setAttribute("priceError", "");
+		request.setAttribute("stockError", "");
+	}
+	protected void clearParameters(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("title", "");
+		request.setAttribute("condition", "");
+		request.setAttribute("price", "");
+		request.setAttribute("quantity", "");
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		clearAttributes(request, response);
+
 		String tit = request.getParameter("title");
+		if (tit.isEmpty()) {
+			request.setAttribute("titleError", "Title Cannot be Empty");
+			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			return;
+		}
+		request.setAttribute("title", tit);
+
 		String auth = request.getParameter("author");
+		request.setAttribute("author", auth);
+
 		String desc = request.getParameter("description");
-		int pri = Integer.parseInt(request.getParameter("price"));
-		int  qty = Integer.parseInt(request.getParameter("quantity"));
-		int cond = Integer.parseInt(request.getParameter("condition"));
+		request.setAttribute("description", desc);
+
 		
-		if((!tit.isEmpty()) && (!auth.isEmpty()) && (!desc.isEmpty()) && (pri != 0) && (qty != 0))
+		int cond = 0;
+		try{
+			cond = Integer.parseInt(request.getParameter("condition"));
+		}catch(NumberFormatException e) {
+			request.setAttribute("conditionError", "Condition Cannot be Zero");
+			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			return;
+		}
+		request.setAttribute("condition", cond);
+
+		
+		int pri = 0;
+		try{
+			pri = Integer.parseInt(request.getParameter("price"));
+		}catch(NumberFormatException e) {
+			request.setAttribute("priceError", "Price Cannot be Zero");
+			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			return;
+		}
+		request.setAttribute("price", pri);
+
+		
+		int  qty = 0;
+		try{
+			qty = Integer.parseInt(request.getParameter("quantity"));
+		}
+		catch(NumberFormatException e) {
+			request.setAttribute("stockError", "Stock Cannot be Zero");
+			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			return;
+		}
+		request.setAttribute("quantity", qty);
+
+
+		
+		if((!tit.isEmpty()) && (pri != 0) && (qty != 0) && (cond != 0))
 		{
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
@@ -79,13 +138,12 @@ public class AddItem extends HttpServlet {
 				
 			}catch(Exception exception)
 			{
+				System.out.println("Some Exception Happened");
 				exception.printStackTrace();
 			}
 			
-		}
-		
-		
-		doGet(request, response);
+		}	
+	doGet(request, response);
 	}
 
 }

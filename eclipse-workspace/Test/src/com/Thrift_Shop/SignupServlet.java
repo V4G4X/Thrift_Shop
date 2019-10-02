@@ -64,8 +64,7 @@ public class SignupServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		clearAttributes(request, response);
 		if(request.getParameter("reset")!=null && (request.getParameter("reset").compareTo("Reset"))==0) {
 			clearParameters(request, response);

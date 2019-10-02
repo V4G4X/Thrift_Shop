@@ -14,27 +14,44 @@
 				<table class="table-content">
 					<tr>
 						<td><b>Title <span class="com">*</span>:</b></td>
-						<td><input type="text" name="title" ></td>
+						<td><input type="text" name="title" value="${title}"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="error">${titleError}</td>
 					</tr>
 					<tr>
 						<td><b>Author:</b></td>
-						<td><input type="text" name="author" ></td>
+						<td><input type="text" name="author" value="${author}"></td>
 					</tr>
+					
 					<tr>
 						<td><b>Describe the Book:</b></td>
-						<td><textarea rows="5" cols="50" name="description" ></textarea></td>
+						<td><textarea rows="5" cols="50" name="description" value="${description}"></textarea></td>
 					</tr>
 					<tr>
 						<td><b>Condition <span class="com">*</span>:</b></td>
-						<td><input type="number" name="condition"></td>
+						<td><input type="number" name="condition" value="${condition}"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="error">${conditionError}</td>
 					</tr>
 					<tr>
 						<td><b>Selling price(for each) <span class="com">*</span>:</b></td>
-						<td><input type="number" name="price"></td>
+						<td><input type="number" name="price" value="${price}"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="error">${priceError}</td>
 					</tr>
 					<tr>
 						<td><b>Quantity <span class="com">*</span>:</b></td>
-						<td><input type="number" name="quantity"></td>
+						<td><input type="number" name="quantity" value="${quantity}"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="error">${stockError}</td>
 					</tr>
 				</table>
 				<br>
