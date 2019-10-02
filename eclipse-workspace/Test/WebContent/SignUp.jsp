@@ -9,7 +9,7 @@
 <title>Sign-up</title>
 </head>
 <body>
-	<form method="POST" name="signup" action="SignupServer" align="center">
+	<form method="POST" name="signup" action="SignupServlet" align="center">
 		<fieldset>
 			<legend>Sign-up</legend>
 				<fieldset width=200>
