@@ -74,11 +74,11 @@ public class LoginServlet extends HttpServlet {
 						session.setAttribute("password", password1); 
 						PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
 						pst.setString(1, username);
-						ResultSet rs2 = st.executeQuery();
-						if(!rs2.next())
-						{
+						ResultSet rs2 = pst.executeQuery();
+						rs2.next();
 							u_id = rs2.getInt("uid");
-						}
+							
+						System.out.println(u_id);
 						session.setAttribute("uid", u_id);
 						//to redirect to profile page
 						response.sendRedirect("Profile.jsp");

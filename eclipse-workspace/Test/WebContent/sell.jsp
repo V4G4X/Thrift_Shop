@@ -25,7 +25,7 @@
 					</tr>
 					<tr>
 						<td>Condition:</td>
-						<td><input type="num" name="condition"></td>
+						<td><input type="number" name="condition"></td>
 					</tr>
 					<tr>
 						<td>Selling price(for each):</td>
@@ -36,6 +36,7 @@
 						<td><input type="number" name="quantity"></td>
 					</tr>
 				</table>
+				<input type = "submit" value ="Sell" >
 				</fieldset>
 	</form>
 </body>
