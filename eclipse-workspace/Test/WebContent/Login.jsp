@@ -8,8 +8,8 @@
 <link href="assets/CSS/style.css" rel="stylesheet">
 </head>
 <body>
-	<form name="login" method="POST" action="LoginServlet"
-		onSubmit="return validate(event);">
+	<form name="login" method="POST" action="LoginServlet">
+		<!-- onSubmit="return validate(event);"> -->
 		<fieldset class="login">
 			<legend>Enter Details</legend>
 			<table class="login">
@@ -19,7 +19,7 @@
 				</tr>
 				<tr class="login">
 					<td></td>
-					<td><div id = "username_error" class="error"></div></td>
+					<td><div id="username_error" class="error"></div></td>
 				</tr>
 				<tr class="login">
 					<td><b>Password :</b></td>
@@ -31,8 +31,8 @@
 				</tr>
 			</table>
 			<section class="center">
-				<input type="submit" value="Submit" class="button" id="btn"> <input
-					type="reset" value="Reset" class="button">
+				<input type="submit" value="Submit" class="button" id="btn">
+				<input type="reset" value="Reset" class="button">
 			</section>
 		</fieldset>
 	</form>
