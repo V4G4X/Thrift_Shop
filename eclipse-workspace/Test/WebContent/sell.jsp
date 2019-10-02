@@ -27,7 +27,7 @@
 					
 					<tr>
 						<td><b>Describe the Book:</b></td>
-						<td><textarea rows="5" cols="50" name="description" value="${description}"></textarea></td>
+						<td><textarea rows="5" cols="50" name="description">${description}</textarea></td>
 					</tr>
 					<tr>
 						<td><b>Condition <span class="com">*</span>:</b></td>
