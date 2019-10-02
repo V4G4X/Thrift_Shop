@@ -219,6 +219,7 @@ CREATE TABLE `Login` (
   `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`uid`),
+  UNIQUE KEY `username` (`username`),
   KEY `fk_Login_1_idx` (`uid`),
   CONSTRAINT `fk_Login_1` FOREIGN KEY (`uid`) REFERENCES `User` (`uid`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -327,7 +328,7 @@ CREATE TABLE `Phone` (
   `uid` int(11) NOT NULL,
   `phone` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   KEY `uid` (`uid`),
-  CONSTRAINT `Phone_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `User` (`uid`)
+  CONSTRAINT `Phone_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `User` (`uid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -379,7 +380,7 @@ CREATE TABLE `User` (
   `email_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `email_id` (`email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -388,7 +389,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,1000,422003,'Nashik','college road','Rachit heritage','Jain','Anuj','anuj16@gmail.com'),(2,1000,411037,'Pune','Vit ke samne','SBI nagar','Mekala','Komal','komal99@gmail.com'),(3,1000,422311,'Kota','Allen ke samne','SBI nagar','sharma','Kota','kota99@gmail.com'),(4,1000,412411,'Pune','PICT ke samne','Friends','Khandelwal','Ritika','ritika99@gmail.com'),(5,0,101,'Mumbai','Andheri','EMP','Gawande','Varun','varun.gawande@gmail.com');
+INSERT INTO `User` VALUES (1,1000,422003,'Nashik','college road','Rachit heritage','Jain','Anuj','anuj16@gmail.com'),(2,1000,411037,'Pune','Vit ke samne','SBI nagar','Mekala','Komal','komal99@gmail.com'),(3,1000,422311,'Kota','Allen ke samne','SBI nagar','sharma','Kota','kota99@gmail.com'),(4,1000,412411,'Pune','PICT ke samne','Friends','Khandelwal','Ritika','ritika99@gmail.com');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -461,4 +462,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-28 18:42:22
+-- Dump completed on 2019-10-02 16:51:57

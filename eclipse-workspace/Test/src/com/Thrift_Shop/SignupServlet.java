@@ -67,9 +67,7 @@ public class SignupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearAttributes(request, response);
-		System.out.println("The Button sends: "+ request.getParameter("reset"));
-		if((request.getParameter("reset").compareTo("Reset"))==0) {
-			System.out.println("Entered Here!");
+		if(request.getParameter("reset")!=null && (request.getParameter("reset").compareTo("Reset"))==0) {
 			clearParameters(request, response);
 			request.getRequestDispatcher("SignUp.jsp").forward(request, response);
 			return;
@@ -149,7 +147,17 @@ public class SignupServlet extends HttpServlet {
 				pst.setInt(1, uid);
 				pst.setString(2, username);
 				pst.setString(3, password1);
-				pst.executeUpdate();
+				try {
+					pst.executeUpdate();
+				} catch (SQLIntegrityConstraintViolationException e) {
+					System.out.println("Duplicate Entry: "+username);
+					request.setAttribute("usernameError", "This Username has already been used before.");
+					pst = con.prepareStatement("DELETE FROM User where email_id like ?");
+					pst.setString(1, emailid);
+					pst.executeUpdate();
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
 
 				response.sendRedirect("Login.jsp");
 
@@ -199,7 +207,7 @@ public class SignupServlet extends HttpServlet {
 
 			} catch (Exception e) {
 				System.out.println("Some Exception Happened");
-				 e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		doGet(request, response);
