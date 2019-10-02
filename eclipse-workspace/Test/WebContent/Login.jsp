@@ -10,18 +10,18 @@
 <body>
 	<form name="login" method="POST" action="LoginServlet">
 		<!-- onSubmit="return validate(event);"> -->
-		<fieldset class="login">
+		<fieldset class="fieldset">
 			<legend>Enter Details</legend>
-			<table class="login">
-				<tr class="login">
+			<table class="table-content">
+				<tr>
 					<td><b>User-name :</b></td>
 					<td><input type="text" name="username"></td>
 				</tr>
-				<tr class="login">
+				<tr>
 					<td></td>
 					<td><div id="username_error" class="error"></div></td>
 				</tr>
-				<tr class="login">
+				<tr>
 					<td><b>Password :</b></td>
 					<td><input type="password" name="password"></td>
 				</tr>

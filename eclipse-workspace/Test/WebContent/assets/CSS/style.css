@@ -1,10 +1,15 @@
-.login{
+.fieldset{
 	width:60%;
 	margin:auto;
 }
 
-.center{
-	margin-left: 35%; 
+.main-fieldset{
+	width:80%;
+	margin:auto;
+}
+
+.table-content{
+	margin:auto;
 }
 
 .error {

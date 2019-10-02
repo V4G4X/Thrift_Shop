@@ -107,8 +107,7 @@ public class SignupServlet extends HttpServlet {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
 
-				PreparedStatement pst = con.prepareStatement(
-						"insert into User(fname,lname,email_id,building,city,neighbourhood,pincode)values(?,?,?,?,?,?,?)");
+				PreparedStatement pst = con.prepareStatement("insert into User(fname,lname,email_id,building,city,neighbourhood,pincode)values(?,?,?,?,?,?,?)");
 				pst.setString(1, fname);
 				pst.setString(2, lname);
 				pst.setString(3, emailid);
@@ -158,9 +157,7 @@ public class SignupServlet extends HttpServlet {
 					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
 					return;
 				}
-
 				response.sendRedirect("Login.jsp");
-
 			} catch (Exception e) {
 				System.out.print(e);
 				e.printStackTrace();

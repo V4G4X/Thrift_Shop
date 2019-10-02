@@ -9,87 +9,103 @@
 <title>Sign-up</title>
 </head>
 <body>
-	<form method="POST" name="signup" action="SignupServlet" align="center">
-		<fieldset>
-			<legend>Sign-up</legend>
-			<fieldset width=200>
-				<legend> Personal Details</legend>
-				<table align="center">
+	<form method="POST" name="signup" action="SignupServlet">
+		<fieldset class="main-fieldset">
+			<legend><b>Sign-up</b></legend>
+			<fieldset class="fieldset">
+				<legend><b>Personal Details</b></legend>
+				<table class="table-content">
 					<tr>
-						<td>First Name:*</td>
+						<td><b>First Name:</b></td>
 						<td><input type="text" name="fname" value="${fName}"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${fNameError}</td>
 					</tr>
 					<tr>
-						<td>Last Name:*</td>
+						<td><b>Last Name:</b></td>
 						<td><input type="text" name="lname" value="${lName}"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${lNameError}</td>
 					</tr>
 					<tr>
-						<td>Phone No. 1*:</td>
-						<td><input type="tel" name="phno1" maxlength="10"
-							minlength="10" value="${phone1}"></td>
+						<td><b>Phone No. 1:</b></td>
+						<td><input type="tel" name="phno1" maxlength="10" minlength="10" value="${phone1}"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${phoneError}</td>
 					</tr>
 					<tr>
-						<td>Phone No. 2:</td>
-						<td><input type="tel" name="phno2" maxlength="10"
-							minlength="10" value="${phone2}"></td>
+						<td><b>Phone No. 2:</b></td>
+						<td><input type="tel" name="phno2" maxlength="10" minlength="10" value="${phone2}"></td>
 					</tr>
 					<tr>
-						<td>Email:*</td>
+						<td><b>Email:</b></td>
 						<td><input type="email" name="emailid" value="${email}"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${emailError}${emailDup}</td>
 					</tr>
 
 				</table>
 			</fieldset>
 
-			<fieldset width=200>
-				<legend>Login Details</legend>
-				<table align="center">
+			<fieldset class="fieldset">
+				<legend><b>Login Details</b></legend>
+				<table class="table-content">
 					<tr>
-						<td>Username:*</td>
+						<td><b>User-name:</b></td>
 						<td><input type="text" name="uname" value="${username}"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${usernameError}</td>
 					</tr>
 					<tr>
-						<td>Password:*</td>
+						<td><b>Password:</b></td>
 						<td><input type="password" name="pwd1"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${passwordError1}</td>
 					</tr>
 					<tr>
-						<td>Confirm Password:*</td>
+						<td><b>Confirm Password:</b></td>
 						<td><input type="password" name="pwd2"></td>
+					</tr>	
+					<tr>
+						<td></td>
 						<td class="error">${passwordError2}</td>
 					</tr>
 				</table>
 			</fieldset>
-			<fieldset width="200">
+			<fieldset class="fieldset">
 				<legend>Address</legend>
-				<table align="center" width="200" heigth="500">
+				<table class="table-content">
 					<tr>
-						<td>Building:*</td>
+						<td><b>Building:</b></td>
 						<td><input type="text" name="bldg" value="${building }"></td>
 					</tr>
 					<tr>
-						<td>City:*</td>
+						<td><b>City:</b></td>
 						<td><input type="text" name="city" value="${city }"></td>
 					</tr>
 					<tr>
-						<td>Neighborhood:*</td>
-						<td><input type="text" name="neighbour"
-							value="${neighborhood }"></td>
+						<td><b>Neighborhood:</b></td>
+						<td><input type="text" name="neighbour" value="${neighborhood }"></td>
 					</tr>
 					<tr>
-						<td>Pincode:*</td>
-						<td><input type="tel" name="pincode" minlength="6"
-							maxlength="6" value="${pincode }"></td>
+						<td><b>Pin-code:</b></td>
+						<td><input type="tel" name="pincode" minlength="6" maxlength="6" value="${pincode }"></td>
 					</tr>
 					<tr>
-						<td><div class="error">
-								<br>${addressError }
-							</div></td>
+						<td></td>
+						<td class="error">${addressError}</td>
 					</tr>
 				</table>
 			</fieldset>
