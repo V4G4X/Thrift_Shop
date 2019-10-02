@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,16 +46,34 @@ public class SignupServlet extends HttpServlet {
 		request.setAttribute("passwordError2", "");
 		request.setAttribute("passwordError1", "");
 		request.setAttribute("addressError", "");
+		request.setAttribute("emailDup", "");
 	}
-
+	protected void clearParameters(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("fName", "");
+		request.setAttribute("lName", "");
+		request.setAttribute("phone1", "");
+		request.setAttribute("phone2", "");
+		request.setAttribute("email", "");
+		request.setAttribute("username", "");
+		request.setAttribute("building", "");
+		request.setAttribute("city", "");
+		request.setAttribute("neighborhood", "");
+		request.setAttribute("pincode", "");
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		clearAttributes(request, response);
+		System.out.println("The Button sends: "+ request.getParameter("reset"));
+		if((request.getParameter("reset").compareTo("Reset"))==0) {
+			System.out.println("Entered Here!");
+			clearParameters(request, response);
+			request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+			return;
+		}
 		String fname = request.getParameter("fname");
 		request.setAttribute("fName", fname);
 		String lname = request.getParameter("lname");
@@ -98,7 +118,14 @@ public class SignupServlet extends HttpServlet {
 				pst.setString(5, city);
 				pst.setString(6, neighbourhood);
 				pst.setString(7, pincode);
-				pst.executeUpdate();
+				try {
+					pst.executeUpdate();
+				} catch (SQLIntegrityConstraintViolationException e) {
+					System.out.println("Duplicate Entry: "+emailid);
+					request.setAttribute("emailDup", "This Email has already been used before.");
+					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					return;
+				}
 
 				pst = con.prepareStatement("Select uid from User where email_id =?");
 				pst.setString(1, emailid);

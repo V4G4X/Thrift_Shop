@@ -39,7 +39,7 @@
 					<tr>
 						<td>Email:*</td>
 						<td><input type="email" name="emailid" value="${email}"></td>
-						<td class="error">${emailError}</td>
+						<td class="error">${emailError}${emailDup}</td>
 					</tr>
 
 				</table>
@@ -96,7 +96,7 @@
 			<br>
 			<section class="center">
 				<button type="submit">Submit</button>
-				<button type="reset">Reset</button>
+				<input type="submit" name="reset" value="Reset" placeholder="Reset" onclick="SignupServlet"> 
 			</section>
 		</fieldset>
 	</form>
