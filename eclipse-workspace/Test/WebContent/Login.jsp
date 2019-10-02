@@ -39,7 +39,9 @@
 	<br>
 	<br>
 	<form action="SignUp.jsp" class="login">
-		<button type="submit">Sign Up</button>
+		<section class="center">
+			<input type="submit" value="Sign Up" class="button">
+		</section>
 	</form>
 </body>
 <script type="text/javascript" src="assets/JS/loginValidation.js"></script>

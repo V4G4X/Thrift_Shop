@@ -4,39 +4,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="assets/CSS/style.css" rel="stylesheet">
 <title>Sell the Item</title>
 </head>
 <body>
 	<form method = "POST" action = "AddItem" name  = "sell">
-		<fieldset>
-			<legend>Sell Item</legend>
-					<table align="center">
+		<fieldset class="fieldset">
+			<legend><b>Sell Item</b></legend>
+				<table class="table-content">
 					<tr>
-						<td>Title:</td>
+						<td><b>Title <span class="com">*</span>:</b></td>
 						<td><input type="text" name="title" ></td>
 					</tr>
 					<tr>
-						<td>Author:</td>
+						<td><b>Author:</b></td>
 						<td><input type="text" name="author" ></td>
 					</tr>
 					<tr>
-						<td>Describe the Book:</td>
-						<td><input type="text" name="description" ></td>
+						<td><b>Describe the Book:</b></td>
+						<td><textarea rows="5" cols="50" name="description" ></textarea></td>
 					</tr>
 					<tr>
-						<td>Condition:</td>
+						<td><b>Condition <span class="com">*</span>:</b></td>
 						<td><input type="number" name="condition"></td>
 					</tr>
 					<tr>
-						<td>Selling price(for each):</td>
+						<td><b>Selling price(for each) <span class="com">*</span>:</b></td>
 						<td><input type="number" name="price"></td>
 					</tr>
 					<tr>
-						<td>Quantity:</td>
+						<td><b>Quantity <span class="com">*</span>:</b></td>
 						<td><input type="number" name="quantity"></td>
 					</tr>
 				</table>
-				<input type = "submit" value ="Sell" >
+				<br>
+				<br>
+				<section class="center">
+					<input type = "submit" value ="Sell" class="button">
+				</section>
 				</fieldset>
 	</form>
 </body>
