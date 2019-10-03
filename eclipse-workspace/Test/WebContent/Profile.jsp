@@ -10,10 +10,10 @@
 	<h3>My User name is <%=session.getAttribute("username")%></h3>
 	<h3>My password is <%=session.getAttribute("password")%> </h3>
 	
-	<form action="sell.jsp">
+	<form action="Sell.jsp">
 			<input type="submit" value="Sell" class="button">
 	</form>
-	<form action="buy.jsp">
+	<form action="Buy.jsp">
 		<input type="reset" value="Buy" class="button">
 	</form>
 			

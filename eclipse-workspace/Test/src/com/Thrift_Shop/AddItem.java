@@ -61,7 +61,7 @@ public class AddItem extends HttpServlet {
 		String tit = request.getParameter("title");
 		if (tit.isEmpty()) {
 			request.setAttribute("titleError", "Title Cannot be Empty");
-			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			request.getRequestDispatcher("Sell.jsp").forward(request, response);
 			return;
 		}
 		request.setAttribute("title", tit);
@@ -78,7 +78,7 @@ public class AddItem extends HttpServlet {
 			cond = Integer.parseInt(request.getParameter("condition"));
 		}catch(NumberFormatException e) {
 			request.setAttribute("conditionError", "Condition Cannot be Zero");
-			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			request.getRequestDispatcher("Sell.jsp").forward(request, response);
 			return;
 		}
 		request.setAttribute("condition", cond);
@@ -89,7 +89,7 @@ public class AddItem extends HttpServlet {
 			pri = Integer.parseInt(request.getParameter("price"));
 		}catch(NumberFormatException e) {
 			request.setAttribute("priceError", "Price Cannot be Zero");
-			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			request.getRequestDispatcher("Sell.jsp").forward(request, response);
 			return;
 		}
 		request.setAttribute("price", pri);
@@ -101,7 +101,7 @@ public class AddItem extends HttpServlet {
 		}
 		catch(NumberFormatException e) {
 			request.setAttribute("stockError", "Stock Cannot be Zero");
-			request.getRequestDispatcher("sell.jsp").forward(request, response);
+			request.getRequestDispatcher("Sell.jsp").forward(request, response);
 			return;
 		}
 		request.setAttribute("quantity", qty);
