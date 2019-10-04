@@ -14,7 +14,7 @@
 			<legend>Enter Details</legend>
 			<table class="table-content">
 				<tr>
-					<td><b>User-name :</b></td>
+					<td><b>Username :</b></td>
 					<td><input type="text" name="username"></td>
 				</tr>
 				<tr>
@@ -34,6 +34,7 @@
 				<input type="submit" value="Submit" class="button" id="btn">
 				<input type="reset" value="Reset" class="button">
 			</section>
+			<div class="center error">${userError}${passError}</div>
 		</fieldset>
 	</form>
 	<br>

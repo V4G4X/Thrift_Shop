@@ -119,7 +119,12 @@ public class AddItem extends HttpServlet {
 				pst.setInt(1, u_id);
 				pst.setInt(2, qty);
 				pst.setInt(3,pri);
-				pst.executeUpdate();
+				try {
+					pst.executeUpdate();
+				} catch (Exception e) {
+					System.out.println("Some Exception caught at \"INSERT INTO Item(s_id,stock,price)\"");
+					e.printStackTrace();
+				}
 				
 				PreparedStatement pst2 = con.prepareStatement("Select max(i_id) as i_id from Item");
 				ResultSet rs1 = pst2.executeQuery();
@@ -133,8 +138,16 @@ public class AddItem extends HttpServlet {
 				pst3.setString(3,auth);
 				pst3.setString(5,desc);
 				pst3.setInt(4,cond);
-				
-				pst3.executeUpdate();
+				try {
+					pst3.executeUpdate();				
+				} catch (Exception e) {
+					System.out.println("Some Exception caught at \"INSERT INTO Item_Detail\"");
+					System.out.println("Deleting Respective record from Item Table");
+					PreparedStatement st = con.prepareStatement("DELETE FROM Item WHERE i_id = ?");
+					st.setInt(1, iid);
+					st.executeUpdate();
+					e.printStackTrace();
+				}
 				
 			}catch(Exception exception)
 			{
