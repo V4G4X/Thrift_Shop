@@ -27,42 +27,42 @@ public class SearchServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String search=request.getParameter("search");
-		if(search.isEmpty())
-		{
+		String search = request.getParameter("search");
+		if (search.isEmpty()) {
 			System.out.println("Empty search");
 		}
-		search="%"+search+"%";
-		try
-		{
+		search = "%" + search + "%";
+		try {
 			Connection con = DatabaseConnection.initializeDatabase();
-			PreparedStatement st1 = con.prepareStatement("select i_id,price,title from Item inner join Item_Detail using(i_id) where title LIKE ? OR author LIKE ? AND stock != 0");
-			st1.setString(1,search);
-			st1.setString(2,search);
-			ResultSet rs=st1.executeQuery();
-			while(rs.next())
-			{
-				String title=rs.getString("title");
-				float price=rs.getFloat("price");
+			PreparedStatement st1 = con.prepareStatement(
+					"select i_id,price,title from Item inner join Item_Detail using(i_id) where title LIKE ? OR author LIKE ? AND stock != 0");
+			st1.setString(1, search);
+			st1.setString(2, search);
+			ResultSet rs = st1.executeQuery();
+			while (rs.next()) {
+				String title = rs.getString("title");
+				float price = rs.getFloat("price");
 				System.out.println("Title:" + title);
 				System.out.println("Price:" + price);
 				System.out.println();
 			}
-
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.print("Some Exception Caught Here!");
 			e.printStackTrace();
 		}
