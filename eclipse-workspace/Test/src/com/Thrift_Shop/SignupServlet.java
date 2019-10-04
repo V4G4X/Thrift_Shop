@@ -121,6 +121,9 @@ public class SignupServlet extends HttpServlet {
 					request.setAttribute("emailDup", "This Email has already been used before.");
 					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
 					return;
+				} catch (Exception e) {
+					System.out.println("Some Exception caught at \"INSERT INTO User\"");
+					e.printStackTrace();
 				}
 
 				pst = con.prepareStatement("Select uid from User where email_id =?");
@@ -132,13 +135,23 @@ public class SignupServlet extends HttpServlet {
 				pst = con.prepareStatement("insert into Phone(uid,phone)values(?,?)");
 				pst.setInt(1, uid);
 				pst.setString(2, phno1);
-				pst.executeUpdate();
+				try {
+					pst.executeUpdate();
+				} catch (Exception e) {
+					System.out.println("Some Exception caught at 1st \"INSERT INTO Phone\"");
+					e.printStackTrace();
+				}
 
 				if (!phno2.isEmpty()) {
 					pst = con.prepareStatement("insert into Phone(uid,phone)values(?,?)");
 					pst.setInt(1, uid);
 					pst.setString(2, phno2);
-					pst.executeUpdate();
+					try {
+						pst.executeUpdate();
+					} catch (Exception e) {
+						System.out.println("Some Exception caught at 2nd \"INSERT INTO Phone\"");
+						e.printStackTrace();
+					}
 				}
 
 				pst = con.prepareStatement("insert into Login(uid,username,password)values(?,?,?)");
@@ -155,6 +168,14 @@ public class SignupServlet extends HttpServlet {
 					pst.executeUpdate();
 					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
 					return;
+				}
+				catch (Exception e) {
+					System.out.println("Some Exception caught at \"INSERT INTO Login\"");
+					e.printStackTrace();
+					PreparedStatement st = con.prepareStatement("DELETE FROM User where email_id like ?");
+					st.setString(1, emailid);
+					st.executeUpdate();
+					st.close();
 				}
 				response.sendRedirect("Login.jsp");
 			} catch (Exception e) {

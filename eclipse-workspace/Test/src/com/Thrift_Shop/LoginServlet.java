@@ -38,7 +38,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setAttribute("userError", "");
+		request.setAttribute("passError", "");
 		String username = request.getParameter("username");
 		String password1= request.getParameter("password");
 		String password2="";	
@@ -49,22 +50,28 @@ public class LoginServlet extends HttpServlet {
 				Connection con = DatabaseConnection.initializeDatabase();
 				//PreparedStatement is used to run dynamic query
 				PreparedStatement st = con.prepareStatement("Select password from Login where username =?");
-				//? value in above string will be replaced by username
+				//? value in above string will be replaced by Username
 				st.setString(1, username);
 				//rs will point to the result of above query
 				ResultSet rs=st.executeQuery();
 				if(!rs.next())
-				{
-					response.sendRedirect("errorLogin.jsp");
+				{	
+					//Set userError key-value pair
+					request.setAttribute("userError", "Username not found");
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					System.out.println("Username not found");
+					return;
 				}
 				else
 				{
 					password2=rs.getString("password");
 					if(password1.compareTo(password2)!=0)
 					{
-						response.sendRedirect("errorLogin.jsp");
-						System.out.println("Passwords did not match");
+						//Set passError key-value pair
+						request.setAttribute("passError", "Password did not match");
+						request.getRequestDispatcher("Login.jsp").forward(request, response);
+						System.out.println("Password did not match");
+						return;
 					}
 					else
 					{
@@ -93,7 +100,14 @@ public class LoginServlet extends HttpServlet {
 				e.printStackTrace(); 
 			}
 		}
+		else {
+			request.setAttribute("userError", "Enter Username and Password");
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+			System.out.println("UEnter Username and Password");
+			return;
+		}
 		doGet(request, response);
 	}
 
 }
+
