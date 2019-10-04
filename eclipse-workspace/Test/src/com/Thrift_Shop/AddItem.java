@@ -130,8 +130,8 @@ public class AddItem extends HttpServlet {
 				PreparedStatement pst3 = con.prepareStatement("Insert into Item_Detail values (?,?,?,?,?)");
 				pst3.setInt(1, iid);
 				pst3.setString(2,tit);
-				pst3.setString(3,auth);
-				pst3.setString(5,desc);
+				pst3.setString(5,auth);
+				pst3.setString(3,desc);
 				pst3.setInt(4,cond);
 				
 				pst3.executeUpdate();

@@ -69,20 +69,21 @@ public class LoginServlet extends HttpServlet {
 					else
 					{
 						//session is used to transfer data from one jsp to other
-						HttpSession session = request.getSession();
-						session.setAttribute("username",username);
-						session.setAttribute("password", password1); 
-						PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
-						pst.setString(1, username);
-						ResultSet rs2 = pst.executeQuery();
-						rs2.next();
-							u_id = rs2.getInt("uid");
+							HttpSession session = request.getSession();
+							session.setAttribute("username",username);
+							session.setAttribute("password", password1); 
+							PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
+							pst.setString(1, username);
+							ResultSet rs2 = pst.executeQuery();
+							rs2.next();
+								u_id = rs2.getInt("uid");
+							System.out.println(u_id);
+							session.setAttribute("uid", u_id);
+							//to redirect to profile page
+							response.sendRedirect("Profile.jsp");
+							System.out.println("Logged in successfully!!");
 							
-						System.out.println(u_id);
-						session.setAttribute("uid", u_id);
-						//to redirect to profile page
-						response.sendRedirect("Profile.jsp");
-						System.out.println("Logged in successfully!!");
+						
 					}
 				}
 				st.close();

@@ -14,6 +14,7 @@ public class DatabaseConnection {
 			Class.forName(dbDriver);
 		} catch (Exception e) {
 			System.out.println("Driver Error");
+			e.printStackTrace();
 		}
 		try {
 			Connection con = DriverManager.getConnection(url+dbName,user,pass);

@@ -14,7 +14,7 @@
 			<input type="submit" value="Sell" class="button">
 	</form>
 	<form action="Buy.jsp">
-		<input type="reset" value="Buy" class="button">
+		<input type="submit" value="Buy" class="button">
 	</form>
 			
 </body>

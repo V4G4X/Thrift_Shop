@@ -3,6 +3,7 @@ package com.Thrift_Shop;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,13 +42,25 @@ public class SearchServlet extends HttpServlet {
 		String search=request.getParameter("search");
 		if(search.isEmpty())
 		{
-			System.out.println("Emty search");
+			System.out.println("Empty search");
 		}
 		search="%"+search+"%";
 		try
 		{
 			Connection con = DatabaseConnection.initializeDatabase();
-			PreparedStatement st = con.prepareStatement("Select password from Login where username =?");
+			PreparedStatement st1 = con.prepareStatement("select i_id,price,title from Item innner join Item_Detail using(i_id) where title LIKE ? OR author LIKE ? AND stock != 0");
+			st1.setString(1,search);
+			st1.setString(2,search);
+			ResultSet rs=st1.executeQuery();
+			while(rs.next())
+			{
+				String title=rs.getString("title");
+				int price=Integer.parseInt(rs.getString("price"));
+				System.out.println("Title:" + title);
+				System.out.println("Price:"+price);
+				System.out.println();
+			}
+			
 		}
 		catch(Exception e)
 		{
