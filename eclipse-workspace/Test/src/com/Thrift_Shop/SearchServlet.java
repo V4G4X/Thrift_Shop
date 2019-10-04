@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SearchServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SearchServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,28 +48,24 @@ public class SearchServlet extends HttpServlet {
 		try
 		{
 			Connection con = DatabaseConnection.initializeDatabase();
-			PreparedStatement st1 = con.prepareStatement("select i_id,price,title from Item innner join Item_Detail using(i_id) where title LIKE ? OR author LIKE ? AND stock != 0");
+			PreparedStatement st1 = con.prepareStatement("select i_id,price,title from Item inner join Item_Detail using(i_id) where title LIKE ? OR author LIKE ? AND stock != 0");
 			st1.setString(1,search);
 			st1.setString(2,search);
 			ResultSet rs=st1.executeQuery();
 			while(rs.next())
 			{
 				String title=rs.getString("title");
-				int price=Integer.parseInt(rs.getString("price"));
+				float price=rs.getFloat("price");
 				System.out.println("Title:" + title);
-				System.out.println("Price:"+price);
+				System.out.println("Price:" + price);
 				System.out.println();
 			}
-			
+
 		}
-		catch(Exception e)
-		{
-			System.out.print(e);
+		catch (Exception e) {
+			System.out.print("Some Exception Caught Here!");
 			e.printStackTrace();
 		}
-		
-		
-		
 		doGet(request, response);
 	}
 
