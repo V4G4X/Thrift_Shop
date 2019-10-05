@@ -11,5 +11,5 @@
 %>
 alert("Script Loaded");
 
-let length = <% len %> ;
+let length = <%= len %> ;
 alert(length);
