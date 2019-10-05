@@ -42,8 +42,97 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
 		search = search.trim();
-
-		if (search.isEmpty()) {
+		String required[] = request.getParameterValues("searchby");
+		int searchbyval = 0;
+		for(String value :required) // traverses array to determine which filters have been chosen and sets searchbyval accordingly.
+		{							//Refer below for an index
+			if(required.length == 3)	//in case all filters have been chosen
+			{
+				searchbyval = 7;
+				break;
+			}
+			else if(required.length == 2)	//in case only two have
+			{
+				if(value.compareTo("auth") == 0)
+				{
+					if(searchbyval == 0)
+					{
+						searchbyval = 2;
+					}
+					else if(searchbyval == 1){
+						searchbyval = 4;
+						break;
+					}
+					else if(searchbyval == 3){
+						searchbyval = 5;
+						break;
+					}											
+				}
+				else if( value.compareTo("tit") == 0)
+				{
+					if(searchbyval == 0)
+					{
+						searchbyval = 1;
+					}
+					else if(searchbyval == 2){
+						searchbyval = 4;
+						break;
+					}
+					else if(searchbyval == 3){
+						searchbyval = 6;
+						break;
+					}											
+				}
+				else if(value.compareTo("desc") == 0)
+				{
+					if(searchbyval == 0)
+					{
+						searchbyval = 3;
+					}
+					else if(searchbyval == 1){
+						searchbyval = 6;
+						break;
+					}
+					else if(searchbyval == 2){
+						searchbyval = 5;
+						break;
+					}											
+				}
+			}
+			else if(required.length == 1)		//in case only one filter has been chosen
+			{
+				if(value.compareTo("auth") == 0)
+				{
+					searchbyval = 2;
+				}
+				else if(value.compareTo("tit") == 0)
+				{
+					searchbyval = 1;
+				}
+				if(value.compareTo("desc") == 0)
+				{
+					searchbyval = 3;
+				}
+			}
+			else {			//in case none have been chosen
+				System.out.println("Empty search");
+				request.setAttribute("searchError", "Please choose a search filter ;)");
+				request.getRequestDispatcher("Buy.jsp").forward(request, response);
+				return;
+			}
+		}
+/*
+ 	index for search by val
+ 	value of searchbyval = 1 ::implies to be searched only by title
+ 	value of searchbyval = 2 ::implies to be searched only by author
+ 	value of searchbyval = 3 ::implies to be searched only by description
+ 	value of searchbyval = 4 ::implies to be searched by title and author
+ 	value of searchbyval = 5 ::implies to be searched  by author and description
+ 	value of searchbyval = 6 ::implies to be searched only by title and description
+ 	value of searchbyval = 7 ::implies to be searched  by title,author and description
+ */
+		
+		if (search.isEmpty()) {					//in case search bar is empty
 			System.out.println("Empty search");
 			request.setAttribute("searchError", "Empty search");
 			request.getRequestDispatcher("Buy.jsp").forward(request, response);
@@ -56,25 +145,66 @@ public class SearchServlet extends HttpServlet {
 		System.out.println("No. of KeyWords are : "+keyword.length);
 		for (int i = 0; i < keyword.length; i++)															//Add WildCards to each keyword 
 			keyword[i] = "%" + keyword[i] +"%";
+
 		String query = "SELECT i_id,price,title,author FROM Item INNER JOIN Item_Detail USING(i_id) WHERE";	//Generate Query head(or the starting static part)
-		for (int i = 0; i < keyword.length; i++) {
-			query = query + " title LIKE ? OR ";															//append to the Query, the search from Title for each keyword
+		
+		if(searchbyval == 1 || searchbyval == 4 || searchbyval == 6 || searchbyval == 7)		//adding title where searchbyval requires it
+		{
+			for (int i = 0; i < keyword.length; i++) {
+				if((searchbyval == 1) && (i == (keyword.length -1)))
+				{
+					query = query + " title LIKE ? AND stock != 0";
+				}
+				else {
+					query = query + " title LIKE ? OR ";
+				}
+			}
 		}
-		for (int i = 0; i < keyword.length; i++) {
-			if(i!=keyword.length-1)																			//append to the Query, the search from author for each keyword
-				query = query + " author LIKE ? OR ";
-			else
-				query = query + " author LIKE ? AND stock !=0 ";											//slightly modify last append to accommodate stock
+		if(searchbyval == 2 || searchbyval == 4 || searchbyval == 5 || searchbyval == 7)      //adding author when and where required by searchbyval
+		{
+			for (int i = 0; i < keyword.length; i++) {
+				if((i==(keyword.length-1)) && ((searchbyval == 2) || (searchbyval == 4)))																			//append to the Query, the search from author for each keyword
+					query = query + " author LIKE ? AND stock !=0 ";
+				else
+					
+					query = query + " author LIKE ? OR ";																//slightly modify last append to accommodate stock
+			}
+		}	
+		if(searchbyval ==3 || searchbyval == 6 || searchbyval == 5 || searchbyval == 7)      //adding description when and where required
+		{
+			for (int i = 0; i < keyword.length; i++) {
+				if(i==(keyword.length-1))																			//append to the Query, the search from author for each keyword
+					query = query + " description LIKE ? AND stock !=0 ";
+				else
+					
+					query = query + " description LIKE ? OR ";																//slightly modify last append to accommodate stock
+			}
 		}
 		try {
 			Connection con2 = DatabaseConnection.initializeDatabase();
 			PreparedStatement st = con2.prepareStatement(query);
 			int i=1;
-			for ( i=1 ; i <= keyword.length; i++) {															
-				st.setString(i, keyword[i-1]);																//The first 'keywork.length' sets will belong to title
+			if(searchbyval ==1 || searchbyval == 4 || searchbyval == 6 || searchbyval == 7)   //sets title to keywords
+			{	
+				for ( int j=0 ; j < keyword.length; j++) {															
+					st.setString(i, keyword[j]);
+					i++;										//The first 'keywork.length' sets will belong to title
+				}
 			}
-			for (i=keyword.length+1  ; i  <= 2*keyword.length; i++) {
-				st.setString(i, keyword[i-keyword.length-1]);												//The second 'keywork.length' sets will belong to title
+			if(searchbyval == 2 || searchbyval == 4  || searchbyval == 5 || searchbyval ==7) //sets author to keyword
+			{
+				for (int j=0  ; j  < keyword.length; j++) {
+					st.setString(i, keyword[j]);
+					i++;//The second 'keywork.length' sets will belong to title
+				}
+			}
+			if(searchbyval == 3 || searchbyval == 5  || searchbyval == 6 || searchbyval ==7) //sets  description to keywords
+			{
+				for(int j = 0;j<keyword.length;j++)
+				{
+					st.setString(i,keyword[j]);
+					i++;
+				}
 			}
 			System.out.println(st.toString().substring(42) + "\n");											//Prints Prepared String for Developers Verification
 			ResultSet rs = st.executeQuery();
