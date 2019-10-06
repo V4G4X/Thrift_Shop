@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>Buy the Item</title>
 <link href="assets/CSS/style.css" rel="stylesheet">
-<!-- <script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
+<!-- 
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -36,13 +37,13 @@
 		</table>
 		<h2 class="error">${searchError}</h2>
 	</form>
-		<div role="grid" class="headingtable">
-			<div role="row" class="headingrow">
-				<div role="gridcell" class="headingcell">Title</div>
-				<div role="gridcell" class="headingcell">Author</div>
-				<div role="gridcell" class="headingcell">Price</div>
-			</div>
-			<%
+	<div role="grid" class="headingtable">
+		<div role="row" class="headingrow">
+			<div role="gridcell" class="headingcell">Title</div>
+			<div role="gridcell" class="headingcell">Author</div>
+			<div role="gridcell" class="headingcell">Price</div>
+		</div>
+		<%
 				QueryResult result = (QueryResult) (request.getAttribute("result"));
 				if (result == null) {
 					return;
@@ -61,17 +62,21 @@
 						session.setAttribute("Description", desc[i]);
 						session.setAttribute("Condition", cond[i]);
 						session.setAttribute("Price", price[i]);
+						int x = i_id[i];
 			%>
-			
-  			<div role="row" class="row" onClick="window.location='itemDetail.jsp';">
-    			<div role="gridcell" class="cell"><%=title[i]%></div>
-    			<div role="gridcell" class="cell"><%=author[i]%></div>
-    			<div role="gridcell" class="cell"><%=price[i]%></div>
- 			</div>
-			<%
+
+		<form id="form-id" method="GET" action="itemDetail.jsp">
+			<input type="hidden" name="i_id" value="<%out.print(x);%>">
+			<div role="row" id="<%out.print(x);%>" class="row" onclick='$("#<%out.print(x);%>").parent().submit();'>
+				<div role="gridcell" class="cell"><%=title[i]%></div>
+				<div role="gridcell" class="cell"><%=author[i]%></div>
+				<div role="gridcell" class="cell"><%=price[i]%></div>
+			</div>
+		</form>
+		<%
 				}
 				}
 			%>
-		</div>
+	</div>
 </body>
 </html>
