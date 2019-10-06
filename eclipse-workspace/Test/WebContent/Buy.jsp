@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Buy the Item</title>
 <link href="assets/CSS/style.css" rel="stylesheet">
-<script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
+<!-- <script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -16,9 +16,7 @@
 								+ '</scrip'+'t>';
 						//	$("head").append(element);
 					});
-</script>
-
-<link href="assets/CSS/style.css" rel="stylesheet">
+</script> -->
 </head>
 <body>
 	<form action="SearchServlet" method="POST">
@@ -38,13 +36,12 @@
 		</table>
 		<h2 class="error">${searchError}</h2>
 	</form>
-	<div id="dynaTable">
-		<table>
-			<tr>
-				<td>Title</td>
-				<td>Author</td>
-				<td>Price</td>
-			</tr>
+		<div role="grid" class="headingtable">
+			<div role="row" class="headingrow">
+				<div role="gridcell" class="headingcell">Title</div>
+				<div role="gridcell" class="headingcell">Author</div>
+				<div role="gridcell" class="headingcell">Price</div>
+			</div>
 			<%
 				QueryResult result = (QueryResult) (request.getAttribute("result"));
 				if (result == null) {
@@ -54,19 +51,27 @@
 					int i_id[] = result.getI_id();
 					String title[] = result.getTitle();
 					String author[] = result.getAuthor();
+					String desc[] = result.getDescription();
+					int cond[] = result.getCondition();
 					float price[] = result.getPrice();
 					for (int i = 0; i < len; i++) {
+						session.setAttribute("itemid", i_id[i]);
+						session.setAttribute("Title", title[i]);
+						session.setAttribute("Author", author[i]);
+						session.setAttribute("Description", desc[i]);
+						session.setAttribute("Condition", cond[i]);
+						session.setAttribute("Price", price[i]);
 			%>
-			<tr>
-				<td><%=title[i]%></td>
-				<td><%=author[i]%></td>
-				<td><%=price[i]%></td>
-			</tr>
+			
+  			<div role="row" class="row" onClick="window.location='itemDetail.jsp';">
+    			<div role="gridcell" class="cell"><%=title[i]%></div>
+    			<div role="gridcell" class="cell"><%=author[i]%></div>
+    			<div role="gridcell" class="cell"><%=price[i]%></div>
+ 			</div>
 			<%
 				}
 				}
 			%>
-		</table>
-	</div>
+		</div>
 </body>
 </html>

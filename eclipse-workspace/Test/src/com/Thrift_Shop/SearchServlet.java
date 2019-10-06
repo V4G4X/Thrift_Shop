@@ -142,7 +142,7 @@ public class SearchServlet extends HttpServlet {
 		for (int i = 0; i < keyword.length; i++) // Add WildCards to each keyword
 			keyword[i] = "%" + keyword[i] + "%";
 
-		String query = "SELECT i_id,price,title,author FROM Item INNER JOIN Item_Detail USING(i_id) WHERE"; // Generate
+		String query = "SELECT i_id,price,title,author,Item_Detail.condition,description FROM Item INNER JOIN Item_Detail USING(i_id) WHERE"; // Generate
 		// Query
 		// head(or
 		// the
@@ -155,7 +155,7 @@ public class SearchServlet extends HttpServlet {
 		{
 			for (int i = 0; i < keyword.length; i++) {
 				if ((searchbyval == 1) && (i == (keyword.length - 1))) {
-					query = query + " title LIKE ? AND stock != 0";
+					query = query + " title LIKE ? AND stock != 0 ";
 				} else {
 					query = query + " title LIKE ? OR ";
 				}
@@ -228,7 +228,7 @@ public class SearchServlet extends HttpServlet {
 					System.out.println("Title: " + title);
 					System.out.println("Price: " + price);
 					System.out.println("Author: " + rs.getString("author") + "\n");
-					result.appendRow(rs.getInt("i_id"), rs.getString("title"), rs.getString("author"),rs.getFloat("price"));
+					result.appendRow(rs.getInt("i_id"), rs.getString("title"), rs.getString("author"),rs.getString("description"), rs.getInt("condition"), rs.getFloat("price"));
 				}
 			request.setAttribute("result", result);
 			request.getRequestDispatcher("Buy.jsp").forward(request, response);

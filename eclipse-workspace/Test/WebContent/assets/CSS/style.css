@@ -28,3 +28,36 @@
 .button{
 
 }
+.headingtable {
+  display: table;
+}
+
+.headingrow {
+  display: table-row;
+}
+
+.headingcell {
+  display: table-cell;
+  padding: 10px;
+}
+
+.table {
+  display: table;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  padding: 10px;
+}
+
+.row:hover {
+  background-color: #cccccc;
+}
+/* 
+.cell:hover {
+  background-color: #e5e5e5;
+} */

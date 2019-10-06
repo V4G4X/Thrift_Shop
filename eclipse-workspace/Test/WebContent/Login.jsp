@@ -8,8 +8,7 @@
 <link href="assets/CSS/style.css" rel="stylesheet">
 </head>
 <body>
-	<form name="login" method="POST" action="LoginServlet">
-		<!-- onSubmit="return validate(event);"> -->
+	<form name="login" method="POST" action="LoginServlet" onSubmit="return validate(event);" >
 		<fieldset class="fieldset">
 			<legend>Enter Details</legend>
 			<table class="table-content">
