@@ -7,17 +7,6 @@
 <meta charset="UTF-8">
 <title>Buy the Item</title>
 <link href="assets/CSS/style.css" rel="stylesheet">
-<script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
-<!-- 
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						let element = '<script type="text/javascript" src="assets/JS/itemList.jsp">'
-								+ '</scrip'+'t>';
-						//	$("head").append(element);
-					});
-</script> -->
 </head>
 <body>
 	<form action="SearchServlet" method="POST">
@@ -37,12 +26,6 @@
 		</table>
 		<h2 class="error">${searchError}</h2>
 	</form>
-	<div role="grid" class="headingtable">
-		<div role="row" class="headingrow">
-			<div role="gridcell" class="headingcell">Title</div>
-			<div role="gridcell" class="headingcell">Author</div>
-			<div role="gridcell" class="headingcell">Price</div>
-		</div>
 		<%
 				QueryResult result = (QueryResult) (request.getAttribute("result"));
 				if (result == null) {
@@ -62,15 +45,19 @@
 		<form id="form-id" method="POST" action="ItemDetail">
 			<input type="hidden" name="i_id" value="<%out.print(x);%>">
 			<div role="row" id="<%out.print(x);%>" class="row" onclick='$("#<%out.print(x);%>").parent().submit();'>
-				<div role="gridcell" class="cell"><%=title[i]%></div>
-				<div role="gridcell" class="cell"><%=author[i]%></div>
-				<div role="gridcell" class="cell"><%=price[i]%></div>
+				<div class="cell"><img src="assets/item.png"></div>
+				<div class="cell">
+					<div><b>Title :</b> <%=title[i]%></div>
+					<div><b>Author :</b> <%=author[i]%></div>
+					<div><b>Price :</b> <%=price[i]%></div>
+				</div>
+				<br>
+				<br>
 			</div>
 		</form>
 		<%
 				}
 				}
 			%>
-	</div>
 </body>
 </html>
