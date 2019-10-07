@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.bg{
+	background-color: #2e86c1 ;
+}
+
+small{
+	color:red;
+}
+
+.signup-form{
+	border:0px solid #fff;
+	 padding:10px 20px;
+	margin-top:05vh;
+	margin-bottom:5vh;
+	background-color:white;
+	-webkit-box-shadow: -1px 2px 26px 11px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 2px 26px 11px rgba(0,0,0,0.75);
+	box-shadow: -1px 2px 26px 11px rgba(0,0,0,0.75);
+}
+
+.signup-form .hint-text {
+		padding-bottom: 15px;
+		text-align: center;
+    }

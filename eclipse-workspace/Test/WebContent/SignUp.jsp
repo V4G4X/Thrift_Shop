@@ -4,117 +4,104 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="assets/CSS/style.css" rel="stylesheet">
-<script src="assets/JS/signupValidation.js"></script>
 <title>Sign-up</title>
+<link href="assets/CSS/signUp.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container-fluid bg">
+	<div class="row">
+	<div class="col-md-4 col-sm-4 col-xs-12"></div>
+	<div class="col-md-4 col-sm-4 col-xs-12">
+	<div class="signup-form">
 	<form method="POST" name="signup" action="SignupServlet" onSubmit="return validate(event);">
-		<fieldset class="main-fieldset">
-			<legend><b>Sign-up</b></legend>
-			<fieldset class="fieldset">
-				<legend><b>Personal Details</b></legend>
-				<table class="table-content">
-					<tr>
-						<td><b>First Name <span class="com">*</span>:</b></td>
-						<td><input type="text" name="fname" value="${fName}"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${fNameError}</td>
-					</tr>
-					<tr>
-						<td><b>Last Name <span class="com">*</span>:</b></td>
-						<td><input type="text" name="lname" value="${lName}"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${lNameError}</td>
-					</tr>
-					<tr>
-						<td><b>Phone No. 1 <span class="com">*</span>:</b></td>
-						<td><input type="tel" name="phno1" maxlength="10" minlength="10" value="${phone1}"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${phoneError}</td>
-					</tr>
-					<tr>
-						<td><b>Phone No. 2:</b></td>
-						<td><input type="tel" name="phno2" maxlength="10" minlength="10" value="${phone2}"></td>
-					</tr>
-					<tr>
-						<td><b>Email <span class="com">*</span>:</b></td>
-						<td><input type="email" name="emailid" value="${email}"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${emailError}${emailDup}</td>
-					</tr>
-
-				</table>
-			</fieldset>
-
-			<fieldset class="fieldset">
-				<legend><b>Login Details</b></legend>
-				<table class="table-content">
-					<tr>
-						<td><b>User-name <span class="com">*</span>:</b></td>
-						<td><input type="text" name="uname" value="${username}"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${usernameError}</td>
-					</tr>
-					<tr>
-						<td><b>Password <span class="com">*</span>:</b></td>
-						<td><input type="password" name="pwd1"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${passwordError1}</td>
-					</tr>
-					<tr>
-						<td><b>Confirm Password <span class="com">*</span>:</b></td>
-						<td><input type="password" name="pwd2"></td>
-					</tr>	
-					<tr>
-						<td></td>
-						<td class="error">${passwordError2}</td>
-					</tr>
-				</table>
-			</fieldset>
-			<fieldset class="fieldset">
-				<legend><b>Address</b></legend>
-				<table class="table-content">
-					<tr>
-						<td><b>Building <span class="com">*</span>:</b></td>
-						<td><input type="text" name="bldg" value="${building }"></td>
-					</tr>
-					<tr>
-						<td><b>City <span class="com">*</span>:</b></td>
-						<td><input type="text" name="city" value="${city }"></td>
-					</tr>
-					<tr>
-						<td><b>Neighborhood <span class="com">*</span>:</b></td>
-						<td><input type="text" name="neighbour" value="${neighborhood }"></td>
-					</tr>
-					<tr>
-						<td><b>Pin-code <span class="com">*</span>:</b></td>
-						<td><input type="tel" name="pincode" minlength="6" maxlength="6" value="${pincode }"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td class="error">${addressError}</td>
-					</tr>
-				</table>
-			</fieldset>
-			<br>
-			<section class="center">
-				<input type="submit" value="Sign Up">
-				<input type="submit" name="reset" value="Reset" placeholder="Reset" onclick="SignupServlet"> 
-			</section>
-		</fieldset>
+		<h2>Sign Up</h2>
+		<p>Please fill in this form to create an account!</p>
+		<hr>
+		<label><b>Personal Details</b></label>
+		<div class="form-group">
+			<div class="row">
+				<div class="col"><input type="text" name="fname" value="${fName}" placeholder="First Name"></div>
+				<div class="col"><input type="text" name="lname" value="${lName}" placeholder="Last Name"></div>
+			</div>
+			<div class="row">
+				<div class="col" class="error"><small>${fNameError}</small></div>
+				<div class="col" class="error"><small>${lNameError}</small></div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="row">
+				<div class="col"><input type="tel" name="phno1" maxlength="10" minlength="10" value="${phone1}" placeholder="Mobile Number"></div>
+				<div class="col"><input type="tel" name="phno2" maxlength="10" minlength="10" value="${phone2}" placeholder="Alternate Number"></div>
+			</div>
+			<div class="error"><small>${phoneError}</small></div>
+		</div>
+		
+		<div class="form-group">
+			
+		</div>
+		
+		<div class="form-group">
+			<input type="email" name="emailid" value="${email}" placeholder="Email-Id">
+			<div class="error"><small>${emailError}${emailDup}</small></div>
+		</div>
+					
+		<hr>
+		<label><b>Login Detail</b></label>
+		<div class="form-group">
+			<input type="text" name="uname" value="${username}" placeholder="User Name">
+			<div class="error"><small>${usernameError}</small></div>
+		</div>
+						
+		<div class="form-group">
+			<input type="password" name="pwd1" placeholder="Password">
+			<div class="error"><small>${passwordError1}</small></div>
+		</div>	
+		
+		<div class="form-group">
+			<input type="password" name="pwd2" placeholder="Confirm-Password">
+			<div class="error"><small>${passwordError2}</small></div>
+		</div>			
+		
+		<hr>				
+		
+		<label><b>Address</b></label>
+		<div class="form-group">
+			<input type="text" name="bldg" value="${building }" placeholder="Building Name">
+		</div>
+		
+		<div class="form-group">
+			<input type="text" name="city" value="${city }" placeholder="City Name">
+		</div>
+					
+		<div class="form-group">
+			<input type="text" name="neighbour" value="${neighborhood }" placeholder="Neighbourhood Name">
+		</div>
+			
+		<div class="form-group">
+			<input type="tel" name="pincode" minlength="6" maxlength="6" value="${pincode }" placeholder="Pin-Code">
+		</div>
+		
+		<div class="error"><small>${addressError}</small></div>
+		
+		<div class="form-group">
+			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col"><input type="submit" value="Sign Up" class="btn btn-primary btn-block"></div>
+				<div class="col"><input type="submit" name="reset" value="Reset" placeholder="Reset" onclick="SignupServlet" class="btn btn-primary btn-block"></div>
+			</div>
+		</div>
 	</form>
+	<div class="hint-text">Already have an account? <a href="Login.jsp">Login here</a></div>
+	</div>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12"></div>
+	</div>
+</div>
 </body>
 </html>

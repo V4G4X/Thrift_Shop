@@ -16,7 +16,7 @@
 	<div class="row">
 	<div class="col-md-4 col-sm-4 col-xs-12"></div>
 	<div class="col-md-4 col-sm-4 col-xs-12">
-	<div class="form-container">
+	<div class="form-container">	
 	<h1>Login Form</h1>
 	<form name="login" method="POST" action="LoginServlet" onSubmit="return validate(event);" >
 			<div class="form-group">
@@ -34,6 +34,8 @@
 			<div class="center error">${userError}${passError}</div>
 	</form>
 	<br>
+	<br>
+	<small id="emailHelp" class="form-text text-muted"><span>New to Thrift_Shop?</span></small>
 	<form action="SignUp.jsp" class="login">
 		<input type="submit" value="Sign Up" class="btn btn-primary btn-block">
 	</form>
