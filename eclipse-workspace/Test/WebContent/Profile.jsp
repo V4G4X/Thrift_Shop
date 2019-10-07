@@ -16,6 +16,10 @@
 	<form action="Buy.jsp">
 		<input type="submit" value="Buy" class="button">
 	</form>
+	<form method = "post" action="ViewCart">
+		<input type="submit" value="View Cart" class="button">
+	</form>
+	
 			
 </body>
 </html>
