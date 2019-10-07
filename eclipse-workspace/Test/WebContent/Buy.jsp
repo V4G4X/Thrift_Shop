@@ -45,7 +45,7 @@
 		<form id="form-id" method="POST" action="ItemDetail">
 			<input type="hidden" name="i_id" value="<%out.print(x);%>">
 			<div role="row" id="<%out.print(x);%>" class="row" onclick='$("#<%out.print(x);%>").parent().submit();'>
-				<div class="cell"><img src="assets/item.png"></div>
+				<div class="cell"><img src="assets/images/item.png"></div>
 				<div class="cell">
 					<div><b>Title :</b> <%=title[i]%></div>
 					<div><b>Author :</b> <%=author[i]%></div>

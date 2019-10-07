@@ -5,44 +5,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Login Page</title>
-<link href="assets/CSS/style.css" rel="stylesheet">
+<link href="assets/CSS/login.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container-fluid bg">
+	<div class="row">
+	<div class="col-md-4 col-sm-4 col-xs-12"></div>
+	<div class="col-md-4 col-sm-4 col-xs-12">
+	<div class="form-container">
+	<h1>Login Form</h1>
 	<form name="login" method="POST" action="LoginServlet" onSubmit="return validate(event);" >
-		<fieldset class="fieldset">
-			<legend>Enter Details</legend>
-			<table class="table-content">
-				<tr>
-					<td><b>Username :</b></td>
-					<td><input type="text" name="username"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><div id="username_error" class="error"></div></td>
-				</tr>
-				<tr>
-					<td><b>Password :</b></td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr class="login">
-					<td></td>
-					<td><div id="password_error" class="error"></div></td>
-				</tr>
-			</table>
-			<section class="center">
-				<input type="submit" value="Submit" class="button" id="btn">
-				<input type="reset" value="Reset" class="button">
-			</section>
+			<div class="form-group">
+				<label>User Name</label>
+				<input type="text" class="form-control" name="username" placeholder="Enter User Name">
+				<div id="username_error" class="error"></div>
+			</div>
+			
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" name="password" placeholder="Enter Password">
+				<div id="password_error" class="error"></div>
+			</div>
+			<input type="submit" value="Log In" class="btn btn-success btn-block" id="btn">	
 			<div class="center error">${userError}${passError}</div>
-		</fieldset>
 	</form>
-	<br>
 	<br>
 	<form action="SignUp.jsp" class="login">
-		<section class="center">
-			<input type="submit" value="Sign Up" class="button">
-		</section>
+		<input type="submit" value="Sign Up" class="btn btn-primary btn-block">
 	</form>
+	</div>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12"></div>
+	</div>
+</div>
 </body>
 <script type="text/javascript" src="assets/JS/loginValidation.js"></script>
 </html>
