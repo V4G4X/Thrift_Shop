@@ -56,16 +56,10 @@
 					int cond[] = result.getCondition();
 					float price[] = result.getPrice();
 					for (int i = 0; i < len; i++) {
-						session.setAttribute("itemid", i_id[i]);
-						session.setAttribute("Title", title[i]);
-						session.setAttribute("Author", author[i]);
-						session.setAttribute("Description", desc[i]);
-						session.setAttribute("Condition", cond[i]);
-						session.setAttribute("Price", price[i]);
-						int x = i_id[i];
+					int x = i_id[i];
 			%>
 
-		<form id="form-id" method="GET" action="itemDetail.jsp">
+		<form id="form-id" method="POST" action="ItemDetail">
 			<input type="hidden" name="i_id" value="<%out.print(x);%>">
 			<div role="row" id="<%out.print(x);%>" class="row" onclick='$("#<%out.print(x);%>").parent().submit();'>
 				<div role="gridcell" class="cell"><%=title[i]%></div>
