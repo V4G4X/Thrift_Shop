@@ -1,0 +1,40 @@
+delimiter $$
+create procedure addtocart(IN iid int,IN qty int,IN bid int,OUT result int )
+begin
+	DECLARE stck INT; 
+	DECLARE flag INT;
+	DECLARE tmstmp TIMESTAMP;
+	DECLARE pamt FLOAT;
+	DECLARE noid INT;
+	DECLARE iamt FLOAT;
+	DECLARE fsum FLOAT;
+	SELECT stock into stck from Item where i_id =iid;
+	IF stck < qty 
+	Then
+	set result=0;
+	ELSE
+		SELECT CURRENT_TIMESTAMP() INTO tmstmp;
+		SELECT COUNT(o_id) INTO flag from Orders where b_id=bid AND status ='CART';
+		IF flag=0
+		THEN
+			INSERT INTO Orders(b_id,status,total_amount) values(bid,'CART',0);
+			SELECT MAX(o_id) INTO noid from Orders;
+			SELECT price INTO iamt from Item where i_id =iid;
+			SET pamt=qty*iamt;
+			INSERT INTO Contains values(noid,iid,pamt,qty);
+			UPDATE Orders SET total_amount=pamt where o_id=noid;
+		ELSE
+			SELECT o_id INTO noid from Orders where b_id=bid;
+			SELECT price INTO iamt from Item where i_id =iid;
+			SET pamt=qty*iamt;
+			INSERT INTO Contains values(noid,iid,pamt,qty);
+			SELECT SUM(partial_amount) INTO fsum from Contains where o_id=noid;
+			UPDATE Orders SET total_amount=fsum where o_id=noid;
+			
+		END IF;
+	SET result=1;
+	END IF;		
+	
+end
+$$
+
