@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="assets/CSS/style.css" rel="stylesheet">
-<title>Item-<%=session.getAttribute("Title")%></title>
+<title>Item - <%=session.getAttribute("viewable_title")%></title>
 </head>
 <body>
 	<fieldset class="fieldset">
@@ -34,10 +34,9 @@
 				<td><b>Stock:</b></td>
 				<td><%=session.getAttribute("viewable_stock")%></td>
 			</tr>
-
-
 		</table>
 	</fieldset>
+	
 	<fieldset class="fieldset">
 		<legend>
 			<b>Seller Details</b>
@@ -77,12 +76,11 @@
 			<td><div class="center error">${QuantityError}</div></td>
 			</tr>
 			<tr>
-			<td><input type="submit" value="Add to Cart" class="button"></td>
+			<td><input type="submit" value="Add to Cart" class="button" name="addToCart"></td>
+			<td><input type="submit" value="Buy Now" class="button" name="buyNow" formaction="BuyNow"></td>
 			</tr>
-			</table>
-			
+			</table>			
 		</section>
 	</form>
-
 </body>
 </html>
