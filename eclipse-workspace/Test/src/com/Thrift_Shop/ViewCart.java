@@ -45,7 +45,7 @@ public class ViewCart extends HttpServlet {
 		int b_id=(int)session.getAttribute("uid");
 		int order_id;
 		String query_order = "Select o_id from Orders where b_id = ? and status = 'Cart'";
-		String query_cart = "Select Item_Detail.title,Item.price,Contains.quantity,Contains.partial_amount from Item INNER JOIN (Item_Detail INNER JOIN Contains ON Contains.i_id = Item_Detail.i_id) ON Item.i_id = Item_Detail.i_id where o_id = ?";
+		String query_cart = "Select Item.i_id,Item_Detail.title,Item.price,Contains.quantity,Contains.partial_amount from Item INNER JOIN (Item_Detail INNER JOIN Contains ON Contains.i_id = Item_Detail.i_id) ON Item.i_id = Item_Detail.i_id where o_id = ?";
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
 			PreparedStatement pst = con.prepareStatement(query_order);
@@ -54,6 +54,8 @@ public class ViewCart extends HttpServlet {
 			if(!rs1.isBeforeFirst())
 			{
 				System.out.println("In here");
+				Query_ViewCart qvc = new Query_ViewCart(0);
+				session.setAttribute("rs", qvc);
 				request.setAttribute("CartError", "Empty Cart ;)");
 				request.getRequestDispatcher("Cart.jsp").forward(request, response);
 				return;
@@ -68,6 +70,7 @@ public class ViewCart extends HttpServlet {
 			float temp_price = 0;
 			float temp_partialAmt = 0;
 			int temp_qty = 0;
+			int temp_iid = 0;
 			int n = this.getRowCount(rs2);
 				Query_ViewCart rs = new Query_ViewCart(n);
 				rs2.next();
@@ -77,8 +80,9 @@ public class ViewCart extends HttpServlet {
 				temp_price = rs2.getFloat("price");
 				temp_qty = rs2.getInt("quantity");
 				temp_partialAmt = rs2.getFloat("partial_amount");
+				temp_iid = rs2.getInt("i_id");
 				System.out.println("Title: " + temp_title);
-				rs.appendRow(temp_title, temp_price, temp_qty, temp_partialAmt);
+				rs.appendRow(temp_title, temp_price, temp_qty, temp_partialAmt,temp_iid);
 				rs2.next();
 			}
 			

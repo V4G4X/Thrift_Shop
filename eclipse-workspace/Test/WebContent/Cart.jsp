@@ -22,6 +22,7 @@
 			float temp_price = 0;
 			float temp_pamount = 0;
 			int temp_qty = 0;
+			int temp_iid = 0;
 			int i = 0;
 	%>
 
@@ -39,6 +40,7 @@
 					temp_price = result.getPrice(i);
 					temp_pamount = result.getPartial_amount(i);
 					temp_qty = result.getQuantity(i);
+					temp_iid = result.getiid(i);
 		%>
 
 		<tr>
@@ -48,7 +50,7 @@
 			<td width="10%"><%=temp_price%></td>
 			<td width="10%"><%=temp_qty%></td>
 			<td width="10%"><%=temp_pamount%></td>
-			<td width = "10%"><form action="RemoveItem" method="post"><input type="submit" value="REMOVE" name="button"><input type="hidden" value="<%=i%>" name="remove"></form></td>
+			<td width = "10%"><form action="RemoveItem" method="post"><input type="submit" value="REMOVE" name="button"><input type="hidden" value="<%=temp_iid%>" name="remove"></form></td>
 			
 		</tr>
 		<%
