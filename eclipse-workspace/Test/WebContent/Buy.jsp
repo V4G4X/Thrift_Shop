@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Buy the Item</title>
 <link href="assets/CSS/style.css" rel="stylesheet">
+<script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
 </head>
 <body>
 	<form action="SearchServlet" method="POST">

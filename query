@@ -8,12 +8,15 @@ begin
 	DECLARE noid INT;
 	DECLARE iamt FLOAT;
 	DECLARE fsum FLOAT;
+	DECLARE same_count INT;
+	DECLARE same_qty INT;
+	DECLARE new_qty INT;
+	DECLARE same_pamt FLOAT;
 	SELECT stock into stck from Item where i_id =iid;
 	IF stck < qty 
 	Then
 	set result=0;
 	ELSE
-		SELECT CURRENT_TIMESTAMP() INTO tmstmp;
 		SELECT COUNT(o_id) INTO flag from Orders where b_id=bid AND status ='CART';
 		IF flag=0
 		THEN
@@ -23,16 +26,30 @@ begin
 			SET pamt=qty*iamt;
 			INSERT INTO Contains values(noid,iid,pamt,qty);
 			UPDATE Orders SET total_amount=pamt where o_id=noid;
+			SET result = 1;
+
 		ELSE
 			SELECT o_id INTO noid from Orders where b_id=bid;
+			SELECT COUNT(i_id) into same_count from Contains where i_id = iid AND noid = o_id;
 			SELECT price INTO iamt from Item where i_id =iid;
-			SET pamt=qty*iamt;
-			INSERT INTO Contains values(noid,iid,pamt,qty);
-			SELECT SUM(partial_amount) INTO fsum from Contains where o_id=noid;
-			UPDATE Orders SET total_amount=fsum where o_id=noid;
+			IF same_count = 1
+			THEN
+				SELECT quantity into same_qty from Contains where i_id = iid and o_id = noid;
+				SELECT partial_amount into same_pamt from Contains where i_id = iid and o_id = noid;
+				SET new_qty = same_qty + qty;
+				SET pamt = new_qty * iamt;
+				UPDATE Contains SET partial_amount = pamt,quantity = new_qty where o_id = noid AND i_id = iid;
+				SET result = 2;
+			ELSE			
+				SET pamt=qty*iamt;
+				INSERT INTO Contains values(noid,iid,pamt,qty);
+				SET result = 1;
+
+			END IF;
+		SELECT SUM(partial_amount) INTO fsum from Contains where o_id=noid;
+		UPDATE Orders SET total_amount=fsum where o_id=noid;
 			
 		END IF;
-	SET result=1;
 	END IF;		
 	
 end
