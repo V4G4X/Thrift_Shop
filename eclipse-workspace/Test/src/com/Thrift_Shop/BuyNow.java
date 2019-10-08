@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AddToCart
+ * Servlet implementation class BuyNow
  */
-@WebServlet("/AddToCart")
-public class AddToCart extends HttpServlet {
+@WebServlet("/BuyNow")
+public class BuyNow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddToCart() {
+    public BuyNow() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +41,11 @@ public class AddToCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		System.out.println("inbuynow");
+		
+		
 		int qty=0;
+		System.out.println(qty);
 		try{
 			qty = Integer.parseInt(request.getParameter("qty"));
 		}catch(NumberFormatException e) {
@@ -49,46 +53,43 @@ public class AddToCart extends HttpServlet {
 			request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
 			return;
 		}
+		System.out.println(qty);
 		if(qty<=0)
 		{
 			request.setAttribute("QuantityError", "Quantity cannot be zero");
 			request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
-		}
-		
-		
+		}		
+		System.out.println(qty);
+	
 		HttpSession session = request.getSession();
 		int b_id=(int)session.getAttribute("uid");
-		int i_id=(int)session.getAttribute("viewable_iid");
+		System.out.println(b_id);
+		String build = "",neighb = "",city = "";
+		float wallet;
+		String queryUserDetails="SELECT building,neighbourhood,city,wallet from User where uid = ?";
 		try
 		{
 			Connection con=DatabaseConnection.initializeDatabase();
-			PreparedStatement st=con.prepareStatement("SELECT @result");
-			st.executeQuery();
-			st=con.prepareStatement("call addtocart(?,?,?,@result)");
-			st.setInt(1,i_id);
-			st.setInt(2,qty);
-			st.setInt(3,b_id);
-			st.executeQuery();
-			st=con.prepareStatement("Select @result as Result");
-			ResultSet rs=st.executeQuery();
+			PreparedStatement st=con.prepareStatement(queryUserDetails);
+			st.setInt(1,b_id);
+			ResultSet rs = st.executeQuery();
 			rs.next();
-			int flag=rs.getInt("Result");
-			if(flag==0)
-			{
-				request.setAttribute("QuantityError", "Stock insufficient!!!");
-				request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
-				
-			}
-			else
-			{
-				request.getRequestDispatcher("Profile.jsp").forward(request, response);
-			}
+			build = rs.getString("building");
+			neighb = rs.getString("neighbourhood");
+			city = rs.getString("city");
+			wallet = rs.getFloat("wallet");
+			request.setAttribute("building", build);
+			request.setAttribute("neighbourhood", neighb);
+			request.setAttribute("city", city);
+			request.setAttribute("wallet", wallet);
 			
-		}
-		catch(Exception e)
+			request.getRequestDispatcher("BuyNow.jsp").forward(request, response);
+			return;
+		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+		
 		doGet(request, response);
 	}
 
