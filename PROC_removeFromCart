@@ -1,0 +1,20 @@
+delimiter $$
+create procedure removeFromCart(IN oid int,IN iid int,OUT result int )
+BEGIN
+	DECLARE item_count INT;
+	DECLARE pamt INT;
+	SELECT COUNT(i_id) INTO item_count FROM Contains where o_id = oid;
+	IF item_count > 1
+	THEN
+		SELECT partial_amount INTO pamt from Contains where o_id = oid and i_id = iid;
+		UPDATE Orders SET total_amount = total_amount - pamt where o_id = oid;
+		DELETE FROM Contains where o_id = oid and i_id = iid;
+		SET result = 1;
+	ELSE 
+		DELETE FROM Orders where o_id = oid;
+		SET result = 2;
+	END IF;
+		 
+END
+$$
+delimiter ;

@@ -1,6 +1,11 @@
 package com.Thrift_Shop;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,10 +43,62 @@ public class ViewCart extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		int b_id=(int)session.getAttribute("uid");
-		String query_order = "Select o_id from Orders where b_id = ? ";
+		int order_id;
+		String query_order = "Select o_id from Orders where b_id = ? and status = 'Cart'";
 		String query_cart = "Select Item_Detail.title,Item.price,Contains.quantity,Contains.partial_amount from Item INNER JOIN (Item_Detail INNER JOIN Contains ON Contains.i_id = Item_Detail.i_id) ON Item.i_id = Item_Detail.i_id where o_id = ?";
-		
+		try {
+			Connection con = DatabaseConnection.initializeDatabase();
+			PreparedStatement pst = con.prepareStatement(query_order);
+			pst.setInt(1, b_id);
+			ResultSet rs1 = pst.executeQuery();
+			if(!rs1.isBeforeFirst())
+			{
+				System.out.println("In here");
+				request.setAttribute("CartError", "Empty Cart ;)");
+				request.getRequestDispatcher("Cart.jsp").forward(request, response);
+				return;
+			}
+			System.out.println("Idhar");
+			rs1.next();
+			order_id = rs1.getInt("o_id");
+			pst = con.prepareStatement(query_cart);
+			pst.setInt(1, order_id);
+			ResultSet rs2 = pst.executeQuery();
+			String temp_title = "";
+			float temp_price = 0;
+			float temp_partialAmt = 0;
+			int temp_qty = 0;
+			int n = this.getRowCount(rs2);
+				Query_ViewCart rs = new Query_ViewCart(n);
+				rs2.next();
+			for(int i = 0;i<n;i++)
+			{
+				temp_title = rs2.getString("title");
+				temp_price = rs2.getFloat("price");
+				temp_qty = rs2.getInt("quantity");
+				temp_partialAmt = rs2.getFloat("partial_amount");
+				System.out.println("Title: " + temp_title);
+				rs.appendRow(temp_title, temp_price, temp_qty, temp_partialAmt);
+				rs2.next();
+			}
+			
+				session.setAttribute("rs", rs);
+				request.getRequestDispatcher("Cart.jsp").forward(request, response);
+				
+			
+			return;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		doGet(request, response);
 	}
+	private int getRowCount(ResultSet rs) throws SQLException {
+		rs.last();
+		int n = rs.getRow();
+		rs.beforeFirst();
+		return n;
+	}
+
 
 }
