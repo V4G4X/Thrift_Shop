@@ -13,9 +13,8 @@
 </head>
 <body>
 <div class="container-fluid bg">
-	<div class="row">
-	<div class="col-md-4 col-sm-4 col-xs-12"></div>
-	<div class="col-md-4 col-sm-4 col-xs-12">
+	<div class="row justify-content-center row-no-gutters">
+	<div class="col-xs-12 col-sm-9 col-md-6 col-lg-3">
 	<div class="form-container">	
 	<h1>Login Form</h1>
 	<form name="login" method="POST" action="LoginServlet" onSubmit="return validate(event);" >
@@ -41,7 +40,6 @@
 	</form>
 	</div>
 	</div>
-	<div class="col-md-4 col-sm-4 col-xs-12"></div>
 	</div>
 </div>
 </body>
