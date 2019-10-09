@@ -52,6 +52,7 @@ public class BuyNow extends HttpServlet {
 		float temp_price = 0;
 		float temp_partialAmt = 0;
 		int temp_iid = 0;
+		float total_amount = 0;
 		int flag = (int)session.getAttribute("flag");
 		System.out.println("flag:"+flag);
 		String queryUserDetails="SELECT building,neighbourhood,city,wallet from User where uid = ?";
@@ -74,7 +75,13 @@ public class BuyNow extends HttpServlet {
 			if(flag==1) {
 				Query_ViewCart result = (Query_ViewCart) (session.getAttribute("rs"));
 				session.setAttribute("result", result);
-
+				st = con.prepareStatement("select total_amount from Orders where b_id = ? AND status = ?;");
+				st.setInt(1, b_id);
+				st.setString(2, "cart");
+				rs = st.executeQuery();
+				rs.next();
+				total_amount = rs.getFloat("total_amount");
+				request.setAttribute("total_amount", total_amount);
 			}
 			else if(flag==2) {
 				int qty=0;
@@ -95,13 +102,13 @@ public class BuyNow extends HttpServlet {
 				System.out.println(qty);
 				temp_title = (String)session.getAttribute("viewable_title");
 				temp_price = (int)session.getAttribute("viewable_price");
-				temp_partialAmt = qty*temp_price;
+				total_amount = qty*temp_price;
 				System.out.println("inbuynow");
 				Query_ViewCart result = new Query_ViewCart(1);
 
-				result.appendRow(temp_title, temp_price, qty, temp_partialAmt,temp_iid);
+				result.appendRow(temp_title, temp_price, qty, total_amount,temp_iid);
 				session.setAttribute("result", result);
-
+				request.setAttribute("total_amount", total_amount);
 			}
 			
 			request.getRequestDispatcher("BuyNow.jsp").forward(request, response);
