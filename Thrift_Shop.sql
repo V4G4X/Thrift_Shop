@@ -40,7 +40,7 @@ CREATE TABLE `Contains` (
 
 LOCK TABLES `Contains` WRITE;
 /*!40000 ALTER TABLE `Contains` DISABLE KEYS */;
-INSERT INTO `Contains` VALUES (7,1,2205,5),(7,2,483,7);
+INSERT INTO `Contains` VALUES (13,1,441,1),(13,2,69,1);
 /*!40000 ALTER TABLE `Contains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `Item` (
 
 LOCK TABLES `Item` WRITE;
 /*!40000 ALTER TABLE `Item` DISABLE KEYS */;
-INSERT INTO `Item` VALUES (1,1,67,441),(2,1,69,69);
+INSERT INTO `Item` VALUES (1,1,66,441),(2,1,68,69);
 /*!40000 ALTER TABLE `Item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -210,7 +210,7 @@ CREATE TABLE `Orders` (
   PRIMARY KEY (`o_id`),
   KEY `fk_Orders_1_idx` (`b_id`),
   CONSTRAINT `fk_Orders_1` FOREIGN KEY (`b_id`) REFERENCES `User` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +219,7 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (7,1,'2019-10-08 10:23:47','Cart',2688);
+INSERT INTO `Orders` VALUES (13,1,'2019-10-09 12:53:37','Confirmed',510);
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -412,6 +412,75 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary table structure for view `itemlist`
+--
+
+DROP TABLE IF EXISTS `itemlist`;
+/*!50001 DROP VIEW IF EXISTS `itemlist`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `itemlist` AS SELECT 
+ 1 AS `i_id`,
+ 1 AS `s_id`,
+ 1 AS `stock`,
+ 1 AS `quantity`,
+ 1 AS `partial_amount`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `vieww`
+--
+
+DROP TABLE IF EXISTS `vieww`;
+/*!50001 DROP VIEW IF EXISTS `vieww`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vieww` AS SELECT 
+ 1 AS `i_id`,
+ 1 AS `s_id`,
+ 1 AS `stock`,
+ 1 AS `quantity`,
+ 1 AS `partial_amount`,
+ 1 AS `title`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `itemlist`
+--
+
+/*!50001 DROP VIEW IF EXISTS `itemlist`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`Admin`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `itemlist` AS select `Item`.`i_id` AS `i_id`,`Item`.`s_id` AS `s_id`,`Item`.`stock` AS `stock`,`Contains`.`quantity` AS `quantity`,`Contains`.`partial_amount` AS `partial_amount` from (`Item` join `Contains` on((`Item`.`i_id` = `Contains`.`i_id`))) where (`Contains`.`o_id` = 12) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vieww`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vieww`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`Admin`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vieww` AS select `Item`.`i_id` AS `i_id`,`Item`.`s_id` AS `s_id`,`Item`.`stock` AS `stock`,`Contains`.`quantity` AS `quantity`,`Contains`.`partial_amount` AS `partial_amount`,`Item_Detail`.`title` AS `title` from (`Item` join (`Contains` join `Item_Detail` on((`Contains`.`i_id` = `Item_Detail`.`i_id`))) on((`Item`.`i_id` = `Contains`.`i_id`))) where (`Contains`.`o_id` = 12) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -422,4 +491,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-08 19:23:55
+-- Dump completed on 2019-10-09 19:22:36
