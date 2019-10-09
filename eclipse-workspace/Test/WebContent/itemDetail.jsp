@@ -8,6 +8,8 @@
 <title>Item - <%=session.getAttribute("viewable_title")%></title>
 </head>
 <body>
+<%			session.setAttribute("flag", 2);
+ %>
 	<fieldset class="fieldset">
 		<table class="table-content">
 			<tr>

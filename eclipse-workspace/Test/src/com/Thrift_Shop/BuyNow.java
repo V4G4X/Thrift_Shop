@@ -43,29 +43,17 @@ public class BuyNow extends HttpServlet {
 		
 		System.out.println("inbuynow");
 		
-		
-		int qty=0;
-		System.out.println(qty);
-		try{
-			qty = Integer.parseInt(request.getParameter("qty"));
-		}catch(NumberFormatException e) {
-			request.setAttribute("QuantityError", "Quantity cannot be zero");
-			request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
-			return;
-		}
-		System.out.println(qty);
-		if(qty<=0)
-		{
-			request.setAttribute("QuantityError", "Quantity cannot be zero");
-			request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
-		}		
-		System.out.println(qty);
-	
 		HttpSession session = request.getSession();
 		int b_id=(int)session.getAttribute("uid");
 		System.out.println(b_id);
 		String build = "",neighb = "",city = "";
 		float wallet;
+		String temp_title = "";
+		float temp_price = 0;
+		float temp_partialAmt = 0;
+		int temp_iid = 0;
+		int flag = (int)session.getAttribute("flag");
+		System.out.println("flag:"+flag);
 		String queryUserDetails="SELECT building,neighbourhood,city,wallet from User where uid = ?";
 		try
 		{
@@ -82,6 +70,39 @@ public class BuyNow extends HttpServlet {
 			request.setAttribute("neighbourhood", neighb);
 			request.setAttribute("city", city);
 			request.setAttribute("wallet", wallet);
+			System.out.println("inbuynow");
+			if(flag==1) {
+				Query_ViewCart result = (Query_ViewCart) (session.getAttribute("rs"));
+				session.setAttribute("result", result);
+
+			}
+			else if(flag==2) {
+				int qty=0;
+				System.out.println(qty);
+				try{
+					qty = Integer.parseInt(request.getParameter("qty"));
+				}catch(NumberFormatException e) {
+					request.setAttribute("QuantityError", "Quantity cannot be zero");
+					request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
+					return;
+				}
+				System.out.println(qty);
+				if(qty<=0)
+				{
+					request.setAttribute("QuantityError", "Quantity cannot be zero");
+					request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
+				}		
+				System.out.println(qty);
+				temp_title = (String)session.getAttribute("viewable_title");
+				temp_price = (int)session.getAttribute("viewable_price");
+				temp_partialAmt = qty*temp_price;
+				System.out.println("inbuynow");
+				Query_ViewCart result = new Query_ViewCart(1);
+
+				result.appendRow(temp_title, temp_price, qty, temp_partialAmt,temp_iid);
+				session.setAttribute("result", result);
+
+			}
 			
 			request.getRequestDispatcher("BuyNow.jsp").forward(request, response);
 			return;
