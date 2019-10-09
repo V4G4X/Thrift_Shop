@@ -58,10 +58,18 @@
 			}
 		%>
 
-
+		
 
 
 	</table>
+<!--<form action ="transaction" method="post">
+	<table>
+	<tr>
+	<td><input type="submit" value="Buy_Now" name="buynow"></td>
+	<td>${wallinsufficient}</td>
+	</tr>
+	</table>
+	</form> -->
 
 </body>
 </html>

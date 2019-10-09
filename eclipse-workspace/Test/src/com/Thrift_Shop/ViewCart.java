@@ -57,7 +57,7 @@ public class ViewCart extends HttpServlet {
 				Query_ViewCart qvc = new Query_ViewCart(0);
 				session.setAttribute("rs", qvc);
 				request.setAttribute("CartError", "Empty Cart ;)");
-				request.getRequestDispatcher("Cart.jsp").forward(request, response);
+				request.getRequestDispatcher("Profile.jsp").forward(request, response);
 				return;
 			}
 			System.out.println("Idhar");

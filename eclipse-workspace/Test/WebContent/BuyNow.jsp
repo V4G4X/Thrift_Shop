@@ -28,6 +28,21 @@
 	</fieldset>
 	
 	<b>Wallet :</b><div>${wallet }</div>
+	<form action="transaction" method="post">
+		<table>
+		<tr>
+		<td> <input type="submit" value="Confirm" name="confirm"></td>
+		</tr>
+		<tr>
+		<td>${wallinsufficient}${itemqtyError}</td>
+		</tr>
+		
+		</table>
+	
+	</form>
+	<input type="submit" value="Confirm" name="confirm">
+	
+	
 	
 </body>
 </html>

@@ -18,6 +18,7 @@
 	</form>
 	<form method = "post" action="ViewCart">
 		<input type="submit" value="View Cart" class="button">
+		${CartError}
 	</form>
 	
 			
