@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 public class DatabaseConnection {
 	protected static Connection initializeDatabase() throws SQLException, ClassNotFoundException{
-		String dbDriver = "com.mysql.cj.jdbc.Driver";
+		String dbDriver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "Thrift_Shop";
 		String user = "Admin";

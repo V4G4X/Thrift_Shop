@@ -9,13 +9,9 @@
 <script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
 </head>
 <body>
-
 	<%
 		Query_ViewCart result = (Query_ViewCart) (session.getAttribute("rs"));
 		if (result == null) {
-	%>
-	${CartError}
-	<%
 		} else {
 			int n = result.getN();
 			String temp_title = "";
@@ -24,6 +20,7 @@
 			int temp_qty = 0;
 			int temp_iid = 0;
 			int i = 0;
+			session.setAttribute("flag", 1);
 	%>
 
 	<table>
@@ -58,18 +55,11 @@
 			}
 		%>
 
-		
-
 
 	</table>
-<!--<form action ="transaction" method="post">
-	<table>
-	<tr>
-	<td><input type="submit" value="Buy_Now" name="buynow"></td>
-	<td>${wallinsufficient}</td>
-	</tr>
-	</table>
-	</form> -->
+	<form method="post" action="BuyNow">
+	<input type="submit" value="Buy Now" class="button" name="buyNow">
+	</form>
 
 </body>
 </html>
