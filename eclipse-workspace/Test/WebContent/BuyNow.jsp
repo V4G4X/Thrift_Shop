@@ -29,23 +29,7 @@
 		</table>
 	</fieldset>
 	
-	<b>Wallet :</b><div>${wallet }</div>
-	<form action="transaction" method="post">
-		<table>
-		<tr>
-		<td> <input type="submit" value="Confirm" name="confirm"></td>
-		</tr>
-		<tr>
-		<td>${wallinsufficient}${itemqtyError}</td>
-		</tr>
-		
-		</table>
-	
-	</form>
-	<input type="submit" value="Confirm" name="confirm">
-	
-	
-	
+	<b>Wallet :</b><div>${wallet }</div>	
 		<fieldset class="fieldset">
 		<legend><b>Bill</b>
 		</legend>
@@ -86,36 +70,12 @@
 		<%
 			}
 		%>
-		
-		<%-- <% 
-			Query_ViewCart result1 = (Query_ViewCart) (session.getAttribute("rs"));
-
-			int m = result1.getN();
-			for (i = 0; i < m; i++) {
-					temp_title = result1.getTitle(i);
-					temp_price = result1.getPrice(i);
-					temp_pamount = result1.getPartial_amount(i);
-					temp_qty = result1.getQuantity(i);
-					temp_iid = result1.getiid(i);
-		%>
-		<tr>
-			
-			<td width="10%"><%=i + 1%></td>
-			<td width="50%"><%=temp_title%></td>
-			<td width="10%"><%=temp_price%></td>
-			<td width="10%"><%=temp_qty%></td>
-			<td width="10%"><%=temp_pamount%></td>			
-		</tr>
-		<%
-			}
-		%>
- --%>
  		<tr>
-			<td><b>Total::</</b></td>
+			<td><b>Total::</b></td>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><%=temp_pamount%></td>
+			<td>${total_amount}</td>
 		</tr>
 
 
@@ -124,6 +84,18 @@
 
 
 	</fieldset>
+		<form action="transaction" method="post">
+		<table>
+		<tr>
+		<td> <input type="submit" value="Confirm" name="confirm"></td>
+		</tr>
+		<tr>
+		<td>${wallinsufficient}${itemqtyError}</td>
+		</tr>
+		
+		</table>
+	
+	</form>
 	
 </body>
 </html>

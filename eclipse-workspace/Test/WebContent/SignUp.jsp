@@ -12,9 +12,8 @@
 </head>
 <body>
 <div class="container-fluid bg">
-	<div class="row">
-	<div class="col-md-4 col-sm-4 col-xs-12"></div>
-	<div class="col-md-4 col-sm-4 col-xs-12">
+	<div class="row justify-content-center">
+	<div class="col-sm-9 col-lg-9 col-xl-4">
 	<div class="signup-form">
 	<form method="POST" name="signup" action="SignupServlet" onSubmit="return validate(event);">
 		<h2>Sign Up</h2>
@@ -100,7 +99,6 @@
 	<div class="hint-text">Already have an account? <a href="Login.jsp">Login here</a></div>
 	</div>
 	</div>
-	<div class="col-md-4 col-sm-4 col-xs-12"></div>
 	</div>
 </div>
 </body>
