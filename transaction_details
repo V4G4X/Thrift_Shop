@@ -1,0 +1,1 @@
+create view transaction_details As select Item_Detail.title,Contains.quantity,Contains.partial_amount,Orders.timestmp,Item.s_id,Item.i_id,Orders.b_id,Orders.o_id from Item INNER JOIN(Orders INNER JOIN (Contains INNER JOIN Item_Detail using(i_id)) using(o_id)) using(i_id) where Orders.status='Confirmed'; 

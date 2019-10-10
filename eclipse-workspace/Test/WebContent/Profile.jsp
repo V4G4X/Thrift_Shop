@@ -7,9 +7,8 @@
 <title>Profile</title>
 </head>
 <body>
-	<h3>My User name is <%=session.getAttribute("username")%></h3>
-	<h3>My password is <%=session.getAttribute("password")%> </h3>
-	
+	<h3>welcome <%=session.getAttribute("username")%></h3>
+		
 	<form action="Sell.jsp">
 			<input type="submit" value="Sell" class="button">
 	</form>
@@ -19,6 +18,17 @@
 	<form method = "post" action="ViewCart">
 		<input type="submit" value="View Cart" class="button">
 		${CartError}
+	</form>
+	<form>
+	<fieldset>
+	<legend>Order History</legend>
+	
+	</fieldset>
+	<br><br>
+	<fieldset>
+	<legend>Sales History</legend>
+	
+	</fieldset>
 	</form>
 	
 			

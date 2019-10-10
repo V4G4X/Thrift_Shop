@@ -40,7 +40,7 @@ public class AddToCart extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.setAttribute("QuantityError", "");
 		int qty=0;
 		try{
 			qty = Integer.parseInt(request.getParameter("qty"));
@@ -53,35 +53,66 @@ public class AddToCart extends HttpServlet {
 		{
 			request.setAttribute("QuantityError", "Quantity cannot be zero");
 			request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
+			return;
 		}
 		
+		System.out.println("User Entered quantity: "+qty+" for buying.");
 		
 		HttpSession session = request.getSession();
 		int b_id=(int)session.getAttribute("uid");
 		int i_id=(int)session.getAttribute("viewable_iid");
+		System.out.println("Now adding to cart" + i_id);
 		try
 		{
 			Connection con=DatabaseConnection.initializeDatabase();
-			PreparedStatement st=con.prepareStatement("SELECT @result");
-			st.executeQuery();
-			st=con.prepareStatement("call addtocart(?,?,?,@result)");
+			PreparedStatement st=con.prepareStatement("SELECT @result1");
+			try {
+				st.executeQuery();
+			} catch (Exception e) {
+				System.out.println("Exception Caught at Line 69 of AddToCart.java");
+			}
+
+			st=con.prepareStatement("call addtocart(?,?,?,@result1)");
 			st.setInt(1,i_id);
 			st.setInt(2,qty);
 			st.setInt(3,b_id);
-			st.executeQuery();
-			st=con.prepareStatement("Select @result as Result");
-			ResultSet rs=st.executeQuery();
-			rs.next();
-			int flag=rs.getInt("Result");
-			if(flag==0)
+			try {
+				st.executeQuery();
+			} catch (Exception e) {
+				System.out.println("Exception Caught at Line 79 of AddToCart.java");
+				System.out.println(st);
+				System.out.println();
+				e.printStackTrace();
+			}
+			st=con.prepareStatement("Select @result1 as Result");
+			ResultSet rs =null;
+			try {
+				rs=st.executeQuery();				
+			} catch (Exception e) {
+				System.out.println("Exception Caught at Line 77 of AddToCart.java ");
+				e.printStackTrace();
+				return;
+			}
+			try {
+				rs.next();				
+			} catch (Exception e) {
+				System.out.println("Exception Caught at Line 85 of AddToCart.java ");
+				e.printStackTrace();
+				return;
+			}
+
+			int flag1=rs.getInt("Result");
+			if(flag1==10)
 			{
 				request.setAttribute("QuantityError", "Stock insufficient!!!");
 				request.getRequestDispatcher("itemDetail.jsp").forward(request, response);
+				return;
 				
 			}
 			else
 			{
 				request.getRequestDispatcher("Profile.jsp").forward(request, response);
+				return;
 			}
 			
 		}

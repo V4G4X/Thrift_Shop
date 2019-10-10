@@ -78,7 +78,7 @@
 			<td><div class="center error">${QuantityError}</div></td>
 			</tr>
 			<tr>
-			<td><input type="submit" value="Add to Cart" class="button" name="addToCart"></td>
+			<td><input type="submit" value="Add to Cart" class="button" name="addToCart" formaction="AddToCart"></td>
 			<td><input type="submit" value="Buy Now" class="button" name="buyNow" formaction="BuyNow"></td>
 			</tr>
 			</table>			

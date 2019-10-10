@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
 						//session is used to transfer data from one jsp to other
 							HttpSession session = request.getSession();
 							session.setAttribute("username",username);
-							session.setAttribute("password", password1); 
+							//session.setAttribute("password", password1); 
 							PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
 							pst.setString(1, username);
 							ResultSet rs2 = pst.executeQuery();
@@ -87,6 +87,9 @@ public class LoginServlet extends HttpServlet {
 							System.out.println(u_id);
 							session.setAttribute("uid", u_id);
 							//to redirect to profile page
+							
+							
+							
 							response.sendRedirect("Profile.jsp");
 							System.out.println("Logged in successfully!!");
 							

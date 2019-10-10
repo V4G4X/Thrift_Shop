@@ -42,7 +42,9 @@ public class ViewCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		System.out.println("Reached Here Successfully");
 		int b_id=(int)session.getAttribute("uid");
+		System.out.println("The b_id/uid received from Session is: "+b_id);
 		int order_id;
 		String query_order = "Select o_id from Orders where b_id = ? and status = 'Cart'";
 		String query_cart = "Select Item.i_id,Item_Detail.title,Item.price,Contains.quantity,Contains.partial_amount from Item INNER JOIN (Item_Detail INNER JOIN Contains ON Contains.i_id = Item_Detail.i_id) ON Item.i_id = Item_Detail.i_id where o_id = ?";
