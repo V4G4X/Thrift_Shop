@@ -145,16 +145,64 @@ public class ProfileServlet extends HttpServlet {
 					
 				}
 				session.setAttribute("order_details", q2);
-			}		
+			}
+			
+			 pst = con.prepareStatement("Select * from User where uid = ? ");
+				System.out.println(u_id);
+				pst.setInt(1, u_id);
+				System.out.println(u_id);
+				rs3 = null;
+				try {
+					rs3 = pst.executeQuery();
+				} catch (Exception e) {
+					System.out.println("exception");
+					e.printStackTrace();
+				}
+				rs3.next();
+
+				String fname = rs3.getString("fname");
+
+				String lname = rs3.getString("lname");
+				String fullname = fname + " " + lname;
+				request.setAttribute("fullname", fullname);
+				request.setAttribute("email_id", rs3.getString("email_id"));
+
+				request.setAttribute("bldg", rs3.getString("building"));
+
+				request.setAttribute("city", rs3.getString("city"));
+				request.setAttribute("neigh", rs3.getString("neighbourhood"));
+				request.setAttribute("bldg", rs3.getString("building"));
+				int pincode = rs3.getInt("pincode");
+				request.setAttribute("pincode", pincode);
+
+				request.setAttribute("wallet", rs3.getFloat("wallet"));
+
+				pst = con.prepareStatement("Select * from Phone where uid = ? ");
+				pst.setInt(1, u_id);
+
+				rs4 = pst.executeQuery();
+
+				String phoneno = "";
+				rs4.next();
+
+				phoneno = rs4.getString("phone");
+
+				if (rs4.next()) {
+					phoneno = phoneno + "," + rs4.getString("phone");
+
+				}
+
+				request.setAttribute("phoneno", phoneno);
+				System.out.println("Logged in successfully!!");
+				request.getRequestDispatcher("Profile").forward(request, response);
+				return;
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 			return;
 		}
-		response.sendRedirect("Profile.jsp");
-		System.out.println("Logged in successfully!!");
 
-		doGet(request, response);
+		/* doGet(request, response); */
 	}
 	
 	private int getRowCount(ResultSet rs) throws SQLException {

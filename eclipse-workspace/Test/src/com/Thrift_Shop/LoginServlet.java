@@ -51,7 +51,8 @@ public class LoginServlet extends HttpServlet {
 		String password1 = request.getParameter("password");
 		String password2 = "";
 		int u_id = 0;
-		if (!username.isEmpty() && !password1.isEmpty()) {
+		if (!username.isEmpty() && !password1.isEmpty()) 
+		{
 			try {
 				// to establish connection with database
 				Connection con = DatabaseConnection.initializeDatabase();
@@ -72,17 +73,22 @@ public class LoginServlet extends HttpServlet {
 					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					System.out.println("Username not found");
 					return;
-				} else {
+				} 
+				
+				else 
+				{
 					password2 = rs.getString("password");
-					if (password1.compareTo(password2) != 0) {
+					if (password1.compareTo(password2) != 0) 
+					{
 						// Set passError key-value pair
 						request.setAttribute("passError", "Password did not match");
 						session.setAttribute("flagLogin", 1);
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 						System.out.println("Password did not match");
 						return;
-					} else 
-          {
+					} 
+					else 
+					{
 						// session is used to transfer data from one jsp to other
 
 						session.setAttribute("username", username);
@@ -95,80 +101,20 @@ public class LoginServlet extends HttpServlet {
 						System.out.println("hello");
 						System.out.println(u_id);
 						session.setAttribute("uid", u_id);
-						// to redirect to profile page
-
-						pst = con.prepareStatement("Select * from User where uid = ? ");
-						System.out.println(u_id);
-						pst.setInt(1, u_id);
-						System.out.println(u_id);
-						ResultSet rs3 = null;
-						try {
-							rs3 = pst.executeQuery();
-						} catch (Exception e) {
-							System.out.println("exception");
-							e.printStackTrace();
-						}
-						rs3.next();
-
-						String fname = rs3.getString("fname");
-
-						String lname = rs3.getString("lname");
-						String fullname = fname + " " + lname;
-						request.setAttribute("fullname", fullname);
-						request.setAttribute("email_id", rs3.getString("email_id"));
-
-						request.setAttribute("bldg", rs3.getString("building"));
-
-						request.setAttribute("city", rs3.getString("city"));
-						request.setAttribute("neigh", rs3.getString("neighbourhood"));
-						request.setAttribute("bldg", rs3.getString("building"));
-						int pincode = rs3.getInt("pincode");
-						request.setAttribute("pincode", pincode);
-
-						request.setAttribute("wallet", rs3.getFloat("wallet"));
-
-						pst = con.prepareStatement("Select * from Phone where uid = ? ");
-						pst.setInt(1, u_id);
-
-						ResultSet rs4 = pst.executeQuery();
-
-						String phoneno = "";
-						rs4.next();
-
-						phoneno = rs4.getString("phone");
-
-						if (rs4.next()) {
-							phoneno = phoneno + "," + rs4.getString("phone");
-
-						}
-
-						request.setAttribute("phoneno", phoneno);
-
-						System.out.println("Logged in successfully!!");
-
-
 					}
 
 				}
 				st.close();
 				con.close();
-				
-			} catch (Exception e) {
+				request.getRequestDispatcher("ProfileServlet").forward(request, response);
+			} 
+			catch (Exception e) 
+			{
 				System.out.print(e);
 				e.printStackTrace();
 			}
-		} else {
+		} 
 
-			request.getRequestDispatcher("ProfileServlet").forward(request, response);
-			
-		}
-		else {
-
-			request.setAttribute("userError", "Enter Username and Password");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-			System.out.println("UEnter Username and Password");
-			return;
-		}
 		doGet(request, response);
 	}
 
