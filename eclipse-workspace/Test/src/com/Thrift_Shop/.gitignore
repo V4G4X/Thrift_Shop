@@ -17,3 +17,7 @@
 /transaction.class
 /Query_Item.class
 /Query_OrderDetails.class
+/viewItemServlet.class
+/RemoveSaleItemServlet.class
+/ProfileServlet.class
+/LogoutServlet.class

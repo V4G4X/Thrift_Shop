@@ -1,16 +1,15 @@
 <%@page import="com.Thrift_Shop.Query_ViewCart"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cart</title>
-<script type="text/javascript" src="assets/JS/jquery-3.4.1.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
 	<%
-		Query_ViewCart result = (Query_ViewCart) (session.getAttribute("rs"));
+		Query_ViewCart result = (Query_ViewCart) (session.getAttribute("saleitem"));
 		if (result == null) {
 		} else {
 			int n = result.getN();
@@ -20,7 +19,6 @@
 			int temp_qty = 0;
 			int temp_iid = 0;
 			int i = 0;
-			session.setAttribute("flag", 1);
 	%>
 
 	<table>
@@ -29,7 +27,7 @@
 			<td>Title</td>
 			<td>Price</td>
 			<td>Quantity</td>
-			<td>Partial Amount</td>
+			<td>Expected Earning</td>
 		</tr>
 		<%
 			for (i = 0; i < n; i++) {
@@ -47,7 +45,7 @@
 			<td width="10%"><%=temp_price%></td>
 			<td width="10%"><%=temp_qty%></td>
 			<td width="10%"><%=temp_pamount%></td>
-			<td width = "10%"><form action="RemoveItem" method="post"><input type="submit" value="REMOVE" name="button"><input type="hidden" value="<%=temp_iid%>" name="remove"></form></td>
+			<td width = "10%"><form action="RemoveSaleItemServlet" method="post"><input type="submit" value="REMOVE" name="button"><input type="hidden" value="<%=temp_iid%>" name="removeItem"></form></td>
 			
 		</tr>
 		<%
@@ -57,14 +55,5 @@
 
 
 	</table>
-	<form method="post" action="BuyNow">
-	<table>
-	<tr>
-	<td><input type="submit" value="Buy Now" class="button" name="buyNow"></td>
-	<td>${wallinsufficient}</td>
-	</tr>
-	</table>
-	</form>
-
 </body>
 </html>

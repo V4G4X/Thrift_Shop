@@ -1,0 +1,35 @@
+DELIMITER $$
+CREATE PROCEDURE directBuyNow(IN bid int,IN iid int,IN qty int,OUT result int)
+BEGIN
+	DECLARE sid int;
+	DECLARE stck int;
+	DECLARE uwall int;
+	DECLARE price1 int;
+	DECLARE partial int;
+	DECLARE noid int;
+	SELECT stock into stck from Item where i_id = iid;
+	SELECT s_id INTO sid from Item where i_id = iid;
+	SELECT price INTO price1 from Item where i_id = iid;
+	IF stck < qty
+	THEN
+		SET result = 0;
+	ELSE
+		Select wallet INTO uwall from User where uid = bid;
+		SET partial = qty * price1;
+		IF uwall < partial
+		THEN
+			SET result = 1;
+		ELSE
+			INSERT INTO Orders(b_id,status,total_amount) values(bid,'Cart',partial);
+			SELECT MAX(o_id) INTO noid from Orders;
+			INSERT INTO Contains(i_id,o_id,quantity,partial_amount) values(iid,noid,qty,partial);
+			UPDATE Orders SET status = 'Confirmed' where o_id = noid;
+			UPDATE Item SET stock = stock - qty where i_id = iid;
+			UPDATE User SET wallet = wallet - partial where uid = bid;
+			UPDATE User SET wallet = wallet + partial where uid = sid; 
+			SET result = 2;
+		END IF;
+	END IF;
+END;
+$$
+DELIMITER ;

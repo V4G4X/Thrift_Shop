@@ -81,6 +81,10 @@
 			<td><input type="submit" value="Add to Cart" class="button" name="addToCart" formaction="AddToCart"></td>
 			<td><input type="submit" value="Buy Now" class="button" name="buyNow" formaction="BuyNow"></td>
 			</tr>
+			<tr>
+				<td><div class = "center error">$(walletinsufficient)</div></td>
+			</tr>
+			
 			</table>			
 		</section>
 	</form>

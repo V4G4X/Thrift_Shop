@@ -11,7 +11,7 @@ public class Query_Item {
 	private int u_id[];
 	int n;
 	int i;
-	Query_Item(int n)
+	public Query_Item(int n)
 	{
 		this.n = n;
 		i_id=new int[n];

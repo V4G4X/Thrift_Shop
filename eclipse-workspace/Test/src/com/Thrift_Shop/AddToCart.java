@@ -59,6 +59,7 @@ public class AddToCart extends HttpServlet {
 		System.out.println("User Entered quantity: "+qty+" for buying.");
 		
 		HttpSession session = request.getSession();
+		session.setAttribute("incaseofbuynowQuantity",qty);
 		int b_id=(int)session.getAttribute("uid");
 		int i_id=(int)session.getAttribute("viewable_iid");
 		System.out.println("Now adding to cart" + i_id);
