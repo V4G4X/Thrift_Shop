@@ -16,7 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container-fluid bg">
+	<div class="container-fluid ">
 		<div class="row justify-content-center">
 			<div class=" col-xs-9 col-md-4 col-lg-4 ">
 				<div class="form-container">
@@ -41,7 +41,7 @@
 					</form>
 				</div>
 			</div>
-		</div>
+		</div>	
 	</div>
 </body>
 <script type="text/javascript" src="assets/JS/loginValidation.js"></script>
