@@ -148,7 +148,7 @@ public class AddItem extends HttpServlet {
 					st.executeUpdate();
 					e.printStackTrace();
 				}
-				
+				response.sendRedirect("Profile.jsp");
 			}catch(Exception exception)
 			{
 				System.out.println("Some Exception Happened");

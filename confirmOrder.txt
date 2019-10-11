@@ -1,0 +1,16 @@
+delimter $$
+CREATE PROCEDURE confirmOrder(IN oid int, OUT result int)
+BEGIN 
+	DECLARE bid INT;
+	DECLARE wall FLOAT;	
+	DECLARE totAmt FLOAT;	
+	SELECT b_id INTO bid from Orders where o_id = oid;
+	SELECT wallet INTO wall from User where uid = bid;
+	SELECT total_amount INTO totAmt from Orders where o_id = oid;
+	IF wall > totAmt
+	THEN
+		SET result = 0;
+	ELSE
+		
+END
+delimiter;

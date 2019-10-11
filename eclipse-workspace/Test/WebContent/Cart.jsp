@@ -91,6 +91,15 @@
 				class="button btn btn-success pull-right px-5" name="buyNow">
 		</form>
 	</div>
+	</table>
+	<form method="post" action="BuyNow">
+	<table>
+	<tr>
+	<td><input type="submit" value="Buy Now" class="button" name="buyNow"></td>
+	<td>${wallinsufficient}</td>
+	</tr>
+	</table>
+	</form>
 
 </body>
 </html>

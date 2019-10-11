@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 public class DatabaseConnection {
 	protected static Connection initializeDatabase() throws SQLException, ClassNotFoundException{
-		String dbDriver = "com.mysql.jdbc.Driver";
+		String dbDriver = "com.mysql.cj.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "Thrift_Shop";
 		String user = "Admin";
@@ -13,8 +13,13 @@ public class DatabaseConnection {
 		try {
 			Class.forName(dbDriver);
 		} catch (Exception e) {
-			System.out.println("Driver Error");
-			e.printStackTrace();
+			try {
+				dbDriver = "com.mysql.jdbc.Driver";
+				Class.forName(dbDriver);
+			} catch (Exception e2) {
+				System.out.println("Driver Error");
+				e.printStackTrace();
+			}
 		}
 		try {
 			Connection con = DriverManager.getConnection(url+dbName,user,pass);

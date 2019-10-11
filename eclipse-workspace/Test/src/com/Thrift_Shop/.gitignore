@@ -15,3 +15,9 @@
 /BuyNow.class
 >>>>>>> 7dab86b4b7b5bda504d32fd6e3dc0b69bbb8b5d4
 /transaction.class
+/Query_Item.class
+/Query_OrderDetails.class
+/viewItemServlet.class
+/RemoveSaleItemServlet.class
+/ProfileServlet.class
+/LogoutServlet.class
