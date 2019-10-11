@@ -25,10 +25,10 @@
 			<a href="#" class="navbar-brand title">Thrift Shop</a>
 			<ul class="navbar-nav pull-right">
 				<li class="navbar-item ">
-					<form>
+					<form action="ProfileServlet" method="POST">
 						<div class="btn-group">
 							<button class="nav-link btn btn-secondary" id="gotoProfile"
-								formaction="Profile.jsp">
+								formaction="ProfileServlet">
 								Profile <i class="fa fa-user-circle" aria-hidden="true"></i>
 							</button>
 							<button class="nav-link btn primary" formaction="Cart.jsp">
