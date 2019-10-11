@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignupServer
@@ -66,23 +67,25 @@ public class SignupServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		clearAttributes(request, response);
-		if(request.getParameter("reset")!=null && (request.getParameter("reset").compareTo("Reset"))==0) {
-			clearParameters(request, response);
-			request.getRequestDispatcher("SignUp.jsp").forward(request, response);
-			return;
-		}
+		System.out.println("in signup");
 		String fname = request.getParameter("fname");
 		request.setAttribute("fName", fname);
+		System.out.println("in signup");
 		String lname = request.getParameter("lname");
 		request.setAttribute("lName", lname);
+		System.out.println("in signup");
 		String phno1 = request.getParameter("phno1");
 		request.setAttribute("phone1", phno1);
+		System.out.println("in signup");
 		String phno2 = request.getParameter("phno2");
 		request.setAttribute("phone2", phno2);
+		System.out.println("in signup");
 		String emailid = request.getParameter("emailid");
 		request.setAttribute("email", emailid);
+		System.out.println("in signup");
 		String username = request.getParameter("uname");
 		request.setAttribute("username", username);
+		System.out.println("in signup");
 		String password1 = request.getParameter("pwd1");
 		String password2 = request.getParameter("pwd2");
 		String building = request.getParameter("bldg");
@@ -94,16 +97,25 @@ public class SignupServlet extends HttpServlet {
 		String pincode = request.getParameter("pincode");
 		request.setAttribute("pincode", pincode);
 		int uid = 0;
-
+		System.out.println("1");
+		System.out.println(fname);
+		System.out.println(lname);
+		System.out.println(phno1);
+		System.out.println(phno2);
+		System.out.println("2");
+		HttpSession session = request.getSession();
+		session.setAttribute("flagLogin",0);
 		if (password1.compareTo(password2) != 0) {
 			request.setAttribute("passwordError2", "Passwords did not match.");
-			request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+			session.setAttribute("flagLogin",2);
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
 			System.out.println("Passwords did not match");
 		}
 		if (!fname.isEmpty() && !lname.isEmpty() && !phno1.isEmpty() && !emailid.isEmpty() && !username.isEmpty()
 				&& !password1.isEmpty() && !building.isEmpty() && !city.isEmpty() && !neighbourhood.isEmpty()
 				&& !pincode.isEmpty()) {
 			try {
+				System.out.println("in signup 1");
 				Connection con = DatabaseConnection.initializeDatabase();
 
 				PreparedStatement pst = con.prepareStatement("insert into User(fname,lname,email_id,building,city,neighbourhood,pincode)values(?,?,?,?,?,?,?)");
@@ -117,9 +129,10 @@ public class SignupServlet extends HttpServlet {
 				try {
 					pst.executeUpdate();
 				} catch (SQLIntegrityConstraintViolationException e) {
+					session.setAttribute("flagLogin",2);
 					System.out.println("Duplicate Entry: "+emailid);
 					request.setAttribute("emailDup", "This Email has already been used before.");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				} catch (Exception e) {
 					System.out.println("Some Exception caught at \"INSERT INTO User\"");
@@ -161,12 +174,13 @@ public class SignupServlet extends HttpServlet {
 				try {
 					pst.executeUpdate();
 				} catch (SQLIntegrityConstraintViolationException e) {
+					session.setAttribute("flagLogin",2);
 					System.out.println("Duplicate Entry: "+username);
 					request.setAttribute("usernameError", "This Username has already been used before.");
 					pst = con.prepareStatement("DELETE FROM User where email_id like ?");
 					pst.setString(1, emailid);
 					pst.executeUpdate();
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				catch (Exception e) {
@@ -177,6 +191,7 @@ public class SignupServlet extends HttpServlet {
 					st.executeUpdate();
 					st.close();
 				}
+				session.setAttribute("flagLogin",3);
 				response.sendRedirect("Login.jsp");
 			} catch (Exception e) {
 				System.out.print(e);
@@ -188,37 +203,37 @@ public class SignupServlet extends HttpServlet {
 
 				if (fname.isEmpty()) {
 					request.setAttribute("fNameError", "First Name Cannot be Empty");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				if (lname.isEmpty()) {
 					request.setAttribute("lNameError", "Last Name Cannot be Empty");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				if (phno1.isEmpty()) {
 					request.setAttribute("phoneError", "Primary Phone no. Cannot be Empty");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				if (emailid.isEmpty()) {
 					request.setAttribute("emailError", "Email Cannot be Empty");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				if (username.isEmpty()) {
 					request.setAttribute("usernameError", "Username Cannot be Empty");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				if (password1.isEmpty()) {
 					request.setAttribute("passwordError1", "Password Cannot be Empty");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 				if (building.isEmpty() || city.isEmpty() || neighbourhood.isEmpty() || pincode.isEmpty()) {
 					request.setAttribute("addressError", "Please Fill all Address  fields");
-					request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					return;
 				}
 
