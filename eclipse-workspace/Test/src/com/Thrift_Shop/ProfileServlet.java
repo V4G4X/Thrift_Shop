@@ -163,6 +163,7 @@ public class ProfileServlet extends HttpServlet {
 		}
 		return;
 		//		doGet(request, response);
+
 	}
 
 	private int getRowCount(ResultSet rs) throws SQLException {
