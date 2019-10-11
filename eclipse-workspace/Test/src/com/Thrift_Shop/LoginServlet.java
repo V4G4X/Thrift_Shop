@@ -3,6 +3,8 @@ package com.Thrift_Shop;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
@@ -79,7 +81,8 @@ public class LoginServlet extends HttpServlet {
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 						System.out.println("Password did not match");
 						return;
-					} else {
+					} else 
+          {
 						// session is used to transfer data from one jsp to other
 
 						session.setAttribute("username", username);
@@ -143,18 +146,24 @@ public class LoginServlet extends HttpServlet {
 
 						System.out.println("Logged in successfully!!");
 
+
 					}
+
 				}
 				st.close();
 				con.close();
-				request.getRequestDispatcher("Profile.jsp").forward(request, response);
 				
-				return;	
 			} catch (Exception e) {
 				System.out.print(e);
 				e.printStackTrace();
 			}
 		} else {
+
+			request.getRequestDispatcher("ProfileServlet").forward(request, response);
+			
+		}
+		else {
+
 			request.setAttribute("userError", "Enter Username and Password");
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
 			System.out.println("UEnter Username and Password");
@@ -163,4 +172,11 @@ public class LoginServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+
+	private int getRowCount(ResultSet rs) throws SQLException {
+		rs.last();
+		int n = rs.getRow();
+		rs.beforeFirst();
+		return n;
+	}
 }

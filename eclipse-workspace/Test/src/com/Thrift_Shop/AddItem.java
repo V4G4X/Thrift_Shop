@@ -34,7 +34,7 @@ public class AddItem extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+		response.sendRedirect("Profile.jsp");
 	}
 
 	
@@ -148,7 +148,7 @@ public class AddItem extends HttpServlet {
 					st.executeUpdate();
 					e.printStackTrace();
 				}
-				
+				response.sendRedirect("Profile.jsp");
 			}catch(Exception exception)
 			{
 				System.out.println("Some Exception Happened");

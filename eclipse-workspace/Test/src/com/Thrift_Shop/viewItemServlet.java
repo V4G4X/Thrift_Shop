@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ViewCart
+ * Servlet implementation class viewItemServlet
  */
-@WebServlet("/ViewCart")
-public class ViewCart extends HttpServlet {
+@WebServlet("/viewItemServlet")
+public class viewItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewCart() {
+    public viewItemServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,59 +42,44 @@ public class ViewCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		System.out.println("Reached Here Successfully");
-		int b_id=(int)session.getAttribute("uid");
-		System.out.println("The b_id/uid received from Session is: "+b_id);
-		int order_id;
-		String query_order = "Select o_id from Orders where b_id = ? and status = 'Cart'";
-		String query_cart = "Select Item.i_id,Item_Detail.title,Item.price,Contains.quantity,Contains.partial_amount from Item INNER JOIN (Item_Detail INNER JOIN Contains ON Contains.i_id = Item_Detail.i_id) ON Item.i_id = Item_Detail.i_id where o_id = ?";
-		try {
+		int sid=(int)session.getAttribute("uid");
+		String getItems="Select title,price,Item.i_id,stock from Item INNER JOIN Item_Detail using(i_id) where s_id=? AND stock!=0";
+		try
+		{
 			Connection con = DatabaseConnection.initializeDatabase();
-			PreparedStatement pst = con.prepareStatement(query_order);
-			pst.setInt(1, b_id);
+			PreparedStatement pst = con.prepareStatement(getItems);
+			pst.setInt(1, sid);
 			ResultSet rs1 = pst.executeQuery();
-			session.setAttribute("flagCart",0);
 			if(!rs1.isBeforeFirst())
 			{
 				System.out.println("In here");
 				Query_ViewCart qvc = new Query_ViewCart(0);
 				session.setAttribute("rs", qvc);
-				session.setAttribute("flagCart",1);
+				request.setAttribute("SaleError", "No Sales Yet ;)");
 				request.getRequestDispatcher("Profile.jsp").forward(request, response);
 				return;
 			}
-			System.out.println("Idhar");
-			rs1.next();
-			order_id = rs1.getInt("o_id");
-			pst = con.prepareStatement(query_cart);
-			pst.setInt(1, order_id);
-			ResultSet rs2 = pst.executeQuery();
 			String temp_title = "";
 			float temp_price = 0;
 			float temp_partialAmt = 0;
 			int temp_qty = 0;
 			int temp_iid = 0;
-			int n = this.getRowCount(rs2);
-				Query_ViewCart rs = new Query_ViewCart(n);
-				rs2.next();
-			for(int i = 0;i<n;i++)
+			int n = this.getRowCount(rs1);
+			Query_ViewCart q=new Query_ViewCart(n);
+			while(rs1.next())
 			{
-				temp_title = rs2.getString("title");
-				temp_price = rs2.getFloat("price");
-				temp_qty = rs2.getInt("quantity");
-				temp_partialAmt = rs2.getFloat("partial_amount");
-				temp_iid = rs2.getInt("i_id");
-				System.out.println("Title: " + temp_title);
-				rs.appendRow(temp_title, temp_price, temp_qty, temp_partialAmt,temp_iid);
-				rs2.next();
-			}
-			
-				session.setAttribute("rs", rs);
-				request.getRequestDispatcher("Cart.jsp").forward(request, response);
+				temp_title = rs1.getString("title");
+				temp_price = rs1.getFloat("price");
+				temp_qty = rs1.getInt("stock");
+				temp_iid=rs1.getInt("i_id");
+				temp_partialAmt = temp_qty*temp_price;
+				q.appendRow(temp_title, temp_price, temp_qty, temp_partialAmt,temp_iid);
 				
-			
-			return;
-		}catch(Exception e)
+			}
+			session.setAttribute("saleitem", q);
+			request.getRequestDispatcher("SaleItemView.jsp").forward(request, response);
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -106,6 +91,5 @@ public class ViewCart extends HttpServlet {
 		rs.beforeFirst();
 		return n;
 	}
-
 
 }

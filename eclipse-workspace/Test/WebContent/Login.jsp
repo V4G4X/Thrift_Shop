@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -17,10 +15,7 @@
   <link href="assets/CSS/login.css" rel="stylesheet">
   <script async defer src="https://buttons.github.io/buttons.js"></script>	
     <script src="assets/JS/core/jquery.min.js" type="text/javascript"></script>
-
-  
 </head>
-
 <body class="landing-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
@@ -523,7 +518,6 @@
       </div>
     </div>
   </footer>
- 
 </body>
 <!--   Core JS Files   -->
 <script type="text/javascript" src="assets/JS/loginValidation.js"></script>
