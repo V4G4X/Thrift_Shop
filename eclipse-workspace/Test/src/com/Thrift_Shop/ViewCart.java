@@ -51,12 +51,13 @@ public class ViewCart extends HttpServlet {
 			PreparedStatement pst = con.prepareStatement(query_order);
 			pst.setInt(1, b_id);
 			ResultSet rs1 = pst.executeQuery();
+			session.setAttribute("flagCart",0);
 			if(!rs1.isBeforeFirst())
 			{
 				System.out.println("In here");
 				Query_ViewCart qvc = new Query_ViewCart(0);
 				session.setAttribute("rs", qvc);
-				request.setAttribute("CartError", "Empty Cart ;)");
+				session.setAttribute("flagCart",1);
 				request.getRequestDispatcher("Profile.jsp").forward(request, response);
 				return;
 			}
