@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SearchServlet
@@ -43,6 +44,9 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
 		search = search.trim();
+		HttpSession session = request.getSession();
+		int uid = (int)session.getAttribute("uid");
+		
 		String required[] = request.getParameterValues("searchby");
 		if(request.getParameterValues("searchby")==null) {
 			//in case none have been chosen
@@ -142,7 +146,7 @@ public class SearchServlet extends HttpServlet {
 		for (int i = 0; i < keyword.length; i++) // Add WildCards to each keyword
 			keyword[i] = "%" + keyword[i] + "%";
 
-		String query = "SELECT i_id,price,title,author,Item_Detail.condition,description FROM Item INNER JOIN Item_Detail USING(i_id) WHERE"; // Generate
+		String query = "SELECT i_id,price,title,author,Item_Detail.condition,description FROM Item INNER JOIN Item_Detail USING(i_id) WHERE ("; // Generate
 		// Query
 		// head(or
 		// the
@@ -155,9 +159,9 @@ public class SearchServlet extends HttpServlet {
 		{
 			for (int i = 0; i < keyword.length; i++) {
 				if ((searchbyval == 1) && (i == (keyword.length - 1))) {
-					query = query + " title LIKE ? AND stock != 0 ";
+					query = query + " title LIKE ?) AND stock != 0 AND s_id = ? ";
 				} else {
-					query = query + " title LIKE ? OR ";
+					query = query + " title LIKE ?  OR ";
 				}
 			}
 		}
@@ -170,7 +174,7 @@ public class SearchServlet extends HttpServlet {
 					// the search from
 					// author for each
 					// keyword
-					query = query + " author LIKE ? AND stock !=0 ";
+					query = query + " author LIKE ?) AND stock !=0 AND s_id = ? ";
 				else
 
 					query = query + " author LIKE ? OR "; // slightly modify last append to accommodate stock
@@ -181,12 +185,14 @@ public class SearchServlet extends HttpServlet {
 		{
 			for (int i = 0; i < keyword.length; i++) {
 				if (i == (keyword.length - 1)) // append to the Query, the search from author for each keyword
-					query = query + " description LIKE ? AND stock !=0 ";
+					query = query + " description LIKE ?) AND stock !=0 AND s_id != ? ";
 				else
 
 					query = query + " description LIKE ? OR "; // slightly modify last append to accommodate stock
 			}
 		}
+		System.out.println(query);
+		
 		query = query + "ORDER BY Item.price ASC";
 		try {
 			Connection con2 = DatabaseConnection.initializeDatabase();
@@ -195,24 +201,39 @@ public class SearchServlet extends HttpServlet {
 			if (searchbyval == 1 || searchbyval == 4 || searchbyval == 6 || searchbyval == 7) // sets title to keywords
 			{
 				for (int j = 0; j < keyword.length; j++) {
+						System.out.println("setting title");
 					st.setString(i, keyword[j]);
 					i++; // The first 'keywork.length' sets will belong to title
+				}
+				if(searchbyval == 1)
+				{
+					System.out.println("setting uid");
+					st.setInt(i,uid);
 				}
 			}
 			if (searchbyval == 2 || searchbyval == 4 || searchbyval == 5 || searchbyval == 7) // sets author to keyword
 			{
 				for (int j = 0; j < keyword.length; j++) {
+					System.out.println("setting author");
 					st.setString(i, keyword[j]);
 					i++;// The second 'keywork.length' sets will belong to title
+				}
+				if(searchbyval == 2 || searchbyval == 4)
+				{
+					System.out.println("setting uid");
+					st.setInt(i, uid);
 				}
 			}
 			if (searchbyval == 3 || searchbyval == 5 || searchbyval == 6 || searchbyval == 7) // sets description to
 				// keywords
 			{
 				for (int j = 0; j < keyword.length; j++) {
+					System.out.println("setting description");
 					st.setString(i, keyword[j]);
 					i++;
 				}
+				System.out.println("setting uid");
+				st.setInt(i,uid);
 			}
 			System.out.println(st.toString().substring(42) + "\n"); // Prints Prepared String for Developers
 			// Verification

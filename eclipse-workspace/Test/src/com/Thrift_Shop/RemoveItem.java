@@ -69,12 +69,12 @@ public class RemoveItem extends HttpServlet {
 			result = rs2.getInt("RESULT");
 			if(result == 1)
 			{
-				request.getRequestDispatcher("Profile.jsp").forward(request, response);
+				request.getRequestDispatcher("ViewCart").forward(request, response);
 				return;
 			}
 			else if(result == 2)
 			{
-				request.getRequestDispatcher("Profile.jsp").forward(request, response);
+				request.getRequestDispatcher("ProfileServlet").forward(request, response);
 			}
 		}catch(Exception e)
 		{

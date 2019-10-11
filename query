@@ -1,5 +1,5 @@
 delimiter $$
-create procedure addtocart(IN iid int,IN qty int,IN bid int,OUT result int )
+create procedure addtocart(IN iid int,IN qty int,IN bid int,OUT result int)
 begin
 	DECLARE stck INT; 
 	DECLARE flag INT;
@@ -12,15 +12,16 @@ begin
 	DECLARE same_qty INT;
 	DECLARE new_qty INT;
 	DECLARE same_pamt FLOAT;
+	SET result = 3;
 	SELECT stock into stck from Item where i_id =iid;
 	IF stck < qty 
 	Then
-	set result=0;
+	set result=10;
 	ELSE
-		SELECT COUNT(o_id) INTO flag from Orders where b_id=bid AND status ='CART';
+		SELECT COUNT(o_id) INTO flag from Orders where b_id=bid AND status like 'Cart';
 		IF flag=0
 		THEN
-			INSERT INTO Orders(b_id,status,total_amount) values(bid,'CART',0);
+			INSERT INTO Orders(b_id,status,total_amount) values(bid,'Cart',0);
 			SELECT MAX(o_id) INTO noid from Orders;
 			SELECT price INTO iamt from Item where i_id =iid;
 			SET pamt=qty*iamt;
@@ -29,7 +30,7 @@ begin
 			SET result = 1;
 
 		ELSE
-			SELECT o_id INTO noid from Orders where b_id=bid;
+			SELECT o_id INTO noid from Orders where b_id=bid AND status like 'Cart';
 			SELECT COUNT(i_id) into same_count from Contains where i_id = iid AND noid = o_id;
 			SELECT price INTO iamt from Item where i_id =iid;
 			IF same_count = 1

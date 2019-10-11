@@ -1,7 +1,10 @@
 package com.Thrift_Shop;
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
@@ -27,9 +30,11 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -78,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 						//session is used to transfer data from one jsp to other
 							HttpSession session = request.getSession();
 							session.setAttribute("username",username);
-							session.setAttribute("password", password1); 
+							//session.setAttribute("password", password1); 
 							PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
 							pst.setString(1, username);
 							ResultSet rs2 = pst.executeQuery();
@@ -87,10 +92,6 @@ public class LoginServlet extends HttpServlet {
 							System.out.println(u_id);
 							session.setAttribute("uid", u_id);
 							//to redirect to profile page
-							response.sendRedirect("Profile.jsp");
-							System.out.println("Logged in successfully!!");
-							
-						
 					}
 				}
 				st.close();
@@ -99,6 +100,8 @@ public class LoginServlet extends HttpServlet {
 				System.out.print(e);
 				e.printStackTrace(); 
 			}
+			request.getRequestDispatcher("ProfileServlet").forward(request, response);
+			
 		}
 		else {
 			request.setAttribute("userError", "Enter Username and Password");
@@ -109,5 +112,11 @@ public class LoginServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-}
+	private int getRowCount(ResultSet rs) throws SQLException {
+		rs.last();
+		int n = rs.getRow();
+		rs.beforeFirst();
+		return n;
+	}
 
+}
