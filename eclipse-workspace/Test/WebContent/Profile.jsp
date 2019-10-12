@@ -36,29 +36,17 @@
     	  	<form method = "post" action="ViewCart">
             <button class="btn btn-primary btn-round">
               Cart<i class="material-icons">shopping_cart</i>       
+            </button>
+            <button class="btn btn-primary btn-round" formaction="LogoutServlet">
+              Logout     
             </button>       
             </form>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank" data-original-title="Follow us on Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank" data-original-title="Like us on Facebook">
-              <i class="fa fa-facebook-square"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank" data-original-title="Follow us on Instagram">
-              <i class="fa fa-instagram"></i>
-            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile.jpg');">
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/Men_Book_Library_465838_3840x2400.jpg');">
         <div class="container-fluid" id="alertCatcher">
 </div>
   </div>
@@ -109,7 +97,7 @@
            		  </form> 
                 </li>
                 <li class="nav-item">
-					<form method = "post" id="saleItemForm" action="SaleItemView.jsp">
+					<form method = "post" id="saleItemForm" action="viewItemServlet">
             		<button onclick="saleItem_submit()" type="submit" class="nav-link" role="tab" data-toggle="tab">
               		<i class="material-icons">work</i>View Your Item      
            			 </button>
@@ -121,7 +109,7 @@
         </div>
           <div class="text-centre justify-content-center"><h2><b>Past Transaction</b></h2></div>
         <fieldset>
-	<legend>Order History</legend>
+	<legend><b>Order History</b></legend>
 	<%
 	Query_OrderDetails q1=(Query_OrderDetails)session.getAttribute("order_details");
 	if(q1.getN() == 0)
@@ -165,7 +153,7 @@
 			int temp_bid = 0;
 			int item_n=0;
 	%>
-	<table>
+	<table class="table table-stripped table-bordered">
 	<tr>
 		<td>SR.No</td>
 		<td>Title</td>
@@ -207,7 +195,7 @@
 	</fieldset>
 	<br><br>
 	<fieldset>
-	<legend>Sales History</legend>
+	<legend><b>Sales History</b></legend>
 	<%
 		
 	Query_Item q = (Query_Item)session.getAttribute("sales_details");
@@ -222,7 +210,7 @@
 		
 	%>
 	
-	<table>
+	<table class="table table-stripped table-bordered">
 	<tr>
 		<td>SR.No</td>
 		<td>TimeStamp</td>

@@ -1,6 +1,7 @@
 
 document.getElementById('btn').addEventListener('blur', usernameVerify, true);
-document.getElementById('btn').addEventListener('blur', passwordVerify, true);
+document.getElementById('btn')
+.addEventListener('blur', passwordVerify, true);
 
 function validate(event){
 

@@ -194,7 +194,7 @@ public class ProfileServlet extends HttpServlet {
 
 				request.setAttribute("phoneno", phoneno);
 				System.out.println("Logged in successfully!!");
-				request.getRequestDispatcher("Profile").forward(request, response);
+				request.getRequestDispatcher("Profile.jsp").forward(request, response);
 				return;
 		}catch(Exception e)
 		{

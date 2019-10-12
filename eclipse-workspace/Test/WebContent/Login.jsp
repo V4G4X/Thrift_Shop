@@ -36,21 +36,6 @@
           
             </button>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom"  target="_blank" data-original-title="Follow us on Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom"  target="_blank" data-original-title="Like us on Facebook">
-              <i class="fa fa-facebook-square"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" target="_blank" data-original-title="Follow us on Instagram">
-              <i class="fa fa-instagram"></i>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -81,7 +66,7 @@
                           </div>
                           <div class="modal-body">
                               <form class="form" name="login" method="post" action="LoginServlet" onSubmit="return validate(event);">
-                                  <p class="description text-center">Or Be Classical</p>
+                                  <p class="description text-center"></p>
                                   <div class="card-body">
           
                                       <div class="form-group bmd-form-group">
@@ -142,7 +127,7 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <form class="form" method="POST" name="signup" action="SignupServlet">
+                        <form class="form" method="POST" name="signup" action="SignupServlet" onSubmit="return validateSignup(event);">
                             <p class="description font-weight-bold text-center"> Sign in to create an Account!</p>
                             <div class="card-body">
 
@@ -155,13 +140,13 @@
                                                     </div>
                                                 </div>
                                                 <input type="text" name="fname" value="${fName}" class="form-control" placeholder="First Name..." required>
-                                                <small class="error">${fNameError}</small>
+                                                <small class="error" id="fNameError">${fNameError}</small>
                                             </div>
                                         </div>
                                         <div class="col-6 form-group">
                                             <div class="input-group ">
                                                 <input type="text" name="lname" value="${lName}" class="form-control" placeholder="Last Name..." required>
-                                                <small class="error">${lNameError}</small>
+                                                <small class="error" id="lNameError">${lNameError}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -175,13 +160,14 @@
                                                     <div class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i>
                                                     </div>
                                                 </div>
-                                                <input type="tel" name="phno1" maxlength="10" minlength="10" value="${phone1}" class="form-control" placeholder="Mobile Number..." required>
-                                                <small class="error">${phoneError}</small>
+                                                <input type="text" name="phno1" maxlength="10" minlength="10" value="${phone1}" class="form-control" placeholder="Mobile Number..." required>
+                                                <small class="error" id="phoneError1">${phoneError}</small>
                                             </div>
                                         </div>
                                         <div class="col-6 form-group">
                                             <div class="input-group">
-                                                <input type="tel" name="phno2" maxlength="10" minlength="10" value="${phone2}" class="form-control" placeholder="Alternative Number...">
+                                                <input type="text" name="phno2" maxlength="10" minlength="10" value="${phone2}" class="form-control" placeholder="Alternative Number...">
+                                            	<small class="error" id="phoneError2">${phoneError}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -224,13 +210,13 @@
                                                     </div>
                                                 </div>
                                                 <input type="password" name="pwd1" placeholder="Password..." class="form-control" required>
-                                                <small class="error">${passwordError1}</small>
+                                                <small class="error" id="passwordError1">${passwordError1}</small>
                                             </div>
                                         </div>
                                         <div class="col-6 form-group">
                                             <div class="input-group">
                                                 <input type="password" name="pwd2" placeholder="Confirm Password..." class="form-control" required>
-                                                <small class="error">${passwordError2}</small>
+                                                <small class="error" id="passwordError2">${passwordError2}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +274,7 @@
                                 </div>
 	                            <div class="form-group bmd-form-group">
                                      <div class="input-group">  
-                                           <input type="submit" value="Sign In" class="btn btn-primary btn-link">	
+                                           <input type="submit" value="Sign In" class="btn btn-primary btn-link" id="btn1">	
                                      </div>
                                 </div>
                             </div>
@@ -303,7 +289,7 @@
     
     
  
-  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/profile_city.jpg')">
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/wp2036897.jpg')">
     <div class="container">
     <div class="container-fluid" id="alertCatcher">
 </div>
@@ -376,8 +362,7 @@
                     <small class="card-description text-muted">33107</small>
                   </h4>
                   <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                    <p class="card-description"></p>
                   </div>
                   <div class="card-footer justify-content-center">
                     <a href="#pablo" rel="tooltip"class="btn btn-link btn-just-icon" data-original-title="Follow us on Twitter"><i class="fa fa-twitter"></i></a>
@@ -399,8 +384,7 @@
                     <small class="card-description text-muted">33117</small>
                   </h4>
                   <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                    <p class="card-description"></p>
                   </div>
                   <div class="card-footer justify-content-center">
                     <a href="#pablo" rel="tooltip"class="btn btn-link btn-just-icon" data-original-title="Follow us on Twitter"><i class="fa fa-twitter"></i></a>
@@ -414,15 +398,14 @@
               <div class="team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="assets/img/faces/kendall.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                    <img src="assets/img/faces/christian.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                   </div>
-                  <h4 class="card-title">Jash Gujrathi
+                  <h4 class="card-title">Jash Gujarathi
                     <br>
                     <small class="card-description text-muted">33118</small>
                   </h4>
                   <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                    <p class="card-description"></p>
                   </div>
                   <div class="card-footer justify-content-center">
                     <a href="#pablo" rel="tooltip"class="btn btn-link btn-just-icon" data-original-title="Follow us on Twitter"><i class="fa fa-twitter"></i></a>
@@ -436,15 +419,14 @@
               <div class="team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="assets/img/faces/kendall.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                    <img src="assets/img/faces/christian.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                   </div>
                   <h4 class="card-title">Yash Gupta
                     <br>
                     <small class="card-description text-muted">33119</small>
                   </h4>
                   <div class="card-body">
-                    <p class="card-description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                      <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                    <p class="card-description"></p>
                   </div>
                   <div class="card-footer justify-content-center">
                     <a href="#pablo" rel="tooltip"class="btn btn-link btn-just-icon" data-original-title="Follow us on Twitter"><i class="fa fa-twitter"></i></a>
@@ -461,7 +443,7 @@
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
             <h2 class="text-center title">Work with us</h2>
-            <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
+            <h4 class="text-center description"></h4>
             <form class="contact-form">
               <div class="row">
                 <div class="col-md-6">
@@ -521,7 +503,7 @@
 </body>
 <!--   Core JS Files   -->
 <script type="text/javascript" src="assets/JS/loginValidation.js"></script>
-
+<script type="text/javascript" src="assets/JS/signupValidation.js"></script>
   <script src="assets/JS/core/popper.min.js" type="text/javascript"></script>
   <script src="assets/JS/core/bootstrap-material-design.min.js" type="text/javascript"></script>
   <script src="assets/JS/plugins/moment.min.js"></script>
@@ -536,15 +518,15 @@
   	let flag= "<%= session.getAttribute("flagLogin") %>";
   	if(flag==="3"){
 
-  		$("#alertCatcher").append('<div class="alert alert-success"><div class="container-fluid"><div class="alert-icon"><i class="material-icons">check</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Success Alert:</b> Yuhuuu! Successfull SignUp</div></div>');
+  		$("#alertCatcher").append('<div class="alert alert-success"><div class="container-fluid"><div class="alert-icon"><i class="material-icons">check</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Success Alert:</b> Successfull SignUp</div></div>');
   		<% session.setAttribute("flagLogin",0); %>
   	}
   	else if(flag==="2"){
-  		$("#alertCatcher").append('<div class="alert alert-danger"><div class="container"><div class="alert-icon"><i class="material-icons">error_outline</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Error Alert:</b> Damn man! You screwed up the server SignUp Error...</div></div>');
+  		$("#alertCatcher").append('<div class="alert alert-danger"><div class="container"><div class="alert-icon"><i class="material-icons">error_outline</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Error Alert:</b> Error in Sign Up...</div></div>');
   		<% session.setAttribute("flagLogin",0); %>
   	}
   	else if(flag==="1"){
-  		$("#alertCatcher").append('<div class="alert alert-danger"><div class="container"><div class="alert-icon"><i class="material-icons">error_outline</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Error Alert:</b> Damn man! You screwed up the server Log In Error...</div></div>');
+  		$("#alertCatcher").append('<div class="alert alert-danger"><div class="container"><div class="alert-icon"><i class="material-icons">error_outline</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Error Alert:</b> Error in Login...</div></div>');
   		<% session.setAttribute("flagLogin",0); %>
   	}
   	

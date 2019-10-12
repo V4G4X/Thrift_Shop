@@ -40,7 +40,7 @@ CREATE TABLE `Contains` (
 
 LOCK TABLES `Contains` WRITE;
 /*!40000 ALTER TABLE `Contains` DISABLE KEYS */;
-INSERT INTO `Contains` VALUES (13,1,441,1),(13,2,69,1);
+INSERT INTO `Contains` VALUES (33,11,250,2),(33,13,100,1),(34,14,320,1),(35,15,200,1),(36,14,320,1),(37,12,680,2),(38,11,125,1),(39,13,100,1),(40,13,100,1),(41,13,200,2),(42,11,125,1),(44,11,125,1);
 /*!40000 ALTER TABLE `Contains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `Item` (
   PRIMARY KEY (`i_id`),
   KEY `fk_Item_1_idx` (`s_id`),
   CONSTRAINT `fk_Item_1` FOREIGN KEY (`s_id`) REFERENCES `User` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `Item` (
 
 LOCK TABLES `Item` WRITE;
 /*!40000 ALTER TABLE `Item` DISABLE KEYS */;
-INSERT INTO `Item` VALUES (1,1,66,441),(2,1,68,69);
+INSERT INTO `Item` VALUES (7,5,5,200),(8,5,4,250),(9,6,3,150),(10,6,2,175),(11,7,0,125),(12,7,4,340),(13,8,0,100),(14,8,2,320),(15,9,2,200),(16,9,2,225);
 /*!40000 ALTER TABLE `Item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -136,7 +136,7 @@ CREATE TABLE `Item_Detail` (
 
 LOCK TABLES `Item_Detail` WRITE;
 /*!40000 ALTER TABLE `Item_Detail` DISABLE KEYS */;
-INSERT INTO `Item_Detail` VALUES (1,'dsaads','teri maa',3,'dasdas'),(2,'pregnancy','It is my personal memoirs',5,'Ayushi');
+INSERT INTO `Item_Detail` VALUES (7,'Life of PI','Publisher : Pearson Publication\r\nOld Edition',4,'R J Guruswamy'),(8,'UNIX/Linux','Publisher : McGraww Hill\r\nNewest Edition\r\nIn Pristine Condition\r\nAbsolute must for preparation of Operating Systems',5,'Sumitabhdhas Charan'),(9,'Basics of Civil Engineering','Published : Techmaxx Publications\r\nPart of the curriculum at IIT Mumbai',3,'Tejasvi Radheya'),(10,'How to crack JEE Advanced','Essential,tried and tested formula for cracking the ultimate exam! Specially made for JEE aspirants hailing from Nashik!',5,'Juna Naij'),(11,'Kota Diaries','A very good read and gives a very insightful understanding about the dark and the mafia underbelly of Kota.\r\nOnly few in stock ',4,'Prakash Gupta'),(12,'The Total Guide to Front End Development','Offers a complete guide into the totality of life and Front End Development. Must for all wishing to apply practical concepts of HCI in project end product Development',3,'Runav Ednawag'),(13,'Using Big Data Effectively!','This book covers all basics of Big Data,Scala and Hadoop environments. Essential for all those pursuing a career in Big Data.',2,'Shrikant Gawande'),(14,'12 Rules of Life','NewYork Time\'s best selling book for over a year. Must read for people who wish to turn around their lives',4,'Jordan Peterson'),(15,'The Fourth Estate','This book covers the story of a jewish kid in Germany during the Holocaust. It is an absolutely amazing book and a touching story. A steal at only 200/-',5,'Jeffery Archer'),(16,'Concepts of Physics ','This book is the bible for everyone who wishes to crack JEE. Used and recommended by everyone who has ever made it in the Engineering Field.',3,'H C Verma');
 /*!40000 ALTER TABLE `Item_Detail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -190,7 +190,7 @@ CREATE TABLE `Login` (
 
 LOCK TABLES `Login` WRITE;
 /*!40000 ALTER TABLE `Login` DISABLE KEYS */;
-INSERT INTO `Login` VALUES (1,'anuj16','ayushi16'),(2,'komal24','kammo21'),(3,'kota500','delhiexpress'),(4,'kitkat45','breakuptobantahai');
+INSERT INTO `Login` VALUES (5,'ayushi16','ayushi16'),(6,'anuj@32','anuj@32'),(7,'yash@29','yash@29'),(8,'varun@69','varun@69'),(9,'jash@14','jash@14'),(12,'ayushi855','123'),(13,'ayushi85','a'),(15,'Varun69','12'),(17,'anuj@321','Yashgupta@123');
 /*!40000 ALTER TABLE `Login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +210,7 @@ CREATE TABLE `Orders` (
   PRIMARY KEY (`o_id`),
   KEY `fk_Orders_1_idx` (`b_id`),
   CONSTRAINT `fk_Orders_1` FOREIGN KEY (`b_id`) REFERENCES `User` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +219,7 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (13,1,'2019-10-09 12:53:37','Confirmed',510);
+INSERT INTO `Orders` VALUES (33,5,'2019-10-11 03:04:01','Confirmed',350),(34,5,'2019-10-11 03:08:11','Confirmed',320),(35,6,'2019-10-11 03:34:34','Confirmed',200),(36,6,'2019-10-11 03:33:30','Confirmed',320),(37,5,'2019-10-11 03:46:30','Cart',680),(38,9,'2019-10-11 04:19:19','Confirmed',125),(39,9,'2019-10-11 05:37:52','Confirmed',100),(40,6,'2019-10-11 06:06:16','Confirmed',100),(41,12,'2019-10-11 07:06:15','Confirmed',200),(42,6,'2019-10-11 08:44:40','Confirmed',125),(44,6,'2019-10-11 09:31:23','Confirmed',125);
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -298,6 +298,7 @@ CREATE TABLE `Phone` (
 
 LOCK TABLES `Phone` WRITE;
 /*!40000 ALTER TABLE `Phone` DISABLE KEYS */;
+INSERT INTO `Phone` VALUES (5,'9766825588'),(5,'7896541230'),(6,'7845129632'),(6,'8256874596'),(7,'9262428642'),(7,'9181817888'),(8,'8451629598'),(8,'9481526787'),(9,'9822048620'),(9,'7030548435'),(12,'9405607845'),(12,'1223312335'),(13,'3214569871'),(15,'4561363564'),(17,'9874563215');
 /*!40000 ALTER TABLE `Phone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -340,7 +341,7 @@ CREATE TABLE `User` (
   `email_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `email_id` (`email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,7 +350,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,1000,422003,'Nashik','college road','Rachit heritage','Jain','Anuj','anuj16@gmail.com'),(2,1000,411037,'Pune','Vit ke samne','SBI nagar','Mekala','Komal','komal99@gmail.com'),(3,1000,422311,'Kota','Allen ke samne','SBI nagar','sharma','Kota','kota99@gmail.com'),(4,1000,412411,'Pune','PICT ke samne','Friends','Khandelwal','Ritika','ritika99@gmail.com');
+INSERT INTO `User` VALUES (5,830,411043,'Pune','Dhankawadi','PICT Girls Hostel','Patani','Ayushi','ayushi16199@gmail.com'),(6,630,422312,'Mumbai','Powai','CharanSingh Apartments','Jain','Anuj','anuj.jain@gmail.com'),(7,2125,411043,'Pune','Dhankawadi','Swami Apartments','Gupta','Yash','yash.gupta@gmail.com'),(8,2640,411043,'Pune','Dhankawadi','201-Duttaraya','Gawande','Varun','varun.gawande@gmail.com'),(9,1475,411048,'Pune','Wanowrie','Green Acres','Gujarathi','Jash','jashgujarathi@gmail.com'),(12,800,123456,'puj','varun','nnnnnnn','sbhjs','sam','sslsl@j.com'),(13,1000,123654,'z','z','z','aa','aa','anuj.jain1@gmail.com'),(15,1000,123456,'1234','1234','1234','Gawande','Varun','varun.1gawande@gmail.com'),(17,1000,123654,'a','a','a','a','a','anuj.jain12@gmail.com');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -430,6 +431,25 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary table structure for view `transaction_details`
+--
+
+DROP TABLE IF EXISTS `transaction_details`;
+/*!50001 DROP VIEW IF EXISTS `transaction_details`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `transaction_details` AS SELECT 
+ 1 AS `title`,
+ 1 AS `quantity`,
+ 1 AS `partial_amount`,
+ 1 AS `timestmp`,
+ 1 AS `s_id`,
+ 1 AS `i_id`,
+ 1 AS `b_id`,
+ 1 AS `o_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary table structure for view `vieww`
 --
 
@@ -465,6 +485,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `transaction_details`
+--
+
+/*!50001 DROP VIEW IF EXISTS `transaction_details`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`Admin`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `transaction_details` AS select `Item_Detail`.`title` AS `title`,`Contains`.`quantity` AS `quantity`,`Contains`.`partial_amount` AS `partial_amount`,`Orders`.`timestmp` AS `timestmp`,`Item`.`s_id` AS `s_id`,`Item`.`i_id` AS `i_id`,`Orders`.`b_id` AS `b_id`,`Orders`.`o_id` AS `o_id` from (`Item` join (`Orders` join (`Contains` join `Item_Detail` on((`Contains`.`i_id` = `Item_Detail`.`i_id`))) on((`Orders`.`o_id` = `Contains`.`o_id`))) on((`Item`.`i_id` = `Contains`.`i_id`))) where (`Orders`.`status` = 'Confirmed') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vieww`
 --
 
@@ -491,4 +529,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-09 19:22:36
+-- Dump completed on 2019-10-12 18:54:04

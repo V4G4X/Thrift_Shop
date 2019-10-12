@@ -93,7 +93,7 @@
 		<form name="addtocart" method="post" action="AddToCart" >
 			<div class="form-group text-center justify-content-center">
 				Quantity:<input type="number" class="form-control" name="qty" class="" autofocus>
-				<div class="btn-group btn-group-justified  text-center justify-content-center" >
+				<div class="btn-group  text-center justify-content-center" >
 					<button type="submit" value="Add to Cart" class=" btn primary btn-lg butpad" name="addToCart">Add to Cart</button>
 					<button type="submit" value="Buy Now" class=" btn btn-info btn-lg butpad" name="buyNow" formaction="BuyNow">Buy Now</button>
 				</div>
