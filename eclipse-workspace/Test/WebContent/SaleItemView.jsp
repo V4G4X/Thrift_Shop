@@ -5,7 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Items on Sale</title>
+=======
+<title>Items in Sale</title>
+>>>>>>> b556ce69926594890b80ee5f0a7593afd89f10be
 <link rel="stylesheet" href="assets/CSS/style.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -53,7 +57,11 @@
 	%>
 	<div class="container">
 		<table class="table table-striped table-bordered table-hover">
+<<<<<<< HEAD
 			<caption><h3> Items on Sale:</h3></caption>
+=======
+			<caption><h3> Cart:</h3></caption>
+>>>>>>> b556ce69926594890b80ee5f0a7593afd89f10be
 			<tr class="info ">
 				<th>SR.NO</th>
 				<th>Title</th>

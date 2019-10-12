@@ -13,7 +13,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<link
+<link
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet"
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
@@ -26,8 +26,13 @@
 			<a href="#" class="navbar-brand title">Thrift Shop</a>
 			<ul class="navbar-nav pull-right">
 				<li class="navbar-item ">
-					<form action="Profile.jsp">
-						<button class="nav-link btn primary" style="margin-top: 10%;">Profile <i class="fa fa-user-circle" aria-hidden="true"></i></button>
+					<form action="ProfileServlet" method="POST">
+						<div class="btn-group">
+							<button class="nav-link btn btn-secondary" id="gotoProfile"
+								formaction="ProfileServlet">
+								Profile <i class="fa fa-user-circle" aria-hidden="true"></i>
+							</button>
+						</div>
 					</form>
 				</li>
 			</ul>
@@ -49,7 +54,9 @@
 	%>
 	<div class="container">
 		<table class="table table-striped table-bordered table-hover">
-			<caption><h3> Cart:</h3></caption>
+			<caption>
+				<h3>Cart:</h3>
+			</caption>
 			<tr class="info ">
 				<th>SR.NO</th>
 				<th>Title</th>
@@ -91,7 +98,10 @@
 				class="button btn btn-success pull-right px-5" name="buyNow">
 		</form>
 	</div>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b556ce69926594890b80ee5f0a7593afd89f10be
 </body>
 </html>
