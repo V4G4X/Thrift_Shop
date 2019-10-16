@@ -98,10 +98,5 @@
 				class="button btn btn-success pull-right px-5" name="buyNow">
 		</form>
 	</div>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b556ce69926594890b80ee5f0a7593afd89f10be
 </body>
 </html>

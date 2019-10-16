@@ -42,6 +42,7 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Entered Profile Servlet");
 		try {
 			HttpSession session = request.getSession();
 			int u_id = (int)session.getAttribute("uid");
@@ -139,26 +140,88 @@ public class ProfileServlet extends HttpServlet {
 						}
 						pst = con.prepareStatement(total_query);
 						pst.setInt(1,temp_oid);
-						ResultSet rs6=pst.executeQuery();
-						rs6.next();
+						ResultSet rs6=null;
+						try {
+							rs6=pst.executeQuery();
+							rs6.next();
+						} catch (Exception e) {
+							System.out.println("Exception Caught near Line 145");
+							e.printStackTrace();
+							return;
+						}
 						temp_tot =rs6.getFloat("total_amount");
 						q2.appendRow(temp_oid, temp_time, temp_item,temp_tot,temp_n);
 
-<<<<<<< HEAD
-				request.setAttribute("phoneno", phoneno);
-				System.out.println("Logged in successfully!!");
-				request.getRequestDispatcher("Profile.jsp").forward(request, response);
-=======
+////<<<<<<< HEAD
+////				request.setAttribute("phoneno", phoneno);
+//				System.out.println("Logged in successfully!!");
+//				request.getRequestDispatcher("Profile.jsp").forward(request, response);
+//				return
+////=======
 					}
 					session.setAttribute("order_details", q2);
 				}		
 			}catch(Exception e)
 			{
+				System.out.println("Exception Caught near Line 162");
 				e.printStackTrace();
->>>>>>> b556ce69926594890b80ee5f0a7593afd89f10be
+//>>>>>>> b556ce69926594890b80ee5f0a7593afd89f10be
 				return;
 			}
 			try {
+				//Starting Code to Fetch Profile Details
+				Connection con = DatabaseConnection.initializeDatabase();
+				PreparedStatement pst = con.prepareStatement("Select * from User where uid = ? ");
+				System.out.println(u_id);
+				pst.setInt(1, u_id);
+				System.out.println(u_id);
+				ResultSet rs3 = null;
+				try {
+					rs3 = pst.executeQuery();
+				} catch (Exception e) {
+					System.out.println("exception");
+					e.printStackTrace();
+				}
+				rs3.next();
+
+				String fname = rs3.getString("fname");
+
+				String lname = rs3.getString("lname");
+				String fullname = fname + " " + lname;
+				request.setAttribute("fullname", fullname);
+				request.setAttribute("email_id", rs3.getString("email_id"));
+
+				request.setAttribute("bldg", rs3.getString("building"));
+
+				request.setAttribute("city", rs3.getString("city"));
+				request.setAttribute("neigh", rs3.getString("neighbourhood"));
+				request.setAttribute("bldg", rs3.getString("building"));
+				int pincode = rs3.getInt("pincode");
+				request.setAttribute("pincode", pincode);
+
+				request.setAttribute("wallet", rs3.getFloat("wallet"));
+
+				pst = con.prepareStatement("Select * from Phone where uid = ? ");
+				pst.setInt(1, u_id);
+
+				ResultSet rs4 = pst.executeQuery();
+
+				String phoneno = "";
+				rs4.next();
+
+				phoneno = rs4.getString("phone");
+
+				if (rs4.next()) {
+					phoneno = phoneno + "," + rs4.getString("phone");
+
+				}
+
+				request.setAttribute("phoneno", phoneno);
+
+//				System.out.println("Logged in successfully!!");
+				//
+				
+				
 				request.getRequestDispatcher("Profile.jsp").forward(request, response);
 				System.out.println("Logged in successfully!!!");
 			} catch (Exception e) {

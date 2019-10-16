@@ -107,6 +107,7 @@ public class LoginServlet extends HttpServlet {
 				st.close();
 				con.close();
 				request.getRequestDispatcher("ProfileServlet").forward(request, response);
+				return;
 			} 
 			catch (Exception e) 
 			{
