@@ -115,7 +115,7 @@
 							}
 						%>
 						<tr id="<%out.print(x);%>" onclick='$("#<%out.print(x);%>").parent().parent().parent().submit();'>
-							<td><input type="text" name="i_id" style="visibility:hidden;display:none;" value="<%out.print(x);%>"><img src="assets/images/item.png"></td>
+							<td><input type="text" name="i_id" style="visibility:hidden;display:none;" value="<%out.print(x);%>"><img src="assets/img/item.png"></td>
 							<td><%=title[i]%></td>
 							<td><%=author[i]%></td>
 							<td><%=price[i]%></td>
