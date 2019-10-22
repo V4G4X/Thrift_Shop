@@ -40,7 +40,8 @@ CREATE TABLE `Contains` (
 
 LOCK TABLES `Contains` WRITE;
 /*!40000 ALTER TABLE `Contains` DISABLE KEYS */;
-INSERT INTO `Contains` VALUES (33,11,250,2),(33,13,100,1),(34,14,320,1),(35,15,200,1),(36,14,320,1),(37,12,680,2),(38,11,125,1),(39,13,100,1),(40,13,100,1),(41,13,200,2),(42,11,125,1),(44,11,125,1);
+
+INSERT INTO `Contains` VALUES (33,11,250,2),(33,13,100,1),(34,14,320,1),(35,15,200,1),(36,14,320,1),(37,12,680,2),(38,11,125,1),(39,13,100,1),(40,13,100,1),(41,13,200,2),(42,11,125,1),(44,11,125,1),(45,7,200,1),(46,15,400,2);
 /*!40000 ALTER TABLE `Contains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +69,9 @@ CREATE TABLE `Item` (
 
 LOCK TABLES `Item` WRITE;
 /*!40000 ALTER TABLE `Item` DISABLE KEYS */;
-INSERT INTO `Item` VALUES (7,5,5,200),(8,5,4,250),(9,6,3,150),(10,6,2,175),(11,7,0,125),(12,7,4,340),(13,8,0,100),(14,8,2,320),(15,9,2,200),(16,9,2,225);
+
+INSERT INTO `Item` VALUES (7,5,7,200),(8,5,6,250),(9,6,5,150),(10,6,4,175),(11,7,2,125),(12,7,6,340),(13,8,2,100),(14,8,4,320),(15,9,2,200),(16,9,4,225);
+
 /*!40000 ALTER TABLE `Item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -190,7 +193,9 @@ CREATE TABLE `Login` (
 
 LOCK TABLES `Login` WRITE;
 /*!40000 ALTER TABLE `Login` DISABLE KEYS */;
-INSERT INTO `Login` VALUES (5,'ayushi16','ayushi16'),(6,'anuj@32','anuj@32'),(7,'yash@29','yash@29'),(8,'varun@69','varun@69'),(9,'jash@14','jash@14'),(12,'ayushi855','123'),(13,'ayushi85','a'),(15,'Varun69','12'),(17,'anuj@321','Yashgupta@123');
+
+INSERT INTO `Login` VALUES (5,'ayushi16','ayushi16'),(6,'anuj@32','anuj@32'),(7,'yash@29','yash@29'),(8,'varun@69','varun@69'),(9,'jash@14','jash@14'),(12,'ayushi855','123'),(13,'ayushi85','a'),(15,'Varun69','12'),(17,'anuj@321','Yashgupta@123'),(18,'guptaji','Guptaji@123');
+
 /*!40000 ALTER TABLE `Login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +215,9 @@ CREATE TABLE `Orders` (
   PRIMARY KEY (`o_id`),
   KEY `fk_Orders_1_idx` (`b_id`),
   CONSTRAINT `fk_Orders_1` FOREIGN KEY (`b_id`) REFERENCES `User` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +226,9 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (33,5,'2019-10-11 03:04:01','Confirmed',350),(34,5,'2019-10-11 03:08:11','Confirmed',320),(35,6,'2019-10-11 03:34:34','Confirmed',200),(36,6,'2019-10-11 03:33:30','Confirmed',320),(37,5,'2019-10-11 03:46:30','Cart',680),(38,9,'2019-10-11 04:19:19','Confirmed',125),(39,9,'2019-10-11 05:37:52','Confirmed',100),(40,6,'2019-10-11 06:06:16','Confirmed',100),(41,12,'2019-10-11 07:06:15','Confirmed',200),(42,6,'2019-10-11 08:44:40','Confirmed',125),(44,6,'2019-10-11 09:31:23','Confirmed',125);
+
+INSERT INTO `Orders` VALUES (33,5,'2019-10-11 03:04:01','Confirmed',350),(34,5,'2019-10-11 03:08:11','Confirmed',320),(35,6,'2019-10-11 03:34:34','Confirmed',200),(36,6,'2019-10-11 03:33:30','Confirmed',320),(37,5,'2019-10-11 03:46:30','Cart',680),(38,9,'2019-10-11 04:19:19','Confirmed',125),(39,9,'2019-10-11 05:37:52','Confirmed',100),(40,6,'2019-10-11 06:06:16','Confirmed',100),(41,12,'2019-10-11 07:06:15','Confirmed',200),(42,6,'2019-10-11 08:44:40','Confirmed',125),(44,6,'2019-10-11 09:31:23','Confirmed',125),(45,6,'2019-10-16 06:40:05','Cart',200),(46,6,'2019-10-16 07:27:08','Confirmed',400);
+
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -287,8 +296,9 @@ DROP TABLE IF EXISTS `Phone`;
 CREATE TABLE `Phone` (
   `uid` int(11) NOT NULL,
   `phone` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`uid`,`phone`),
   KEY `uid` (`uid`),
-  CONSTRAINT `Phone_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `User` (`uid`) ON DELETE CASCADE
+  CONSTRAINT `Phone_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `User` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -298,7 +308,9 @@ CREATE TABLE `Phone` (
 
 LOCK TABLES `Phone` WRITE;
 /*!40000 ALTER TABLE `Phone` DISABLE KEYS */;
-INSERT INTO `Phone` VALUES (5,'9766825588'),(5,'7896541230'),(6,'7845129632'),(6,'8256874596'),(7,'9262428642'),(7,'9181817888'),(8,'8451629598'),(8,'9481526787'),(9,'9822048620'),(9,'7030548435'),(12,'9405607845'),(12,'1223312335'),(13,'3214569871'),(15,'4561363564'),(17,'9874563215');
+
+INSERT INTO `Phone` VALUES (5,'7896541230'),(5,'9766825588'),(6,'7845129632'),(6,'8256874596'),(7,'9181817888'),(7,'9262428642'),(8,'8451629598'),(8,'9481526787'),(9,'7030548435'),(9,'9822048620'),(12,'1223312335'),(12,'9405607845'),(13,'3214569871'),(15,'4561363564'),(17,'9874563215'),(18,'7894561230'),(18,'9876543210');
+
 /*!40000 ALTER TABLE `Phone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -308,7 +320,7 @@ UNLOCK TABLES;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET is there a offline help manual command for mongodbsql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`Admin`@`localhost`*/ /*!50003 TRIGGER `phone_before_insert` BEFORE INSERT ON `Phone` FOR EACH ROW
 BEGIN
@@ -341,7 +353,7 @@ CREATE TABLE `User` (
   `email_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `email_id` (`email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -350,7 +362,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (5,830,411043,'Pune','Dhankawadi','PICT Girls Hostel','Patani','Ayushi','ayushi16199@gmail.com'),(6,630,422312,'Mumbai','Powai','CharanSingh Apartments','Jain','Anuj','anuj.jain@gmail.com'),(7,2125,411043,'Pune','Dhankawadi','Swami Apartments','Gupta','Yash','yash.gupta@gmail.com'),(8,2640,411043,'Pune','Dhankawadi','201-Duttaraya','Gawande','Varun','varun.gawande@gmail.com'),(9,1475,411048,'Pune','Wanowrie','Green Acres','Gujarathi','Jash','jashgujarathi@gmail.com'),(12,800,123456,'puj','varun','nnnnnnn','sbhjs','sam','sslsl@j.com'),(13,1000,123654,'z','z','z','aa','aa','anuj.jain1@gmail.com'),(15,1000,123456,'1234','1234','1234','Gawande','Varun','varun.1gawande@gmail.com'),(17,1000,123654,'a','a','a','a','a','anuj.jain12@gmail.com');
+INSERT INTO `User` VALUES (5,1330,411043,'Pune','Dhankawadi','PICT Girls Hostel','Patani','Ayushi','ayushi16199@gmail.com'),(6,730,422312,'Mumbai','Powai','CharanSingh Apartments','Jain','Anuj','anuj.jain@gmail.com'),(7,2625,411043,'Pune','Dhankawadi','Swami Apartments','Gupta','Yash','yash.gupta@gmail.com'),(8,3140,411043,'Pune','Dhankawadi','201-Duttaraya','Gawande','Varun','varun.gawande@gmail.com'),(9,2375,411048,'Pune','Wanowrie','Green Acres','Gujarathi','Jash','jashgujarathi@gmail.com'),(12,1300,123456,'puj','varun','nnnnnnn','sbhjs','sam','sslsl@j.com'),(13,1500,123654,'z','z','z','aa','aa','anuj.jain1@gmail.com'),(15,1500,123456,'1234','1234','1234','Gawande','Varun','varun.1gawande@gmail.com'),(17,1500,123654,'a','a','a','a','a','anuj.jain12@gmail.com'),(18,1500,789456,'ghjgjk','hvjhvj','ytfh','gupta','yash','yash.gupta123@gmail.com');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -529,4 +541,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-12 18:54:04
+-- Dump completed on 2019-10-22 20:14:07
