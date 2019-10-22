@@ -226,6 +226,7 @@ public class ProfileServlet extends HttpServlet {
 				System.out.println("Logged in successfully!!!");
 			} catch (Exception e) {
 				System.out.println("Redirect has exception");
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			System.out.println("Outer Scope has exception");

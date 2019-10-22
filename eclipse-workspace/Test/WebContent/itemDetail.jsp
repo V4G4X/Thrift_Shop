@@ -84,7 +84,7 @@
 		let str = "${QuantityError}";
 		if(str!==""){
 			console.log("Entered Here");
-			let tag = '<div class="alert alert-danger alert-dismissible fade in">  <strong>Error!</strong> ${QuantityError}</div>';
+			let tag = '<div class="alert alert-danger alert-dismissible fade in">  <strong>Error!</strong> ${QuantityError}  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 			$("#errorCatcher").append(tag);
 		}
 	</script>
