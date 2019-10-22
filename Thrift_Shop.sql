@@ -40,6 +40,7 @@ CREATE TABLE `Contains` (
 
 LOCK TABLES `Contains` WRITE;
 /*!40000 ALTER TABLE `Contains` DISABLE KEYS */;
+
 INSERT INTO `Contains` VALUES (33,11,250,2),(33,13,100,1),(34,14,320,1),(35,15,200,1),(36,14,320,1),(37,12,680,2),(38,11,125,1),(39,13,100,1),(40,13,100,1),(41,13,200,2),(42,11,125,1),(44,11,125,1),(45,7,200,1),(46,15,400,2);
 /*!40000 ALTER TABLE `Contains` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -68,7 +69,9 @@ CREATE TABLE `Item` (
 
 LOCK TABLES `Item` WRITE;
 /*!40000 ALTER TABLE `Item` DISABLE KEYS */;
+
 INSERT INTO `Item` VALUES (7,5,7,200),(8,5,6,250),(9,6,5,150),(10,6,4,175),(11,7,2,125),(12,7,6,340),(13,8,2,100),(14,8,4,320),(15,9,2,200),(16,9,4,225);
+
 /*!40000 ALTER TABLE `Item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -190,7 +193,9 @@ CREATE TABLE `Login` (
 
 LOCK TABLES `Login` WRITE;
 /*!40000 ALTER TABLE `Login` DISABLE KEYS */;
+
 INSERT INTO `Login` VALUES (5,'ayushi16','ayushi16'),(6,'anuj@32','anuj@32'),(7,'yash@29','yash@29'),(8,'varun@69','varun@69'),(9,'jash@14','jash@14'),(12,'ayushi855','123'),(13,'ayushi85','a'),(15,'Varun69','12'),(17,'anuj@321','Yashgupta@123'),(18,'guptaji','Guptaji@123');
+
 /*!40000 ALTER TABLE `Login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +215,9 @@ CREATE TABLE `Orders` (
   PRIMARY KEY (`o_id`),
   KEY `fk_Orders_1_idx` (`b_id`),
   CONSTRAINT `fk_Orders_1` FOREIGN KEY (`b_id`) REFERENCES `User` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +226,9 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
+
 INSERT INTO `Orders` VALUES (33,5,'2019-10-11 03:04:01','Confirmed',350),(34,5,'2019-10-11 03:08:11','Confirmed',320),(35,6,'2019-10-11 03:34:34','Confirmed',200),(36,6,'2019-10-11 03:33:30','Confirmed',320),(37,5,'2019-10-11 03:46:30','Cart',680),(38,9,'2019-10-11 04:19:19','Confirmed',125),(39,9,'2019-10-11 05:37:52','Confirmed',100),(40,6,'2019-10-11 06:06:16','Confirmed',100),(41,12,'2019-10-11 07:06:15','Confirmed',200),(42,6,'2019-10-11 08:44:40','Confirmed',125),(44,6,'2019-10-11 09:31:23','Confirmed',125),(45,6,'2019-10-16 06:40:05','Cart',200),(46,6,'2019-10-16 07:27:08','Confirmed',400);
+
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -299,7 +308,9 @@ CREATE TABLE `Phone` (
 
 LOCK TABLES `Phone` WRITE;
 /*!40000 ALTER TABLE `Phone` DISABLE KEYS */;
+
 INSERT INTO `Phone` VALUES (5,'7896541230'),(5,'9766825588'),(6,'7845129632'),(6,'8256874596'),(7,'9181817888'),(7,'9262428642'),(8,'8451629598'),(8,'9481526787'),(9,'7030548435'),(9,'9822048620'),(12,'1223312335'),(12,'9405607845'),(13,'3214569871'),(15,'4561363564'),(17,'9874563215'),(18,'7894561230'),(18,'9876543210');
+
 /*!40000 ALTER TABLE `Phone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -309,7 +320,7 @@ UNLOCK TABLES;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET is there a offline help manual command for mongodbsql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`Admin`@`localhost`*/ /*!50003 TRIGGER `phone_before_insert` BEFORE INSERT ON `Phone` FOR EACH ROW
 BEGIN
