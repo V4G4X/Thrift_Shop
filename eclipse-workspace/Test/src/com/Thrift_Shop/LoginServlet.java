@@ -40,77 +40,85 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("userError", "");
 		request.setAttribute("passError", "");
 		String username = request.getParameter("username");
-		String password1= request.getParameter("password");
-		String password2="";	
+		String password1 = request.getParameter("password");
+		String password2 = "";
 		int u_id = 0;
-		if(!username.isEmpty() && !password1.isEmpty()) {
+		if (!username.isEmpty() && !password1.isEmpty()) 
+		{
 			try {
-				//to establish connection with database
+				// to establish connection with database
 				Connection con = DatabaseConnection.initializeDatabase();
-				//PreparedStatement is used to run dynamic query
+				// PreparedStatement is used to run dynamic query
 				PreparedStatement st = con.prepareStatement("Select password from Login where username =?");
-				//? value in above string will be replaced by Username
+				// ? value in above string will be replaced by Username
 				st.setString(1, username);
-				//rs will point to the result of above query
-				ResultSet rs=st.executeQuery();
-				if(!rs.next())
-				{	
-					//Set userError key-value pair
+				// rs will point to the result of above query
+				ResultSet rs = st.executeQuery();
+				HttpSession session = request.getSession();
+				session.setAttribute("flagLogin", 0);
+				if (!rs.next()) {
+
+					// Set userError key-value pair
 					request.setAttribute("userError", "Username not found");
+
+					session.setAttribute("flagLogin", 1);
 					request.getRequestDispatcher("Login.jsp").forward(request, response);
 					System.out.println("Username not found");
 					return;
-				}
-				else
+				} 
+				
+				else 
 				{
-					password2=rs.getString("password");
-					if(password1.compareTo(password2)!=0)
+					password2 = rs.getString("password");
+					if (password1.compareTo(password2) != 0) 
 					{
-						//Set passError key-value pair
+						// Set passError key-value pair
 						request.setAttribute("passError", "Password did not match");
+						session.setAttribute("flagLogin", 1);
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 						System.out.println("Password did not match");
 						return;
-					}
-					else
+					} 
+					else 
 					{
-						//session is used to transfer data from one jsp to other
-							HttpSession session = request.getSession();
-							session.setAttribute("username",username);
-							//session.setAttribute("password", password1); 
-							PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
-							pst.setString(1, username);
-							ResultSet rs2 = pst.executeQuery();
-							rs2.next();
-								u_id = rs2.getInt("uid");
-							System.out.println(u_id);
-							session.setAttribute("uid", u_id);
-							//to redirect to profile page
+						// session is used to transfer data from one jsp to other
+
+						session.setAttribute("username", username);
+						session.setAttribute("password", password1);
+						PreparedStatement pst = con.prepareStatement("Select uid from Login where username = ? ");
+						pst.setString(1, username);
+						ResultSet rs2 = pst.executeQuery();
+						rs2.next();
+						u_id = rs2.getInt("uid");
+						System.out.println("hello");
+						System.out.println(u_id);
+						session.setAttribute("uid", u_id);
 					}
+
 				}
 				st.close();
 				con.close();
-			} catch (Exception e) {
+				request.getRequestDispatcher("ProfileServlet").forward(request, response);
+				return;
+			} 
+			catch (Exception e) 
+			{
 				System.out.print(e);
-				e.printStackTrace(); 
+				e.printStackTrace();
 			}
-			request.getRequestDispatcher("ProfileServlet").forward(request, response);
-			
-		}
-		else {
-			request.setAttribute("userError", "Enter Username and Password");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-			System.out.println("UEnter Username and Password");
-			return;
-		}
+		} 
+
 		doGet(request, response);
 	}
+
 
 	private int getRowCount(ResultSet rs) throws SQLException {
 		rs.last();
@@ -118,5 +126,4 @@ public class LoginServlet extends HttpServlet {
 		rs.beforeFirst();
 		return n;
 	}
-
 }

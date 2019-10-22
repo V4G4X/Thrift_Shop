@@ -13,7 +13,7 @@
 <body>
 <div class="container-fluid bg">
 	<div class="row justify-content-center">
-	<div class="col-sm-9 col-lg-9 col-xl-4">
+	<div class="col-xs-10 col-sm-9 col-lg-6 col-xl-4">
 	<div class="signup-form">
 	<form method="POST" name="signup" action="SignupServlet" onSubmit="return validate(event);">
 		<h2>Sign Up</h2>

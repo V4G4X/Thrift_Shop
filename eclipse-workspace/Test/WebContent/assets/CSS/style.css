@@ -1,20 +1,37 @@
+@import
+	url('https://fonts.googleapis.com/css?family=Mansalva&display=swap');
 
-
-
-
-
-.fieldset{
-	width:60%;
-	margin:auto;
+ul {
+	list-style: none;
 }
 
-.main-fieldset{
-	width:80%;
-	margin:auto;
+.primary {
+	background-color: #9124A3;
+	color: white !important;
 }
 
-.table-content{
-	margin:auto;
+.primary:hover{
+	background-color: purple;
+}
+
+.title {
+	font-family: Mansalva;
+	font-weight: 900;
+	color: #00B2EE !important;
+}
+
+.fieldset {
+	width: 60%;
+	margin: auto;
+}
+
+.main-fieldset {
+	width: 80%;
+	margin: auto;
+}
+
+.table-content {
+	margin: auto;
 }
 
 .error {
@@ -22,32 +39,60 @@
 	font-size: small;
 }
 
-.com{
-	color:red;
+.com {
+	color: red;
 }
 
-.center{
-	margin-left:45%;
+.center {
+	margin-left: 45%;
 }
 
-.button{
-
+.button {
+	
 }
 
 .row {
-  display: table-row;
-  margin:100px;
+	display: table-row;
+	margin: 100px;
 }
 
 .row:hover {
-  background-color: #cccccc;
+	background-color: #cccccc;
 }
- 
-.cell{
-  display: table-cell;
-} 
 
-img{
-	width:40px;
-	height:40px;
+.cell {
+	display: table-cell;
+}
+
+img {
+	width: 40px;
+	height: 40px;
+}
+
+.btn-group {
+	margin-top: 7%;
+}
+
+.info>th {
+	text-align: center;
+}
+
+.input-group-btn {
+	padding: 0 !important;
+}
+
+.navbar {
+	border-radius: unset !important;
+}
+
+.jumbotron {
+	border-radius: 25px !important;
+}
+
+div.checkbox:nth-child(1) {
+	margin-top: 0;
+}
+
+.butpad{
+	width: 50% !important;
 }

@@ -1,36 +1,115 @@
 <%@page import="com.Thrift_Shop.Query_Item"%>
 <%@page import="com.Thrift_Shop.Query_OrderDetails"%>
-
 <%@page import = "java.sql.Timestamp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Profile</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Profile
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="assets/CSS/material-kit.css" rel="stylesheet" />
+   <script async defer src="https://buttons.github.io/buttons.js"></script>	
+   
+    <script src="assets/JS/core/jquery.min.js" type="text/javascript"></script>
 </head>
-<body>
-	<h3>welcome <%=session.getAttribute("username")%></h3>
-		<form method = "post" action = "LogoutServlet">
-		<input type = "submit" value = "Logout" class = "button">
-		</form>
-	<form action="Sell.jsp">
-			<input type="submit" value="Sell" class="button">
-	</form>
-	<form action="Buy.jsp">
-		<input type="submit" value="Buy" class="button">
-	</form>
-	<form method = "post" action="ViewCart">
-		<input type="submit" value="View Cart" class="button">
-		${CartError}
-	</form>
-	<form action="viewItemServlet" method="post">
-			<input type="submit" value="View Your Items" class="button">
-		${SaleError}
-	</form>
-	<fieldset>
-	<legend>Order History</legend>
+<body class="profile-page sidebar-collapse">
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand">
+          Thrift Shop </a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+    	  <li class="dropdown nav-item">
+    	  	<form method = "post" action="ViewCart">
+            <button class="btn btn-primary btn-round">
+              Cart<i class="material-icons">shopping_cart</i>       
+            </button>
+            <button class="btn btn-primary btn-round" formaction="LogoutServlet">
+              Logout     
+            </button>       
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/Men_Book_Library_465838_3840x2400.jpg');">
+        <div class="container-fluid" id="alertCatcher">
+</div>
+  </div>
+  
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                <img src="assets/img/faces/christian.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+              </div>
+              <div class="name">
+                <h3 class="title"><%=session.getAttribute("username")%></h3>
+                <h6>User</h6>
+                <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i class="fa fa-dribbble"></i></a>
+                <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i class="fa fa-pinterest"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="description text-center">
+        </div>
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile-tabs">
+              <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                <li class="nav-item">
+                  <button class="nav-link active" data-toggle="modal" data-target="#profileModal">
+                    <i class="material-icons">account_circle</i> Profile Details
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <form method = "post" id="buyForm" action="Buy.jsp">
+            		<button onclick="buy_submit()" type="submit" class="nav-link" role="tab" data-toggle="tab">
+              		<i class="material-icons">shopping_basket</i>Buy       
+           			 </button>
+           		  </form> 
+                </li>
+                <li class="nav-item">
+					<form method = "post" id="sellForm" action="Sell.jsp">
+            		<button onclick="sell_submit()" type="submit" class="nav-link" role="tab" data-toggle="tab">
+              		<i class="material-icons">monetization_on</i>Sell      
+           			 </button>
+           		  </form> 
+                </li>
+                <li class="nav-item">
+					<form method = "post" id="saleItemForm" action="viewItemServlet">
+            		<button onclick="saleItem_submit()" type="submit" class="nav-link" role="tab" data-toggle="tab">
+              		<i class="material-icons">work</i>View Your Item      
+           			 </button>
+           		  </form> 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <div class="text-centre justify-content-center"><h2><b>Past Transaction</b></h2></div>
+        <fieldset>
+	<legend><b>Order History</b></legend>
 	<%
 	Query_OrderDetails q1=(Query_OrderDetails)session.getAttribute("order_details");
 	if(q1.getN() == 0)
@@ -74,7 +153,7 @@
 			int temp_bid = 0;
 			int item_n=0;
 	%>
-	<table>
+	<table class="table table-stripped table-bordered">
 	<tr>
 		<td>SR.No</td>
 		<td>Title</td>
@@ -116,7 +195,7 @@
 	</fieldset>
 	<br><br>
 	<fieldset>
-	<legend>Sales History</legend>
+	<legend><b>Sales History</b></legend>
 	<%
 		
 	Query_Item q = (Query_Item)session.getAttribute("sales_details");
@@ -131,7 +210,7 @@
 		
 	%>
 	
-	<table>
+	<table class="table table-stripped table-bordered">
 	<tr>
 		<td>SR.No</td>
 		<td>TimeStamp</td>
@@ -172,7 +251,145 @@
 	<%}
 	%>
 	</fieldset>
-	
-			
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="profileModal" tabindex="-1" role="">
+    <div class="modal-dialog modal-login" role="document">
+        <div class="modal-content">
+            <div class="card card-signup card-plain">
+                <div class="modal-header">
+                  <div class="card-header card-header-primary text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="material-icons">clear</i>
+                    </button>
+
+                    <h4 class="card-title">Profile Details</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-body">
+                	<div class="card-body">
+						<table>
+							<tr></tr>
+							<tr>
+								<td></td>
+								<td><b>Personal Details</b></td>
+							</tr>
+							<tr></tr>
+						
+							<tr>
+								<td><b>User Name : </b></td>
+								<td><%= session.getAttribute("username") %></td>
+							</tr>
+							<tr>
+								<td><b>Full Name : </b></td>
+								<td>${fullname}</td>
+							</tr>
+							
+							<tr>
+								<td><b>Email-Id : </b></td>
+								<td>${email_id }</td>
+								
+							</tr>
+							
+							<tr></tr>
+							<tr>
+								<td></td>
+								<td><b>Address</b></td>
+							</tr>
+							<tr></tr>
+							<tr>
+								<td><b>Building : </b></td>
+								<td>${bldg}</td>
+							</tr>
+							
+							<tr>
+								<td><b>Neighbourhood : </b></td>
+								<td>${neigh}</td>
+								
+							</tr>
+							
+							<tr>
+								<td><b>City : </b></td>
+								<td>${city}</td>
+							</tr>
+							
+							<tr>
+								<td><b>Mobile Number : </b></td>
+								<td>${phoneno}</td>
+							</tr>
+							
+							<tr>
+								<td><b>Pincode : </b></td>
+								<td>${pincode}</td>
+							</tr>
+							
+							<tr>
+								<td><b>Wallet</b></td>
+								<td>${wallet}</td>						
+							</tr>
+						
+						</table>
+
+                    </div>
+                 </div>
+                </div>
+            </div>
+        </div>
+
+  
+  <footer class="footer footer-default">
+    <div class="container">
+      <nav class="float-left">
+        <ul>
+          <li>
+            <a href="">
+              About Us
+            </a>
+          </li>
+          <li>
+            <a href="">
+              Licenses
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="copyright float-right">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script>, made with <i class="material-icons">favorite</i> by PICT IT Students.
+      </div>
+    </div>
+  </footer>
+<!--   Core JS Files   -->
+
+  <script src="assets/JS/core/popper.min.js" type="text/javascript"></script>
+<script src="assets/JS/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+   <script src="assets/JS/plugins/moment.min.js"></script>
+<!--   	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="assets/JS/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+ <!--   Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="assets/JS/plugins/nouislider.min.js" type="text/javascript"></script>
+<!--   Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+  <script src="assets/JS/material-kit.js" type="text/javascript"></script> 
+    <script>
+  	let flag= "<%= session.getAttribute("flagCart") %>";
+  	
+  	if(flag==="1"){
+  		$("#alertCatcher").append('<div class="alert alert-danger"><div class="container"><div class="alert-icon"><i class="material-icons">error_outline</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Error Alert:</b> Cart Empty</div></div>');
+  		<% session.setAttribute("flagCart",0); %>
+  	}
+  	function sell_submit() {
+  	    document.getElementById("sellForm").submit();
+  	   }
+  	function buy_submit() {
+  	    document.getElementById("buyForm").submit();
+  	   }
+  	function saleItem_submit() {
+  	    document.getElementById("saleItemForm").submit();
+  	   }
+	</script>
 </body>
 </html>

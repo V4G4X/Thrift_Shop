@@ -39,7 +39,7 @@ public class RemoveSaleItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		int iid =Integer.parseInt(request.getParameter("removeItem"));
+		int iid =Integer.parseInt(request.getParameter("remove"));
 		System.out.println("Item ID : " + iid);
 		String RemoveItemQuery = "Update Item set stock = 0 where i_id = ?";
 		try {
