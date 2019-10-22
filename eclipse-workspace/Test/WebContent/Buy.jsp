@@ -114,7 +114,7 @@
 						<%
 							}
 						%>
-						<tr id="<%out.print(x);%>" onclick='$("#<%out.print(x);%>").parent().parent().parent().submit();'>
+						<tr id="<%out.print(x);%>" onclick='$("[name=i_id]").val("<%out.print(x);%>");$("#<%out.print(x);%>").parent().parent().parent().submit();'>
 							<td><input type="text" name="i_id" style="visibility:hidden;display:none;" value="<%out.print(x);%>"><img src="assets/img/item.png"></td>
 							<td><%=title[i]%></td>
 							<td><%=author[i]%></td>
@@ -130,5 +130,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	function a (a){
+		console.log("Entered Script");
+		console.log( $("[name=i_id]"));
+	}
+	</script>
 </body>
 </html>
